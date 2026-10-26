@@ -1,0 +1,68 @@
+{
+  "model_name": "word_ngram_baseline",
+  "metrics": {
+    "accuracy": 0.6603535353535354,
+    "precision": 0.693384223918575,
+    "recall": 0.6472684085510689,
+    "f1": 0.6695331695331695,
+    "f1_macro": 0.6600912600912601,
+    "f1_micro": 0.6603535353535354,
+    "mcc": 0.32183654555554236,
+    "confusion_matrix": [
+      [
+        1503,
+        723
+      ],
+      [
+        891,
+        1635
+      ]
+    ],
+    "classification_report": {
+      "benign": {
+        "precision": 0.6278195488721805,
+        "recall": 0.6752021563342318,
+        "f1-score": 0.6506493506493507,
+        "support": 2226.0
+      },
+      "vulnerable": {
+        "precision": 0.693384223918575,
+        "recall": 0.6472684085510689,
+        "f1-score": 0.6695331695331695,
+        "support": 2526.0
+      },
+      "accuracy": 0.6603535353535354,
+      "macro avg": {
+        "precision": 0.6606018863953778,
+        "recall": 0.6612352824426504,
+        "f1-score": 0.6600912600912601,
+        "support": 4752.0
+      },
+      "weighted avg": {
+        "precision": 0.6626714784107312,
+        "recall": 0.6603535353535354,
+        "f1-score": 0.6606873402327949,
+        "support": 4752.0
+      }
+    },
+    "auroc": 0.7382971810155515,
+    "average_precision": 0.7791441725788335,
+    "n_samples": 4752,
+    "n_positive": 2526,
+    "n_negative": 2226,
+    "positive_rate": 0.5315656565656566,
+    "training_time_sec": 12.774040699005127,
+    "model_config": {
+      "max_features": 20000,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "analyzer": "word",
+      "C": 1.0,
+      "max_iter": 1000,
+      "class_weight": "balanced",
+      "random_seed": 42
+    }
+  }
+}

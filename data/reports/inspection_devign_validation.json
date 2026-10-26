@@ -1,0 +1,135 @@
+{
+  "dataset_name": "devign_validation",
+  "num_samples": 2732,
+  "columns": [
+    "id",
+    "func",
+    "target",
+    "project",
+    "commit_id",
+    "func_clean",
+    "vul_lines",
+    "normalized_func",
+    "lines",
+    "label",
+    "line_no"
+  ],
+  "dtypes": {
+    "id": "int32",
+    "func": "object",
+    "target": "bool",
+    "project": "object",
+    "commit_id": "object",
+    "func_clean": "object",
+    "vul_lines": "object",
+    "normalized_func": "object",
+    "lines": "object",
+    "label": "object",
+    "line_no": "object"
+  },
+  "missing_values": {
+    "id": 0,
+    "func": 0,
+    "target": 0,
+    "project": 0,
+    "commit_id": 0,
+    "func_clean": 0,
+    "vul_lines": 0,
+    "normalized_func": 0,
+    "lines": 0,
+    "label": 0,
+    "line_no": 0
+  },
+  "missing_pct": {
+    "id": 0.0,
+    "func": 0.0,
+    "target": 0.0,
+    "project": 0.0,
+    "commit_id": 0.0,
+    "func_clean": 0.0,
+    "vul_lines": 0.0,
+    "normalized_func": 0.0,
+    "lines": 0.0,
+    "label": 0.0,
+    "line_no": 0.0
+  },
+  "vulnerability_related_columns": [
+    "target",
+    "label"
+  ],
+  "label_dist_target": {
+    "false": 1545,
+    "true": 1187
+  },
+  "label_dist_label": "[ndarray non-scalar - omitted]",
+  "language_columns": [],
+  "code_columns": [
+    "func",
+    "func_clean",
+    "normalized_func"
+  ],
+  "code_length_stats": {
+    "mean": 1982.550878477306,
+    "median": 927.5,
+    "min": 41,
+    "max": 137221,
+    "std": 4056.3973280510995
+  },
+  "provenance_columns": [],
+  "task_columns": [
+    "project",
+    "commit_id"
+  ],
+  "duplicate_code_samples": 0,
+  "duplicate_pct": 0.0,
+  "sample_rows": [
+    {
+      "id": 8,
+      "func": "static void filter_mirror_setup(NetFilterState *nf, Error **errp)\n{\n    MirrorState *s = FILTER_MIRROR(nf);\n    Chardev *chr;\n    chr = qemu_chr_find(s->outdev);\n    if (chr == NULL) {\n        error_set(errp, ERROR_CLASS_DEVICE_NOT_FOUND,\n                  \"Device '%s' not found\", s->outdev);\n    qe...",
+      "target": true,
+      "project": "qemu",
+      "commit_id": "aa1530dec499f7525d2ccaa0e3a876dc8089ed1e",
+      "func_clean": "static void filter_mirror_setup(NetFilterState *nf, Error **errp)\n{\n    MirrorState *s = FILTER_MIRROR(nf);\n    Chardev *chr;\n    chr = qemu_chr_find(s->outdev);\n    if (chr == NULL) {\n        error_set(errp, ERROR_CLASS_DEVICE_NOT_FOUND,\n                  \"Device '%s' not found\", s->outdev);\n    qe...",
+      "vul_lines": {
+        "code": "[]",
+        "line_no": "[]"
+      },
+      "normalized_func": "static void FUNC_0(NetFilterState *VAR_0, Error **VAR_1)\n{\n    MirrorState *s = FILTER_MIRROR(VAR_0);\n    Chardev *chr;\n    chr = qemu_chr_find(s->outdev);\n    if (chr == NULL) {\n        error_set(VAR_1, ERROR_CLASS_DEVICE_NOT_FOUND,\n                  \"Device '%s' not found\", s->outdev);\n    qemu_ch...",
+      "lines": "['static void FUNC_0(NetFilterState *VAR_0, Error **VAR_1)\\n{'\n 'MirrorState *s = FILTER_MIRROR(VAR_0);' 'Chardev *chr;'\n 'chr = qemu_chr_find(s->outdev);' 'if (chr == NULL) {'\n 'error_set(VAR_1, ERROR_CLASS_DEVICE_NOT_FOUND,\\n\"Device \\'%s\\' not found\", s->outdev);'\n 'qemu_chr_fe_init(&s->chr_out, chr, VAR_1);']",
+      "label": "[0 0 0 0 0 0 0]",
+      "line_no": "[array([1, 2]) array([3]) array([4]) array([5]) array([6]) array([7, 8])\n array([9])]"
+    },
+    {
+      "id": 10,
+      "func": "static inline int64_t sub64(const int64_t a, const int64_t b)\n\n{\n\n\treturn a - b;\n\n}\n",
+      "target": true,
+      "project": "qemu",
+      "commit_id": "21ce148c7ec71ee32834061355a5ecfd1a11f90f",
+      "func_clean": "static inline int64_t sub64(const int64_t a, const int64_t b)\n\n{\n\n\treturn a - b;\n\n}\n",
+      "vul_lines": {
+        "code": "['static inline int64_t sub64(const int64_t a, const int64_t b)']",
+        "line_no": "[1]"
+      },
+      "normalized_func": "static inline int64_t FUNC_0(const int64_t a, const int64_t b)\n\n{\n\n\treturn a - b;\n\n}\n",
+      "lines": "['static inline int64_t FUNC_0(const int64_t a, const int64_t b)\\n{'\n 'return a - b;' '}']",
+      "label": "[1 0 0]",
+      "line_no": "[array([1, 3]) array([5]) array([7])]"
+    },
+    {
+      "id": 15,
+      "func": "void fw_cfg_add_callback(FWCfgState *s, uint16_t key, FWCfgCallback callback,\n\n                         void *callback_opaque, uint8_t *data, size_t len)\n\n{\n\n    int arch = !!(key & FW_CFG_ARCH_LOCAL);\n\n\n\n    assert(key & FW_CFG_WRITE_CHANNEL);\n\n\n\n    key &= FW_CFG_ENTRY_MASK;\n\n\n\n    assert(key < FW...",
+      "target": true,
+      "project": "qemu",
+      "commit_id": "089da572b956ef0f8f5b8d5917358e07892a77c2",
+      "func_clean": "void fw_cfg_add_callback(FWCfgState *s, uint16_t key, FWCfgCallback callback,\n\n                         void *callback_opaque, uint8_t *data, size_t len)\n\n{\n\n    int arch = !!(key & FW_CFG_ARCH_LOCAL);\n\n\n\n    assert(key & FW_CFG_WRITE_CHANNEL);\n\n\n\n    key &= FW_CFG_ENTRY_MASK;\n\n\n\n    assert(key < FW...",
+      "vul_lines": {
+        "code": "['    s->entries[arch][key].len = len;'\n '                         void *callback_opaque, uint8_t *data, size_t len)'\n '    assert(key < FW_CFG_MAX_ENTRY && len <= 65535);'\n '    s->entries[arch][key].len = len;']",
+        "line_no": "[25  3 19 25]"
+      },
+      "normalized_func": "void FUNC_0(FWCfgState *VAR_0, uint16_t VAR_1, FWCfgCallback VAR_2,\n\n                         void *VAR_3, uint8_t *VAR_4, size_t VAR_5)\n\n{\n\n    int VAR_6 = !!(VAR_1 & FW_CFG_ARCH_LOCAL);\n\n\n\n    assert(VAR_1 & FW_CFG_WRITE_CHANNEL);\n\n\n\n    VAR_1 &= FW_CFG_ENTRY_MASK;\n\n\n\n    assert(VAR_1 < FW_CFG_MAX...",
+      "lines": "['void FUNC_0(FWCfgState *VAR_0, uint16_t VAR_1, FWCfgCallback VAR_2,\\nvoid *VAR_3, uint8_t *VAR_4, size_t VAR_5)\\n{'\n 'int VAR_6 = !!(VAR_1 & FW_CFG_ARCH_LOCAL);'\n 'assert(VAR_1 & FW_CFG_WRITE_CHANNEL);' 'VAR_1 &= FW_CFG_ENTRY_MASK;'\n 'assert(VAR_1 < FW_CFG_MAX_ENTRY && VAR_5 <= 65535);'\n 'VAR_0->entries[VAR_6][VAR_1].VAR_4 = VAR_4;'\n 'VAR_0->entries[VAR_6][VAR_1].VAR_5 = VAR_5;'\n 'VAR_0->entries[VAR_6][VAR_1].VAR_3 = VAR_3;'\n 'VAR_0->entries[VAR_6][VAR_1].VAR_2 = VAR_2;' '}']",
+      "label": "[1 0 0 0 1 0 1 0 0 0]",
+      "line_no": "[array([1, 3, 5]) array([7]) array([11]) array([15]) array([19])\n array([23]) array([25]) array([27]) array([29]) array([31])]"
+    }
+  ]
+}

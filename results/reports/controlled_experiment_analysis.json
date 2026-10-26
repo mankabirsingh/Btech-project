@@ -1,0 +1,294 @@
+{
+  "experiment": {
+    "task_id": "pilot_001_buffer_handling",
+    "task_description": "Implement a function that reads a string from user input, processes it, and copies it to a fixed-size buffer.",
+    "language": "C",
+    "n_versions": 4,
+    "versions": [
+      {
+        "version_id": "pilot_001_v1_human_secure",
+        "code": "#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>\n\n#define BUFFER_SIZE 256\n\nint process_input(const char *input, char *output, size_t output_size) {\n    if (input == NULL || output == NULL || output_size == 0) {\n        return -1;\n    }\n    \n    size_t input_len = strlen(input);\n    if (input_len >= output_size) {\n        fprintf(stderr, \"Input too long: %zu >= %zu\\n\", input_len, output_size);\n        return -1;\n    }\n    \n    strncpy(output, input, output_size - 1);\n    output[output_size - 1] = '\\0';\n    \n    return 0;\n}\n\nint main(void) {\n    char buffer[BUFFER_SIZE];\n    char input[BUFFER_SIZE];\n    \n    printf(\"Enter input: \");\n    if (fgets(input, sizeof(input), stdin) == NULL) {\n        fprintf(stderr, \"Failed to read input\\n\");\n        return 1;\n    }\n    \n    // Remove trailing newline\n    size_t len = strlen(input);\n    if (len > 0 && input[len - 1] == '\\n') {\n        input[len - 1] = '\\0';\n    }\n    \n    if (process_input(input, buffer, sizeof(buffer)) != 0) {\n        fprintf(stderr, \"Processing failed\\n\");\n        return 1;\n    }\n    \n    printf(\"Processed: %s\\n\", buffer);\n    return 0;\n}\n",
+        "language": "C",
+        "task_id": "pilot_001_buffer_handling",
+        "author_type": "human",
+        "ai_generator": null,
+        "ai_involvement": 0.0,
+        "parent_version_id": null,
+        "edit_description": "Human-written secure implementation with bounds checking",
+        "timestamp": "2026-10-26T21:02:54.656302",
+        "security_findings": {
+          "language": "C",
+          "findings": [],
+          "n_findings": 0,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [],
+          "risk_score": 0,
+          "risk_level": "Low",
+          "tools_used": [
+            "pattern"
+          ],
+          "note": "Pattern-based findings are heuristic and may contain false positives. They are not confirmed vulnerabilities."
+        },
+        "vuln_label": 0,
+        "code_hash": "ba404f8345e62efa"
+      },
+      {
+        "version_id": "pilot_001_v2_ai_insecure",
+        "code": "#include <stdio.h>\n#include <string.h>\n\nvoid process_input(char *input) {\n    char buffer[64];\n    strcpy(buffer, input);  // No bounds checking!\n    printf(\"Processed: %s\\n\", buffer);\n}\n\nint main() {\n    char input[1024];\n    printf(\"Enter input: \");\n    gets(input);  // Deprecated and unsafe!\n    process_input(input);\n    return 0;\n}\n",
+        "language": "C",
+        "task_id": "pilot_001_buffer_handling",
+        "author_type": "ai",
+        "ai_generator": "controlled_example_simulated",
+        "ai_involvement": 1.0,
+        "parent_version_id": null,
+        "edit_description": "AI-generated code with common insecure patterns (CONTROLLED EXAMPLE - simulated for experiment)",
+        "timestamp": "2026-10-26T21:02:54.656344",
+        "security_findings": {
+          "language": "C",
+          "findings": [
+            {
+              "rule_id": "unsafe-strcpy",
+              "cwe": "CWE-120",
+              "severity": "high",
+              "message": "Use of strcpy() without bounds checking \u2014 potential buffer overflow",
+              "line": 6,
+              "end_line": null,
+              "code_snippet": "strcpy(buffer, input);  // No bounds checking!",
+              "tool": "pattern",
+              "confidence": "medium"
+            },
+            {
+              "rule_id": "unsafe-gets",
+              "cwe": "CWE-120",
+              "severity": "critical",
+              "message": "Use of gets() \u2014 always vulnerable to buffer overflow",
+              "line": 13,
+              "end_line": null,
+              "code_snippet": "gets(input);  // Deprecated and unsafe!",
+              "tool": "pattern",
+              "confidence": "medium"
+            }
+          ],
+          "n_findings": 2,
+          "severity_counts": {
+            "critical": 1,
+            "high": 1,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [
+            "CWE-120"
+          ],
+          "risk_score": 7,
+          "risk_level": "High",
+          "tools_used": [
+            "pattern"
+          ],
+          "note": "Pattern-based findings are heuristic and may contain false positives. They are not confirmed vulnerabilities."
+        },
+        "vuln_label": 1,
+        "code_hash": "324b7fc28e34bc04"
+      },
+      {
+        "version_id": "pilot_001_v3_human_edited_ai",
+        "code": "#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>\n\n#define BUFFER_SIZE 64\n\nvoid process_input(const char *input) {\n    char buffer[BUFFER_SIZE];\n    \n    if (input == NULL) {\n        fprintf(stderr, \"Null input\\n\");\n        return;\n    }\n    \n    // Human fix: replaced strcpy with strncpy + null termination\n    strncpy(buffer, input, BUFFER_SIZE - 1);\n    buffer[BUFFER_SIZE - 1] = '\\0';\n    \n    printf(\"Processed: %s\\n\", buffer);\n}\n\nint main() {\n    char input[1024];\n    printf(\"Enter input: \");\n    \n    // Human fix: replaced gets() with fgets()\n    if (fgets(input, sizeof(input), stdin) == NULL) {\n        return 1;\n    }\n    \n    // Remove newline\n    input[strcspn(input, \"\\n\")] = '\\0';\n    \n    process_input(input);\n    return 0;\n}\n",
+        "language": "C",
+        "task_id": "pilot_001_buffer_handling",
+        "author_type": "human_edit_of_ai",
+        "ai_generator": "controlled_example_simulated",
+        "ai_involvement": 0.5,
+        "parent_version_id": "pilot_001_v2_ai_insecure",
+        "edit_description": "Human security review of AI code: replaced strcpy\u2192strncpy, gets\u2192fgets, added null checks (CONTROLLED EXAMPLE)",
+        "timestamp": "2026-10-26T21:02:54.656366",
+        "security_findings": {
+          "language": "C",
+          "findings": [],
+          "n_findings": 0,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [],
+          "risk_score": 0,
+          "risk_level": "Low",
+          "tools_used": [
+            "pattern"
+          ],
+          "note": "Pattern-based findings are heuristic and may contain false positives. They are not confirmed vulnerabilities."
+        },
+        "vuln_label": 0,
+        "code_hash": "b6880759210cc509"
+      },
+      {
+        "version_id": "pilot_001_v4_human_insecure",
+        "code": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char buffer[32];\n    char name[256];\n    \n    printf(\"Enter your name: \");\n    scanf(\"%s\", name);  // No length limit\n    \n    sprintf(buffer, \"Hello, %s!\", name);  // Buffer overflow possible\n    printf(\"%s\\n\", buffer);\n    \n    return 0;\n}\n",
+        "language": "C",
+        "task_id": "pilot_001_buffer_handling",
+        "author_type": "human",
+        "ai_generator": null,
+        "ai_involvement": 0.0,
+        "parent_version_id": null,
+        "edit_description": "Human-written code with vulnerabilities (demonstrates that human code can also be insecure) (CONTROLLED EXAMPLE)",
+        "timestamp": "2026-10-26T21:02:54.656387",
+        "security_findings": {
+          "language": "C",
+          "findings": [
+            {
+              "rule_id": "unsafe-sprintf",
+              "cwe": "CWE-120",
+              "severity": "high",
+              "message": "Use of sprintf() \u2014 potential buffer overflow, prefer snprintf()",
+              "line": 11,
+              "end_line": null,
+              "code_snippet": "sprintf(buffer, \"Hello, %s!\", name);  // Buffer overflow possible",
+              "tool": "pattern",
+              "confidence": "medium"
+            },
+            {
+              "rule_id": "unsafe-scanf",
+              "cwe": "CWE-120",
+              "severity": "high",
+              "message": "scanf with %s \u2014 no bounds on input, potential buffer overflow",
+              "line": 9,
+              "end_line": null,
+              "code_snippet": "scanf(\"%s\", name);  // No length limit",
+              "tool": "pattern",
+              "confidence": "medium"
+            }
+          ],
+          "n_findings": 2,
+          "severity_counts": {
+            "critical": 0,
+            "high": 2,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [
+            "CWE-120"
+          ],
+          "risk_score": 6,
+          "risk_level": "High",
+          "tools_used": [
+            "pattern"
+          ],
+          "note": "Pattern-based findings are heuristic and may contain false positives. They are not confirmed vulnerabilities."
+        },
+        "vuln_label": 1,
+        "code_hash": "b43dca7b0793e42a"
+      }
+    ],
+    "metadata": {
+      "experiment_type": "controlled_pilot",
+      "purpose": "Demonstrate provenance-tracking framework and security analysis across code versions",
+      "note": "These are CONTROLLED EXAMPLES, not from a public benchmark",
+      "created_at": "2026-10-26T21:02:54.656288"
+    }
+  },
+  "security_analysis": {
+    "task_id": "pilot_001_buffer_handling",
+    "n_versions": 4,
+    "version_results": [
+      {
+        "version_id": "pilot_001_v1_human_secure",
+        "author_type": "human",
+        "ai_involvement": 0.0,
+        "n_findings": 0,
+        "severity_counts": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "cwes": [],
+        "risk_level": "Low",
+        "risk_score": 0,
+        "known_vuln_label": 0
+      },
+      {
+        "version_id": "pilot_001_v2_ai_insecure",
+        "author_type": "ai",
+        "ai_involvement": 1.0,
+        "n_findings": 2,
+        "severity_counts": {
+          "critical": 1,
+          "high": 1,
+          "medium": 0,
+          "low": 0
+        },
+        "cwes": [
+          "CWE-120"
+        ],
+        "risk_level": "High",
+        "risk_score": 7,
+        "known_vuln_label": 1
+      },
+      {
+        "version_id": "pilot_001_v3_human_edited_ai",
+        "author_type": "human_edit_of_ai",
+        "ai_involvement": 0.5,
+        "n_findings": 0,
+        "severity_counts": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "cwes": [],
+        "risk_level": "Low",
+        "risk_score": 0,
+        "known_vuln_label": 0
+      },
+      {
+        "version_id": "pilot_001_v4_human_insecure",
+        "author_type": "human",
+        "ai_involvement": 0.0,
+        "n_findings": 2,
+        "severity_counts": {
+          "critical": 0,
+          "high": 2,
+          "medium": 0,
+          "low": 0
+        },
+        "cwes": [
+          "CWE-120"
+        ],
+        "risk_level": "High",
+        "risk_score": 6,
+        "known_vuln_label": 1
+      }
+    ],
+    "transitions": [
+      {
+        "from_version": "pilot_001_v2_ai_insecure",
+        "to_version": "pilot_001_v3_human_edited_ai",
+        "from_author": "ai",
+        "to_author": "human_edit_of_ai",
+        "from_ai_involvement": 1.0,
+        "to_ai_involvement": 0.5,
+        "findings_removed": 2,
+        "risk_change": -7,
+        "cwes_fixed": [
+          "CWE-120"
+        ],
+        "cwes_introduced": [],
+        "cwes_persistent": [],
+        "vuln_persisted": false,
+        "vuln_fixed": true
+      }
+    ],
+    "summary": {
+      "versions_analyzed": 4,
+      "versions_with_findings": 2,
+      "total_unique_cwes": [
+        "CWE-120"
+      ]
+    }
+  }
+}

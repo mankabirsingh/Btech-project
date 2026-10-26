@@ -1,0 +1,90 @@
+{
+  "dataset_name": "humanvsaicode",
+  "num_samples": 507045,
+  "columns": [
+    "hm_index",
+    "docstring",
+    "human_code",
+    "chatgpt_code",
+    "dsc_code",
+    "qwen_code",
+    "_split"
+  ],
+  "dtypes": {
+    "hm_index": "object",
+    "docstring": "object",
+    "human_code": "object",
+    "chatgpt_code": "object",
+    "dsc_code": "object",
+    "qwen_code": "object",
+    "_split": "object"
+  },
+  "missing_values": {
+    "hm_index": 0,
+    "docstring": 0,
+    "human_code": 0,
+    "chatgpt_code": 0,
+    "dsc_code": 0,
+    "qwen_code": 0,
+    "_split": 0
+  },
+  "missing_pct": {
+    "hm_index": 0.0,
+    "docstring": 0.0,
+    "human_code": 0.0,
+    "chatgpt_code": 0.0,
+    "dsc_code": 0.0,
+    "qwen_code": 0.0,
+    "_split": 0.0
+  },
+  "vulnerability_related_columns": [],
+  "language_columns": [],
+  "code_columns": [
+    "human_code",
+    "chatgpt_code",
+    "dsc_code",
+    "qwen_code"
+  ],
+  "code_length_stats": {
+    "mean": 630.5232494157324,
+    "median": 375.0,
+    "min": 52,
+    "max": 68516,
+    "std": 928.4428825935493
+  },
+  "provenance_columns": [
+    "human_code"
+  ],
+  "task_columns": [],
+  "duplicate_code_samples": 0,
+  "duplicate_pct": 0.0,
+  "sample_rows": [
+    {
+      "hm_index": "gj235730",
+      "docstring": "Reads a value that can be a map, list, string, number, boolean or enum.",
+      "human_code": "private OptionKindAndValue readKindAndValue() {\n    char peeked = peekChar();\n    switch (peeked) {\n      case '{':\n        return OptionKindAndValue.of(OptionElement.Kind.MAP, readMap('{', '}', ':'));\n      case '[':\n        return OptionKindAndValue.of(OptionElement.Kind.LIST, readList());\n      c...",
+      "chatgpt_code": "public Object readValue(Object value) {\n    // check the type of the provided value using instanceof operator\n    if (value instanceof Map) {\n        // do something if the value is a map\n        Map<Object, Object> mapVal = (Map<Object, Object>) value;\n        // ...\n    } else if (value instanceof...",
+      "dsc_code": "import com.google.gson.Gson;\nimport com.google.gson.JsonElement;\nimport com.google.gson.JsonParser;\n\npublic class ValueReader {\n\n    private Gson gson = new Gson();\n\n    public OptionKindAndValue readKindAndValue(String json) {\n        JsonElement jsonElement = JsonParser.parseString(json);\n\n       ...",
+      "qwen_code": "private OptionKindAndValue readKindAndValue() {\n\t// Implementation goes here\n}\n\n    public OptionKindAndValue(OptionKind kind, Object value) {\n        this.kind = kind;\n        this.value = value;\n    }\n\n    public OptionKind getKind() {\n        return kind;\n    }\n\n    public Object getValue() {\n   ...",
+      "_split": "train"
+    },
+    {
+      "hm_index": "gj164536",
+      "docstring": "Adds an asynchronous continuation to this task, returning a new task that completes after the\ntask returned by the continuation has completed.",
+      "human_code": "public <TContinuationResult> Task<TContinuationResult> continueWithTask(\n      Continuation<TResult, Task<TContinuationResult>> continuation) {\n    return continueWithTask(continuation, IMMEDIATE_EXECUTOR, null);\n  }",
+      "chatgpt_code": "public <U> CompletableFuture<U> thenComposeAsync(Function<? super T, ? extends CompletionStage<U>> fn) {\n    return CompletableFuture.<U>supplyAsync(() -> {\n        try {\n            return fn.apply(join()).toCompletableFuture().join();\n        } catch (Throwable ex) {\n            throw new Completi...",
+      "dsc_code": "Task<String> task = new Task<>(() -> {\n    // some long running operation\n    return \"Hello, World!\";\n});\n\nTask<String> continuationTask = task.continueWithTask(result -> {\n    // this is the continuation\n    return new Task<>(() -> {\n        // some other long running operation\n        return resul...",
+      "qwen_code": "public <TContinuationResult> Task<TContinuationResult> continueWithTask( Continuation<TResult, Task<TContinuationResult>> continuation) {\n\t// Implementation goes here\n}",
+      "_split": "train"
+    },
+    {
+      "hm_index": "gj096930",
+      "docstring": "Return User-Agent value\nFormat: ex: CouchbaseLite/1.2 (Java Linux/MIPS 1.2.1/3382EFA)",
+      "human_code": "public static String getUserAgent() {\n        if (USER_AGENT == null) {\n            USER_AGENT = String.format(Locale.ENGLISH, \"%s/%s (%s/%s)\",\n                    PRODUCT_NAME,\n                    Version.SYNC_PROTOCOL_VERSION,\n                    Version.getVersionName(),\n                    Versi...",
+      "chatgpt_code": "public String getUserAgent() {\n    String javaVersion = System.getProperty(\"java.version\");\n    String osName = System.getProperty(\"os.name\");\n    String osVersion = System.getProperty(\"os.version\");\n\n    return \"CouchbaseLite/1.2 (Java \" + javaVersion + \" \" + osName + \"/\" + osVersion + \")\";\n}\n",
+      "dsc_code": "import java.lang.management.ManagementFactory;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(getUserAgent());\n    }\n\n    public static String getUserAgent() {\n        String osName = System.getProperty(\"os.name\");\n        String osArch = System.getPrope...",
+      "qwen_code": "public static String getUserAgent() {\n\tString version = \"1.2.1\";\n    String buildNumber = \"3382EFA\";\n    String javaVersion = System.getProperty(\"java.version\");\n    String osName = System.getProperty(\"os.name\");\n    String osArch = System.getProperty(\"os.arch\");\n    return String.format(\"CouchbaseL...",
+      "_split": "train"
+    }
+  ]
+}

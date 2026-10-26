@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-10-26 20:56:58",
+  "datasets": {
+    "devign": {
+      "loaded": true,
+      "n_samples": 27258,
+      "source": "DetectVul/devign"
+    },
+    "primevul": {
+      "loaded": true,
+      "n_samples": 4416,
+      "source": "adefu020/primevul"
+    },
+    "humanvsaicode": {
+      "loaded": true,
+      "n_samples": 1986283,
+      "source": "OSS-forge/HumanVsAICode"
+    }
+  },
+  "vulnerability_data": {
+    "total": 31674,
+    "vuln": 16840,
+    "benign": 14834
+  },
+  "splits": {
+    "train": 23754,
+    "val": 3168,
+    "test": 4752
+  },
+  "elapsed_sec": 15.136668920516968
+}

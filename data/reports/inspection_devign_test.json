@@ -1,0 +1,135 @@
+{
+  "dataset_name": "devign_test",
+  "num_samples": 2732,
+  "columns": [
+    "id",
+    "func",
+    "target",
+    "project",
+    "commit_id",
+    "func_clean",
+    "vul_lines",
+    "normalized_func",
+    "lines",
+    "label",
+    "line_no"
+  ],
+  "dtypes": {
+    "id": "int32",
+    "func": "object",
+    "target": "bool",
+    "project": "object",
+    "commit_id": "object",
+    "func_clean": "object",
+    "vul_lines": "object",
+    "normalized_func": "object",
+    "lines": "object",
+    "label": "object",
+    "line_no": "object"
+  },
+  "missing_values": {
+    "id": 0,
+    "func": 0,
+    "target": 0,
+    "project": 0,
+    "commit_id": 0,
+    "func_clean": 0,
+    "vul_lines": 0,
+    "normalized_func": 0,
+    "lines": 0,
+    "label": 0,
+    "line_no": 0
+  },
+  "missing_pct": {
+    "id": 0.0,
+    "func": 0.0,
+    "target": 0.0,
+    "project": 0.0,
+    "commit_id": 0.0,
+    "func_clean": 0.0,
+    "vul_lines": 0.0,
+    "normalized_func": 0.0,
+    "lines": 0.0,
+    "label": 0.0,
+    "line_no": 0.0
+  },
+  "vulnerability_related_columns": [
+    "target",
+    "label"
+  ],
+  "label_dist_target": {
+    "false": 1477,
+    "true": 1255
+  },
+  "label_dist_label": "[ndarray non-scalar - omitted]",
+  "language_columns": [],
+  "code_columns": [
+    "func",
+    "func_clean",
+    "normalized_func"
+  ],
+  "code_length_stats": {
+    "mean": 2006.0490483162519,
+    "median": 965.5,
+    "min": 28,
+    "max": 142292,
+    "std": 4598.662084715355
+  },
+  "provenance_columns": [],
+  "task_columns": [
+    "project",
+    "commit_id"
+  ],
+  "duplicate_code_samples": 1,
+  "duplicate_pct": 0.04,
+  "sample_rows": [
+    {
+      "id": 3,
+      "func": "int ff_get_wav_header(AVFormatContext *s, AVIOContext *pb,\n\n                      AVCodecContext *codec, int size, int big_endian)\n\n{\n\n    int id;\n\n    uint64_t bitrate;\n\n\n\n    if (size < 14) {\n\n        avpriv_request_sample(codec, \"wav header size < 14\");\n\n        return AVERROR_INVALIDDATA;\n\n    }...",
+      "target": false,
+      "project": "FFmpeg",
+      "commit_id": "32bf6550cb9cc9f487a6722fe2bfc272a93c1065",
+      "func_clean": "int ff_get_wav_header(AVFormatContext *s, AVIOContext *pb,\n\n                      AVCodecContext *codec, int size, int big_endian)\n\n{\n\n    int id;\n\n    uint64_t bitrate;\n\n\n\n    if (size < 14) {\n\n        avpriv_request_sample(codec, \"wav header size < 14\");\n\n        return AVERROR_INVALIDDATA;\n\n    }...",
+      "vul_lines": {
+        "code": "[]",
+        "line_no": "[]"
+      },
+      "normalized_func": "int FUNC_0(AVFormatContext *VAR_0, AVIOContext *VAR_1,\n\n                      AVCodecContext *VAR_2, int VAR_3, int VAR_4)\n\n{\n\n    int VAR_5;\n\n    uint64_t bitrate;\n\n\n\n    if (VAR_3 < 14) {\n\n        avpriv_request_sample(VAR_2, \"wav header VAR_3 < 14\");\n\n        return AVERROR_INVALIDDATA;\n\n    }\n\n\n...",
+      "lines": "['int FUNC_0(AVFormatContext *VAR_0, AVIOContext *VAR_1,\\nAVCodecContext *VAR_2, int VAR_3, int VAR_4)\\n{'\n 'int VAR_5;' 'uint64_t bitrate;' 'if (VAR_3 < 14) {'\n 'avpriv_request_sample(VAR_2, \"wav header VAR_3 < 14\");'\n 'return AVERROR_INVALIDDATA;' '}'\n 'VAR_2->codec_type  = AVMEDIA_TYPE_AUDIO;' 'if (!VAR_4) {'\n 'VAR_5                 = avio_rl16(VAR_1);' 'if (VAR_5 != 0x0165) {'\n 'VAR_2->channels    = avio_rl16(VAR_1);'\n 'VAR_2->sample_rate = avio_rl32(VAR_1);'\n 'bitrate            = avio_rl32(VAR_1) * 8LL;'\n 'VAR_2->block_align = avio_rl16(VAR_1);' '}' '} else {'\n 'VAR_5                 = avio_rb16(VAR_1);'\n 'VAR_2->channels    = avio_rb16(VAR_1);'\n 'VAR_2->sample_rate = avio_rb32(VAR_1);'\n 'bitrate            = avio_rb32(VAR_1) * 8LL;'\n 'VAR_2->block_align = avio_rb16(VAR_1);' '}' 'if (VAR_3 == 14) {'\n 'VAR_2->bits_per_coded_sample = 8;' '} else {' 'if (!VAR_4) {'\n 'VAR_2->bits_per_coded_sample = avio_rl16(VAR_1);' '} else {'\n 'VAR_2->bits_per_coded_sample = avio_rb16(VAR_1);' '}' '}'\n 'if (VAR_5 == 0xFFFE) {' 'VAR_2->codec_tag = 0;' '} else {'\n 'VAR_2->codec_tag = VAR_5;'\n 'VAR_2->codec_id  = ff_wav_codec_get_id(VAR_5,\\nVAR_2->bits_per_coded_sample);'\n '}' 'if (VAR_3 >= 18 && VAR_5 != 0x0165) {'\n 'int VAR_6 = avio_rl16(VAR_1);' 'if (VAR_4) {'\n 'avpriv_report_missing_feature(VAR_2, \"WAVEFORMATEX support for RIFX files\\\\n\");'\n 'return AVERROR_PATCHWELCOME;' '}' 'VAR_3  -= 18;'\n 'VAR_6 = FFMIN(VAR_3, VAR_6);' 'if (VAR_6 >= 22 && VAR_5 == 0xfffe) {'\n 'parse_waveformatex(VAR_1, VAR_2);' 'VAR_6 -= 22;' 'VAR_3   -= 22;' '}'\n 'if (VAR_6 > 0) {' 'av_freep(&VAR_2->extradata);'\n 'if (ff_get_extradata(VAR_2, VAR_1, VAR_6) < 0)\\nreturn AVERROR(ENOMEM);'\n 'VAR_3 -= VAR_6;' '}' 'if (VAR_3 > 0)\\navio_skip(VAR_1, VAR_3);'\n '} else if (VAR_5 == 0x0165 && VAR_3 >= 32) {' 'int VAR_7, VAR_8;'\n 'VAR_3 -= 4;' 'av_freep(&VAR_2->extradata);'\n 'if (ff_get_extradata(VAR_2, VAR_1, VAR_3) < 0)\\nreturn AVERROR(ENOMEM);'\n 'VAR_7         = AV_RL16(VAR_2->extradata + 4);'\n 'VAR_2->sample_rate = AV_RL32(VAR_2->extradata + 12);'\n 'VAR_2->channels    = 0;' 'bitrate            = 0;'\n 'if (VAR_3 < 8 + VAR_7 * 20)\\nreturn AVERROR_INVALIDDATA;'\n 'for (VAR_8 = 0; VAR_8 < VAR_7; VAR_8++)'\n 'VAR_2->channels += VAR_2->extradata[8 + VAR_8 * 20 + 17];' '}'\n 'if (bitrate > INT_MAX) {'\n 'if (VAR_0->error_recognition & AV_EF_EXPLODE) {'\n 'av_log(VAR_0, AV_LOG_ERROR,\\n\"The bitrate %\"PRIu64\" is too large.\\\\n\",\\nbitrate);'\n 'return AVERROR_INVALIDDATA;' '} else {'\n 'av_log(VAR_0, AV_LOG_WARNING,\\n\"The bitrate %\"PRIu64\" is too large, resetting to 0.\",\\nbitrate);'\n 'VAR_2->bit_rate = 0;' '}' '} else {' 'VAR_2->bit_rate = bitrate;' '}'\n 'if (VAR_2->sample_rate <= 0) {'\n 'av_log(VAR_0, AV_LOG_ERROR,\\n\"Invalid sample rate: %d\\\\n\", VAR_2->sample_rate);'\n 'return AVERROR_INVALIDDATA;' '}'\n 'if (VAR_2->codec_id == AV_CODEC_ID_AAC_LATM) {'\n 'VAR_2->channels    = 0;' 'VAR_2->sample_rate = 0;' '}'\n 'if (VAR_2->codec_id == AV_CODEC_ID_ADPCM_G726 && VAR_2->sample_rate)\\nVAR_2->bits_per_coded_sample = VAR_2->bit_rate / VAR_2->sample_rate;'\n 'return 0;' '}']",
+      "label": "[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]",
+      "line_no": "[array([1, 3, 5]) array([7]) array([9]) array([13]) array([15])\n array([17]) array([19]) array([23]) array([25]) array([27]) array([29])\n array([31]) array([33]) array([35]) array([37]) array([39]) array([41])\n array([43]) array([45]) array([47]) array([49]) array([51]) array([53])\n array([55]) array([57]) array([59]) array([61]) array([63]) array([65])\n array([67]) array([69]) array([71]) array([73]) array([75]) array([77])\n array([79]) array([81, 83]) array([85]) array([87]) array([89])\n array([91]) array([93]) array([95]) array([97]) array([99]) array([101])\n array([103]) array([105]) array([107]) array([109]) array([111])\n array([113]) array([115]) array([117, 119]) array([121]) array([123])\n array([129, 131]) array([133]) array([135]) array([139]) array([141])\n array([143, 145]) array([147]) array([149]) array([151]) array([153])\n array([155, 157]) array([159]) array([161]) array([163]) array([167])\n array([169]) array([171, 173, 175]) array([177]) array([179])\n array([181, 183, 185]) array([187]) array([189]) array([191])\n array([193]) array([195]) array([199]) array([201, 203]) array([205])\n array([207]) array([209]) array([215]) array([217]) array([219])\n array([223, 225]) array([229]) array([231])]"
+    },
+    {
+      "id": 12,
+      "func": "static int xen_9pfs_connect(struct XenDevice *xendev)\n\n{\n\n    int i;\n\n    Xen9pfsDev *xen_9pdev = container_of(xendev, Xen9pfsDev, xendev);\n\n    V9fsState *s = &xen_9pdev->state;\n\n    QemuOpts *fsdev;\n\n\n\n    if (xenstore_read_fe_int(&xen_9pdev->xendev, \"num-rings\",\n\n                             &xen...",
+      "target": true,
+      "project": "qemu",
+      "commit_id": "c0c24b95542bc1a4dc3fc6ea71475ae04fa69189",
+      "func_clean": "static int xen_9pfs_connect(struct XenDevice *xendev)\n\n{\n\n    int i;\n\n    Xen9pfsDev *xen_9pdev = container_of(xendev, Xen9pfsDev, xendev);\n\n    V9fsState *s = &xen_9pdev->state;\n\n    QemuOpts *fsdev;\n\n\n\n    if (xenstore_read_fe_int(&xen_9pdev->xendev, \"num-rings\",\n\n                             &xen...",
+      "vul_lines": {
+        "code": "[]",
+        "line_no": "[]"
+      },
+      "normalized_func": "static int FUNC_0(struct XenDevice *VAR_0)\n\n{\n\n    int VAR_1;\n\n    Xen9pfsDev *xen_9pdev = container_of(VAR_0, Xen9pfsDev, VAR_0);\n\n    V9fsState *s = &xen_9pdev->state;\n\n    QemuOpts *fsdev;\n\n\n\n    if (xenstore_read_fe_int(&xen_9pdev->VAR_0, \"num-rings\",\n\n                             &xen_9pdev->nu...",
+      "lines": "['static int FUNC_0(struct XenDevice *VAR_0)\\n{' 'int VAR_1;'\n 'Xen9pfsDev *xen_9pdev = container_of(VAR_0, Xen9pfsDev, VAR_0);'\n 'V9fsState *s = &xen_9pdev->state;' 'QemuOpts *fsdev;'\n 'if (xenstore_read_fe_int(&xen_9pdev->VAR_0, \"num-rings\",\\n&xen_9pdev->num_rings) == -1 ||\\nxen_9pdev->num_rings > MAX_RINGS || xen_9pdev->num_rings < 1) {'\n 'return -1;' '}'\n 'xen_9pdev->rings = g_malloc0(xen_9pdev->num_rings * sizeof(Xen9pfsRing));'\n 'for (VAR_1 = 0; VAR_1 < xen_9pdev->num_rings; VAR_1++) {' 'char *str;'\n 'int ring_order;' 'xen_9pdev->rings[VAR_1].priv = xen_9pdev;'\n 'xen_9pdev->rings[VAR_1].evtchn = -1;'\n 'xen_9pdev->rings[VAR_1].local_port = -1;'\n 'str = g_strdup_printf(\"ring-ref%u\", VAR_1);'\n 'if (xenstore_read_fe_int(&xen_9pdev->VAR_0, str,\\n&xen_9pdev->rings[VAR_1].ref) == -1) {'\n 'goto out;' '}' 'str = g_strdup_printf(\"event-channel-%u\", VAR_1);'\n 'if (xenstore_read_fe_int(&xen_9pdev->VAR_0, str,\\n&xen_9pdev->rings[VAR_1].evtchn) == -1) {'\n 'goto out;' '}'\n 'xen_9pdev->rings[VAR_1].intf =  xengnttab_map_grant_ref(\\nxen_9pdev->VAR_0.gnttabdev,\\nxen_9pdev->VAR_0.dom,\\nxen_9pdev->rings[VAR_1].ref,\\nPROT_READ | PROT_WRITE);'\n 'if (!xen_9pdev->rings[VAR_1].intf) {' 'goto out;' '}'\n 'ring_order = xen_9pdev->rings[VAR_1].intf->ring_order;'\n 'if (ring_order > MAX_RING_ORDER) {' 'goto out;' '}'\n 'xen_9pdev->rings[VAR_1].ring_order = ring_order;'\n 'xen_9pdev->rings[VAR_1].data = xengnttab_map_domain_grant_refs(\\nxen_9pdev->VAR_0.gnttabdev,\\n(1 << ring_order),\\nxen_9pdev->VAR_0.dom,\\nxen_9pdev->rings[VAR_1].intf->ref,\\nPROT_READ | PROT_WRITE);'\n 'if (!xen_9pdev->rings[VAR_1].data) {' 'goto out;' '}'\n 'xen_9pdev->rings[VAR_1].ring.in = xen_9pdev->rings[VAR_1].data;'\n 'xen_9pdev->rings[VAR_1].ring.out = xen_9pdev->rings[VAR_1].data +\\nXEN_FLEX_RING_SIZE(ring_order);'\n 'xen_9pdev->rings[VAR_1].bh = qemu_bh_new(xen_9pfs_bh, &xen_9pdev->rings[VAR_1]);'\n 'xen_9pdev->rings[VAR_1].out_cons = 0;'\n 'xen_9pdev->rings[VAR_1].out_size = 0;'\n 'xen_9pdev->rings[VAR_1].inprogress = false;'\n 'xen_9pdev->rings[VAR_1].evtchndev = xenevtchn_open(NULL, 0);'\n 'if (xen_9pdev->rings[VAR_1].evtchndev == NULL) {' 'goto out;' '}'\n 'fcntl(xenevtchn_fd(xen_9pdev->rings[VAR_1].evtchndev), F_SETFD, FD_CLOEXEC);'\n 'xen_9pdev->rings[VAR_1].local_port = xenevtchn_bind_interdomain\\n(xen_9pdev->rings[VAR_1].evtchndev,\\nVAR_0->dom,\\nxen_9pdev->rings[VAR_1].evtchn);'\n 'if (xen_9pdev->rings[VAR_1].local_port == -1) {'\n 'xen_pv_printf(VAR_0, 0,\\n\"xenevtchn_bind_interdomain failed port=%d\\\\n\",\\nxen_9pdev->rings[VAR_1].evtchn);'\n 'goto out;' '}'\n 'xen_pv_printf(VAR_0, 2, \"bind evtchn port %d\\\\n\", VAR_0->local_port);'\n 'qemu_set_fd_handler(xenevtchn_fd(xen_9pdev->rings[VAR_1].evtchndev),\\nxen_9pfs_evtchn_event, NULL, &xen_9pdev->rings[VAR_1]);'\n '}'\n 'xen_9pdev->security_model = xenstore_read_be_str(VAR_0, \"security_model\");'\n 'xen_9pdev->path = xenstore_read_be_str(VAR_0, \"path\");'\n 'xen_9pdev->id = s->fsconf.fsdev_id =\\ng_strdup_printf(\"xen9p%d\", VAR_0->dev);'\n 'xen_9pdev->tag = s->fsconf.tag = xenstore_read_fe_str(VAR_0, \"tag\");'\n 'v9fs_register_transport(s, &xen_9p_transport);'\n 'fsdev = qemu_opts_create(qemu_find_opts(\"fsdev\"),\\ns->fsconf.tag,\\n1, NULL);'\n 'qemu_opt_set(fsdev, \"fsdriver\", \"local\", NULL);'\n 'qemu_opt_set(fsdev, \"path\", xen_9pdev->path, NULL);'\n 'qemu_opt_set(fsdev, \"security_model\", xen_9pdev->security_model, NULL);'\n 'qemu_opts_set_id(fsdev, s->fsconf.fsdev_id);' 'qemu_fsdev_add(fsdev);'\n 'v9fs_device_realize_common(s, NULL);' 'return 0;'\n 'out:\\nxen_9pfs_free(VAR_0);' 'return -1;' '}']",
+      "label": "[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]",
+      "line_no": "[array([1, 3]) array([5]) array([7]) array([9]) array([11])\n array([15, 17, 19]) array([21]) array([23]) array([27]) array([29])\n array([31]) array([33]) array([37]) array([39]) array([41]) array([45])\n array([47, 49]) array([52]) array([54]) array([57]) array([59, 61])\n array([64]) array([66]) array([71, 73, 75, 77, 79]) array([81])\n array([83]) array([85]) array([87]) array([89]) array([91]) array([93])\n array([95]) array([ 97,  99, 101, 103, 105, 107]) array([109])\n array([111]) array([113]) array([115]) array([117, 119]) array([123])\n array([125]) array([127]) array([129]) array([135]) array([137])\n array([139]) array([141]) array([143]) array([145, 147, 149, 151])\n array([153]) array([155, 157, 159]) array([161]) array([163])\n array([165]) array([167, 169]) array([171]) array([175]) array([177])\n array([179, 181]) array([183]) array([185]) array([187, 189, 191])\n array([193]) array([195]) array([197]) array([199]) array([201])\n array([203]) array([207]) array([211, 213]) array([215]) array([217])]"
+    },
+    {
+      "id": 35,
+      "func": "static int subframe_count_exact(FlacEncodeContext *s, FlacSubframe *sub,\n\n                                int pred_order)\n\n{\n\n    int p, porder, psize;\n\n    int i, part_end;\n\n    int count = 0;\n\n\n\n    /* subframe header */\n\n    count += 8;\n\n\n\n    /* subframe */\n\n    if (sub->type == FLAC_SUBFRAME_CO...",
+      "target": true,
+      "project": "FFmpeg",
+      "commit_id": "5ff998a233d759d0de83ea6f95c383d03d25d88e",
+      "func_clean": "static int subframe_count_exact(FlacEncodeContext *s, FlacSubframe *sub,\n\n                                int pred_order)\n\n{\n\n    int p, porder, psize;\n\n    int i, part_end;\n\n    int count = 0;\n\n\n\n    \n\n    count += 8;\n\n\n\n    \n\n    if (sub->type == FLAC_SUBFRAME_CONSTANT) {\n\n        count += sub->ob...",
+      "vul_lines": {
+        "code": "['    int count = 0;'\n 'static int subframe_count_exact(FlacEncodeContext *s, FlacSubframe *sub,'\n '                                int pred_order)' '    int count = 0;']",
+        "line_no": "[11  1  3 11]"
+      },
+      "normalized_func": "static int FUNC_0(FlacEncodeContext *VAR_0, FlacSubframe *VAR_1,\n\n                                int VAR_2)\n\n{\n\n    int VAR_3, VAR_4, VAR_5;\n\n    int VAR_6, VAR_7;\n\n    int VAR_8 = 0;\n\n\n\n    \n\n    VAR_8 += 8;\n\n\n\n    \n\n    if (VAR_1->type == FLAC_SUBFRAME_CONSTANT) {\n\n        VAR_8 += VAR_1->obits;\n...",
+      "lines": "['static int FUNC_0(FlacEncodeContext *VAR_0, FlacSubframe *VAR_1,\\nint VAR_2)\\n{'\n 'int VAR_3, VAR_4, VAR_5;' 'int VAR_6, VAR_7;' 'int VAR_8 = 0;'\n 'VAR_8 += 8;' 'if (VAR_1->type == FLAC_SUBFRAME_CONSTANT) {'\n 'VAR_8 += VAR_1->obits;'\n '} else if (VAR_1->type == FLAC_SUBFRAME_VERBATIM) {'\n 'VAR_8 += VAR_0->frame.blocksize * VAR_1->obits;' '} else {'\n 'VAR_8 += VAR_2 * VAR_1->obits;'\n 'if (VAR_1->type == FLAC_SUBFRAME_LPC)\\nVAR_8 += 4 + 5 + VAR_2 * VAR_0->options.lpc_coeff_precision;'\n 'VAR_8 += 2;' 'VAR_4 = VAR_1->rc.VAR_4;'\n 'VAR_5  = VAR_0->frame.blocksize >> VAR_4;' 'VAR_8 += 4;'\n 'VAR_6        = VAR_2;' 'VAR_7 = VAR_5;'\n 'for (VAR_3 = 0; VAR_3 < 1 << VAR_4; VAR_3++) {'\n 'int VAR_9 = VAR_1->rc.params[VAR_3];' 'VAR_8 += 4;'\n 'VAR_8 += rice_count_exact(&VAR_1->residual[VAR_6], VAR_7 - VAR_6, VAR_9);'\n 'VAR_6 = VAR_7;' 'VAR_7 = FFMIN(VAR_0->frame.blocksize, VAR_7 + VAR_5);'\n '}' '}' 'return VAR_8;' '}']",
+      "label": "[1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]",
+      "line_no": "[array([1, 3, 5]) array([7]) array([9]) array([11]) array([17])\n array([23]) array([25]) array([27]) array([29]) array([31]) array([35])\n array([41, 43]) array([49]) array([55]) array([57]) array([59])\n array([65]) array([67]) array([69]) array([71]) array([73]) array([75])\n array([77]) array([79]) array([81]) array([83]) array([87]) array([89])]"
+    }
+  ]
+}

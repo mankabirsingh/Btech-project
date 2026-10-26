@@ -1,0 +1,65 @@
+{
+  "model_name": "codebert_vuln",
+  "metrics": {
+    "accuracy": 0.5466666666666666,
+    "precision": 0.547683923705722,
+    "recall": 0.9804878048780488,
+    "f1": 0.7027972027972028,
+    "f1_macro": 0.37387051151096096,
+    "f1_micro": 0.5466666666666666,
+    "mcc": 0.01384039926817396,
+    "confusion_matrix": [
+      [
+        8,
+        332
+      ],
+      [
+        8,
+        402
+      ]
+    ],
+    "classification_report": {
+      "benign": {
+        "precision": 0.5,
+        "recall": 0.023529411764705882,
+        "f1-score": 0.0449438202247191,
+        "support": 340.0
+      },
+      "vulnerable": {
+        "precision": 0.547683923705722,
+        "recall": 0.9804878048780488,
+        "f1-score": 0.7027972027972028,
+        "support": 410.0
+      },
+      "accuracy": 0.5466666666666666,
+      "macro avg": {
+        "precision": 0.523841961852861,
+        "recall": 0.5020086083213773,
+        "f1-score": 0.37387051151096096,
+        "support": 750.0
+      },
+      "weighted avg": {
+        "precision": 0.5260672116257947,
+        "recall": 0.5466666666666666,
+        "f1-score": 0.4045703360310102,
+        "support": 750.0
+      }
+    },
+    "auroc": 0.6642037302725969,
+    "average_precision": 0.7515964364766989,
+    "n_samples": 750,
+    "n_positive": 410,
+    "n_negative": 340,
+    "positive_rate": 0.5466666666666666,
+    "training_time_sec": 79.93453979492188,
+    "config": {
+      "epochs": 3,
+      "batch_size": 16,
+      "lr": 2e-05,
+      "max_length": 256,
+      "freeze_encoder": true,
+      "subset": 1500,
+      "device": "mps"
+    }
+  }
+}
