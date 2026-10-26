@@ -1,0 +1,556 @@
+{
+  "overall_metrics": {
+    "Char Baseline": {
+      "accuracy": 0.5275314116777532,
+      "precision": 0.5131175468483816,
+      "recall": 0.571753986332574,
+      "f1": 0.5408511402406178,
+      "mcc": 0.057541248504910304,
+      "auroc": 0.5474329024065319,
+      "average_precision": 0.5284901451567343,
+      "brier_score": 0.256614908063779,
+      "fpr": 0.5143988480921526,
+      "fnr": 0.428246013667426,
+      "confusion_matrix": {
+        "tn": 1349,
+        "fp": 1429,
+        "fn": 1128,
+        "tp": 1506
+      }
+    },
+    "Word Baseline": {
+      "accuracy": 0.5072062084257206,
+      "precision": 0.4943083822007589,
+      "recall": 0.544039483675019,
+      "f1": 0.5179830110247605,
+      "mcc": 0.016357580803656444,
+      "auroc": 0.5193044465326602,
+      "average_precision": 0.5020867759201579,
+      "brier_score": 0.26376939090105694,
+      "fpr": 0.5277177825773938,
+      "fnr": 0.455960516324981,
+      "confusion_matrix": {
+        "tn": 1312,
+        "fp": 1466,
+        "fn": 1201,
+        "tp": 1433
+      }
+    },
+    "CodeBERT Original": {
+      "accuracy": 0.5221729490022173,
+      "precision": 0.5086830680173662,
+      "recall": 0.5337889141989369,
+      "f1": 0.5209336791404223,
+      "mcc": 0.044942432613922945,
+      "auroc": 0.542500996275651,
+      "average_precision": 0.534031771191313,
+      "brier_score": 0.24904697919368257,
+      "fpr": 0.4888408927285817,
+      "fnr": 0.466211085801063,
+      "confusion_matrix": {
+        "tn": 1420,
+        "fp": 1358,
+        "fn": 1228,
+        "tp": 1406
+      }
+    },
+    "Tri-Union Best": {
+      "accuracy": 0.5273466371027347,
+      "precision": 0.5144927536231884,
+      "recall": 0.5121488230827639,
+      "f1": 0.5133181126331812,
+      "mcc": 0.05391237929415333,
+      "auroc": 0.541782967157616,
+      "average_precision": 0.5367395585458342,
+      "brier_score": 0.24798629793300728,
+      "fpr": 0.4582433405327574,
+      "fnr": 0.4878511769172361,
+      "confusion_matrix": {
+        "tn": 1505,
+        "fp": 1273,
+        "fn": 1285,
+        "tp": 1349
+      }
+    },
+    "CodeBERT Improved Hybrid": {
+      "accuracy": 0.5447154471544715,
+      "precision": 0.5419960474308301,
+      "recall": 0.4164768413059985,
+      "f1": 0.47101760412194077,
+      "mcc": 0.08551474951951583,
+      "auroc": 0.5616888689907086,
+      "average_precision": 0.551174000171542,
+      "brier_score": 0.2460974934533556,
+      "fpr": 0.33369330453563717,
+      "fnr": 0.5835231586940015,
+      "confusion_matrix": {
+        "tn": 1851,
+        "fp": 927,
+        "fn": 1537,
+        "tp": 1097
+      }
+    }
+  },
+  "dataset_breakdown": {
+    "devign": {
+      "Char Baseline": {
+        "accuracy": 0.5325054784514244,
+        "precision": 0.5143529411764706,
+        "recall": 0.5517415446744068,
+        "f1": 0.5323916220165611,
+        "mcc": 0.06632178434363134,
+        "auroc": 0.5550564321543848,
+        "ap": 0.5310903024744276,
+        "cm": {
+          "tn": 1094,
+          "fp": 1032,
+          "fn": 888,
+          "tp": 1093
+        }
+      },
+      "Word Baseline": {
+        "accuracy": 0.506208911614317,
+        "precision": 0.4886964886964887,
+        "recall": 0.5128722867238769,
+        "f1": 0.5004926108374385,
+        "mcc": 0.012865253638933417,
+        "auroc": 0.5195545357281759,
+        "ap": 0.49896110040591807,
+        "cm": {
+          "tn": 1063,
+          "fp": 1063,
+          "fn": 965,
+          "tp": 1016
+        }
+      },
+      "CodeBERT Original": {
+        "accuracy": 0.5252008765522279,
+        "precision": 0.5079691516709511,
+        "recall": 0.49873801110550225,
+        "f1": 0.5033112582781457,
+        "mcc": 0.048634538145271675,
+        "auroc": 0.5483414165522607,
+        "ap": 0.5392102221981332,
+        "cm": {
+          "tn": 1169,
+          "fp": 957,
+          "fn": 993,
+          "tp": 988
+        }
+      },
+      "Tri-Union Best": {
+        "accuracy": 0.5364012661309958,
+        "precision": 0.525279054497702,
+        "recall": 0.4038364462392731,
+        "f1": 0.45662100456621,
+        "mcc": 0.06596051815978021,
+        "auroc": 0.5489174438444622,
+        "ap": 0.547326658999379,
+        "cm": {
+          "tn": 1403,
+          "fp": 723,
+          "fn": 1181,
+          "tp": 800
+        }
+      },
+      "CodeBERT Improved Hybrid": {
+        "accuracy": 0.5566106647187729,
+        "precision": 0.5725952813067151,
+        "recall": 0.31852599697122663,
+        "f1": 0.40934155043788517,
+        "mcc": 0.10937229204617777,
+        "auroc": 0.5752221361637342,
+        "ap": 0.5713934754052621,
+        "cm": {
+          "tn": 1655,
+          "fp": 471,
+          "fn": 1350,
+          "tp": 631
+        }
+      }
+    },
+    "primevul": {
+      "Char Baseline": {
+        "accuracy": 0.5118773946360153,
+        "precision": 0.5098765432098765,
+        "recall": 0.6324655436447167,
+        "f1": 0.5645933014354066,
+        "mcc": 0.02428800700175116,
+        "auroc": 0.5191976155356588,
+        "ap": 0.5195397654040215,
+        "cm": {
+          "tn": 255,
+          "fp": 397,
+          "fn": 240,
+          "tp": 413
+        }
+      },
+      "Word Baseline": {
+        "accuracy": 0.5103448275862069,
+        "precision": 0.5085365853658537,
+        "recall": 0.6385911179173047,
+        "f1": 0.5661914460285132,
+        "mcc": 0.021203485209764818,
+        "auroc": 0.522103035541484,
+        "ap": 0.5192210931902371,
+        "cm": {
+          "tn": 249,
+          "fp": 403,
+          "fn": 236,
+          "tp": 417
+        }
+      },
+      "CodeBERT Original": {
+        "accuracy": 0.5126436781609195,
+        "precision": 0.5103785103785103,
+        "recall": 0.6401225114854517,
+        "f1": 0.5679347826086957,
+        "mcc": 0.025950919731989392,
+        "auroc": 0.5174360431796616,
+        "ap": 0.513394261037721,
+        "cm": {
+          "tn": 251,
+          "fp": 401,
+          "fn": 235,
+          "tp": 418
+        }
+      },
+      "Tri-Union Best": {
+        "accuracy": 0.49885057471264366,
+        "precision": 0.49954504094631486,
+        "recall": 0.8407350689127105,
+        "f1": 0.6267123287671232,
+        "mcc": -0.0038716101768482888,
+        "auroc": 0.5033270229896937,
+        "ap": 0.5053168848705387,
+        "cm": {
+          "tn": 102,
+          "fp": 550,
+          "fn": 104,
+          "tp": 549
+        }
+      },
+      "CodeBERT Improved Hybrid": {
+        "accuracy": 0.5072796934865901,
+        "precision": 0.5054229934924078,
+        "recall": 0.7136294027565084,
+        "f1": 0.5917460317460318,
+        "mcc": 0.01563917922209188,
+        "auroc": 0.5087139112543335,
+        "ap": 0.5081633891149362,
+        "cm": {
+          "tn": 196,
+          "fp": 456,
+          "fn": 187,
+          "tp": 466
+        }
+      }
+    }
+  },
+  "patch_pair_analysis": {
+    "Char Baseline": {
+      "total_pairs": 652,
+      "pairwise_ranking_accuracy": 0.5720858895705522,
+      "both_correct_rate": 0.04447852760736196,
+      "both_wrong_inverted_rate": 0.02147239263803681,
+      "identical_prob_count": 15
+    },
+    "Word Baseline": {
+      "total_pairs": 652,
+      "pairwise_ranking_accuracy": 0.5368098159509203,
+      "both_correct_rate": 0.03834355828220859,
+      "both_wrong_inverted_rate": 0.018404907975460124,
+      "identical_prob_count": 65
+    },
+    "CodeBERT Original": {
+      "total_pairs": 652,
+      "pairwise_ranking_accuracy": 0.31901840490797545,
+      "both_correct_rate": 0.05674846625766871,
+      "both_wrong_inverted_rate": 0.03067484662576687,
+      "identical_prob_count": 287
+    },
+    "Tri-Union Best": {
+      "total_pairs": 652,
+      "pairwise_ranking_accuracy": 0.5214723926380368,
+      "both_correct_rate": 0.023006134969325152,
+      "both_wrong_inverted_rate": 0.02607361963190184,
+      "identical_prob_count": 5
+    },
+    "CodeBERT Improved Hybrid": {
+      "total_pairs": 652,
+      "pairwise_ranking_accuracy": 0.5567484662576687,
+      "both_correct_rate": 0.04754601226993865,
+      "both_wrong_inverted_rate": 0.03374233128834356,
+      "identical_prob_count": 4
+    }
+  },
+  "length_breakdown": {
+    "Short (<500c)": {
+      "n_samples": 1370,
+      "pos_rate": 0.46934306569343065,
+      "Tri-Union Best": {
+        "acc": 0.5445255474452555,
+        "auroc": 0.560356906779389,
+        "mcc": 0.07024560477822164
+      },
+      "CodeBERT Original": {
+        "acc": 0.5153284671532846,
+        "auroc": 0.5396963596963169,
+        "mcc": 0.014234421319642093
+      },
+      "CodeBERT Improved Hybrid": {
+        "acc": 0.572992700729927,
+        "auroc": 0.5905177116379763,
+        "mcc": 0.13459099151426612
+      }
+    },
+    "Medium (500-1500c)": {
+      "n_samples": 1801,
+      "pos_rate": 0.5002776235424764,
+      "Tri-Union Best": {
+        "acc": 0.538034425319267,
+        "auroc": 0.5577136514983352,
+        "mcc": 0.07708545589168578
+      },
+      "CodeBERT Original": {
+        "acc": 0.5280399777901166,
+        "auroc": 0.5557269700332963,
+        "mcc": 0.05607765972110927
+      },
+      "CodeBERT Improved Hybrid": {
+        "acc": 0.5524708495280399,
+        "auroc": 0.5794302626711062,
+        "mcc": 0.11352854183387634
+      }
+    },
+    "Long (1500-3000c)": {
+      "n_samples": 950,
+      "pos_rate": 0.5094736842105263,
+      "Tri-Union Best": {
+        "acc": 0.5336842105263158,
+        "auroc": 0.5436788387188309,
+        "mcc": 0.06505453215426994
+      },
+      "CodeBERT Original": {
+        "acc": 0.5273684210526316,
+        "auroc": 0.5281408505657432,
+        "mcc": 0.05179442078798873
+      },
+      "CodeBERT Improved Hybrid": {
+        "acc": 0.5126315789473684,
+        "auroc": 0.5273383463980421,
+        "mcc": 0.02723091831960754
+      }
+    },
+    "Truncated (>3000c)": {
+      "n_samples": 1291,
+      "pos_rate": 0.4694035631293571,
+      "Tri-Union Best": {
+        "acc": 0.4895429899302866,
+        "auroc": 0.5182602201826022,
+        "mcc": 0.0031851794155973298
+      },
+      "CodeBERT Original": {
+        "acc": 0.517428350116189,
+        "auroc": 0.5294524342945244,
+        "mcc": 0.04797694893223041
+      },
+      "CodeBERT Improved Hybrid": {
+        "acc": 0.5274980635166537,
+        "auroc": 0.5418491484184915,
+        "mcc": 0.06302286084384537
+      }
+    }
+  },
+  "cwe_breakdown": {},
+  "paired_statistical_tests": {
+    "CodeBERT Original vs. CodeBERT Improved Hybrid": {
+      "mcnemar": {
+        "contingency_table": [
+          [
+            2122,
+            704
+          ],
+          [
+            826,
+            1760
+          ]
+        ],
+        "b_only_A_correct": 704,
+        "c_only_B_correct": 826,
+        "chi2_stat": 9.569281045751634,
+        "p_value": 0.001978602540938992,
+        "odds_ratio": 1.1732954545454546,
+        "significant_005": true,
+        "significant_001": true
+      },
+      "bootstrap_deltas": {
+        "delta_acc_mean": 0.02262620103473762,
+        "delta_acc_95ci": [
+          0.007945306725794521,
+          0.038068181818181834
+        ],
+        "delta_auroc_mean": 0.019304241565759196,
+        "delta_auroc_95ci": [
+          0.0066929772537891565,
+          0.0317735618221244
+        ],
+        "delta_f1_mean": -0.04980573659630057,
+        "delta_f1_95ci": [
+          -0.06539795520414864,
+          -0.033579957558753065
+        ],
+        "delta_mcc_mean": 0.04086009456513842,
+        "delta_mcc_95ci": [
+          0.014105500089069072,
+          0.06929741451141026
+        ]
+      },
+      "wilcoxon_prob_test": {
+        "w_stat": 6866919.0,
+        "p_value": 7.051668486513608e-05
+      }
+    },
+    "Tri-Union Best vs. CodeBERT Improved Hybrid": {
+      "mcnemar": {
+        "contingency_table": [
+          [
+            2302,
+            552
+          ],
+          [
+            646,
+            1912
+          ]
+        ],
+        "b_only_A_correct": 552,
+        "c_only_B_correct": 646,
+        "chi2_stat": 7.219532554257095,
+        "p_value": 0.007211448469814752,
+        "odds_ratio": 1.1702898550724639,
+        "significant_005": true,
+        "significant_001": true
+      },
+      "bootstrap_deltas": {
+        "delta_acc_mean": 0.017175166297117517,
+        "delta_acc_95ci": [
+          0.0042498152254249995,
+          0.029563932002956372
+        ],
+        "delta_auroc_mean": 0.01975542254931198,
+        "delta_auroc_95ci": [
+          0.008353238248115891,
+          0.03162019549269526
+        ],
+        "delta_f1_mean": -0.04237073289210558,
+        "delta_f1_95ci": [
+          -0.05785930686059749,
+          -0.02782977898068264
+        ],
+        "delta_mcc_mean": 0.03132905799154624,
+        "delta_mcc_95ci": [
+          0.006624631382255863,
+          0.055922408653589065
+        ]
+      },
+      "wilcoxon_prob_test": {
+        "w_stat": 7042597.0,
+        "p_value": 0.014436015418128348
+      }
+    },
+    "Char Baseline vs. CodeBERT Improved Hybrid": {
+      "mcnemar": {
+        "contingency_table": [
+          [
+            1811,
+            1044
+          ],
+          [
+            1137,
+            1420
+          ]
+        ],
+        "b_only_A_correct": 1044,
+        "c_only_B_correct": 1137,
+        "chi2_stat": 3.8807886290692344,
+        "p_value": 0.048841610255770954,
+        "odds_ratio": 1.089080459770115,
+        "significant_005": true,
+        "significant_001": false
+      },
+      "bootstrap_deltas": {
+        "delta_acc_mean": 0.017274759793052475,
+        "delta_acc_95ci": [
+          0.0011040280857353953,
+          0.033813747228381374
+        ],
+        "delta_auroc_mean": 0.014258114175153857,
+        "delta_auroc_95ci": [
+          -0.004174503849023611,
+          0.03299924079828172
+        ],
+        "delta_f1_mean": -0.06962441520972316,
+        "delta_f1_95ci": [
+          -0.08923242232199359,
+          -0.050189478399046424
+        ],
+        "delta_mcc_mean": 0.028317833935109057,
+        "delta_mcc_95ci": [
+          -0.004011413479165998,
+          0.06248127348475147
+        ]
+      },
+      "wilcoxon_prob_test": {
+        "w_stat": 7074384.0,
+        "p_value": 0.030029872548733613
+      }
+    },
+    "Char Baseline vs. Tri-Union Best": {
+      "mcnemar": {
+        "contingency_table": [
+          [
+            1965,
+            890
+          ],
+          [
+            889,
+            1668
+          ]
+        ],
+        "b_only_A_correct": 890,
+        "c_only_B_correct": 889,
+        "chi2_stat": 0.0,
+        "p_value": 1.0,
+        "odds_ratio": 0.998876404494382,
+        "significant_005": false,
+        "significant_001": false
+      },
+      "bootstrap_deltas": {
+        "delta_acc_mean": 9.959349593495804e-05,
+        "delta_acc_95ci": [
+          -0.01516075388026617,
+          0.015525683665927655
+        ],
+        "delta_auroc_mean": -0.005497308374158125,
+        "delta_auroc_95ci": [
+          -0.021709500452877853,
+          0.010215032946880124
+        ],
+        "delta_f1_mean": -0.027253682317617597,
+        "delta_f1_95ci": [
+          -0.04372077806982404,
+          -0.009945253877955426
+        ],
+        "delta_mcc_mean": -0.003011224056437182,
+        "delta_mcc_95ci": [
+          -0.03266433106332135,
+          0.028889915562938264
+        ]
+      },
+      "wilcoxon_prob_test": {
+        "w_stat": 6925545.0,
+        "p_value": 0.0005311797519094714
+      }
+    }
+  }
+}
