@@ -1,0 +1,68 @@
+[
+  {
+    "model_name": "CodeBERT [CLS] len=256 C=0.1",
+    "val_accuracy": 0.5077605321507761,
+    "val_precision": 0.4725352112676056,
+    "val_recall": 0.828395061728395,
+    "val_f1": 0.6017937219730942,
+    "val_mcc": 0.09098222954924441,
+    "val_auroc": 0.5562425478798718,
+    "val_ap": 0.49607069638714046,
+    "best_val_threshold": 0.44
+  },
+  {
+    "model_name": "CodeBERT [CLS] len=384 C=0.1",
+    "val_accuracy": 0.5643015521064302,
+    "val_precision": 0.51854714064915,
+    "val_recall": 0.4141975308641975,
+    "val_f1": 0.4605353466026081,
+    "val_mcc": 0.10455666571362464,
+    "val_auroc": 0.5622610663983904,
+    "val_ap": 0.4995033219946728,
+    "best_val_threshold": 0.54
+  },
+  {
+    "model_name": "CodeBERT [CLS+MeanPool] len=384 C=0.05",
+    "val_accuracy": 0.5529379157427938,
+    "val_precision": 0.5021380574221136,
+    "val_recall": 0.5074074074074074,
+    "val_f1": 0.5047589806570464,
+    "val_mcc": 0.09735749941584296,
+    "val_auroc": 0.5615186489306208,
+    "val_ap": 0.4948555477527841,
+    "best_val_threshold": 0.52
+  },
+  {
+    "model_name": "CodeBERT [CLS+MeanPool]+SecurityStruct C=0.01",
+    "val_accuracy": 0.5579268292682927,
+    "val_precision": 0.5084745762711864,
+    "val_recall": 0.46296296296296297,
+    "val_f1": 0.48465266558966075,
+    "val_mcc": 0.09942980305048527,
+    "val_auroc": 0.5658132436594877,
+    "val_ap": 0.5159192254450615,
+    "best_val_threshold": 0.52
+  },
+  {
+    "model_name": "CodeBERT [CLS+MeanPool]+SecurityStruct C=0.05",
+    "val_accuracy": 0.561529933481153,
+    "val_precision": 0.5149136577708007,
+    "val_recall": 0.4049382716049383,
+    "val_f1": 0.45335176226675883,
+    "val_mcc": 0.09790298262651388,
+    "val_auroc": 0.5651149179024766,
+    "val_ap": 0.5161594961863523,
+    "best_val_threshold": 0.54
+  },
+  {
+    "model_name": "CodeBERT [CLS+MeanPool]+SecurityStruct C=0.1",
+    "val_accuracy": 0.5523835920177383,
+    "val_precision": 0.5015365703749232,
+    "val_recall": 0.5037037037037037,
+    "val_f1": 0.5026178010471204,
+    "val_mcc": 0.09571847238513541,
+    "val_auroc": 0.5640113831134959,
+    "val_ap": 0.5155780651538069,
+    "best_val_threshold": 0.52
+  }
+]
