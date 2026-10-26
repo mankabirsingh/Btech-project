@@ -82,7 +82,8 @@ Test Split:   5,412 samples ( 2,507 groups) | Vuln:  2,634 (48.67%)
 ### 4.2 Leakage Verification Results
 - **Exact Code Duplicate Overlap:** **0** across all splits ($0.0\%$).
 - **Group ID Cross-Contamination:** **0** across all splits ($0.0\%$).
-- **Near-Duplicate Code Similarity ($J \ge 0.85$):** Only 1 boilerplate `#include <stdio.h>` pair detected out of 250,000 sampled cross-split pairs ($0.0004\%$).
+- **Near-Duplicate Code Similarity Analysis:** In an exhaustive verification of 1,000,000 train-test pairs using character 4-gram Jaccard similarity, **8 pairs** were identified with $J \ge 0.85$ ($0.0008\%$). These correspond to functions modified across different historical commits (e.g., `pxa255_init` in QEMU between commit `b45c03f` in test and `c92cfba` in train).
+  - *Finding:* Commit-level grouping strictly eliminates intra-commit patch leakage (ensuring pre- and post-patch functions never cross splits). However, historical modifications to identical functions across separate commits can span splits unless grouped at the function-symbol or repository level.
 
 ---
 
@@ -103,41 +104,52 @@ Test Split:   5,412 samples ( 2,507 groups) | Vuln:  2,634 (48.67%)
 
 ## 6. Actual Verified Evaluation Metrics
 
-All metrics were computed on the held-out test set (5,412 samples for baselines, 1,200 representative test samples for CodeBERT):
+### 6.1 Complete Held-Out Test Set (N = 5,412 Samples)
+All three models evaluated on the identical full held-out test split (2,634 vulnerable, 2,778 benign):
 
 | Model Architecture | Accuracy | Precision | Recall | F1 Score | F1 Macro | MCC | AUROC | PR-AUC (AP) | Brier Score |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Char N-gram Baseline** | **52.75%** | **51.31%** | **57.18%** | **54.09%** | **52.71%** | **+0.0575** | **0.5474** | **0.5285** | 0.2481 |
+| **Char N-gram Baseline** | **52.75%** | **51.31%** | **57.18%** | **54.09%** | **52.71%** | **+0.0575** | **0.5474** | 0.5285 | 0.2481 |
 | **Word N-gram Baseline** | 50.72% | 49.43% | 54.40% | 51.80% | 50.70% | +0.0164 | 0.5193 | 0.5021 | 0.2512 |
-| **CodeBERT Classifier** | 49.08% | 49.03% | 50.58% | 49.79% | 49.07% | -0.0183 | 0.5010 | 0.5097 | 0.2520 |
+| **CodeBERT Classifier** | 52.22% | 50.87% | 53.38% | 52.09% | 52.22% | +0.0449 | 0.5425 | **0.5340** | 0.2490 |
 
-### Confusion Matrices
+### 6.2 Standardized 1,200 Test Subset Comparison
+Evaluated on an identical fixed random sample of 1,200 test cases (599 vulnerable, 601 benign, seed=42):
 
-#### Char N-gram Baseline (N = 5,412 Test Set)
+| Model Architecture | Accuracy | Precision | Recall | F1 Score | F1 Macro | MCC | AUROC | PR-AUC (AP) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Char N-gram Baseline** | 51.67% | 51.49% | 54.92% | 53.15% | 51.64% | +0.0335 | 0.5267 | 0.5147 |
+| **Word N-gram Baseline** | 48.33% | 48.38% | 52.42% | 50.32% | 48.33% | -0.0333 | 0.4858 | 0.4788 |
+| **CodeBERT Classifier** | 49.08% | 49.03% | 50.58% | 49.79% | 49.07% | -0.0183 | 0.5010 | 0.5097 |
+
+### Confusion Matrices (Complete N = 5,412 Test Set)
+
+#### Char N-gram Baseline (N = 5,412)
 ```
                Predicted Benign    Predicted Vulnerable
 True Benign          1,349                 1,429
 True Vulnerable      1,128                 1,506
 ```
 
-#### CodeBERT Vulnerability Classifier (N = 1,200 Held-Out Test Set)
+#### CodeBERT Classifier (N = 5,412)
 ```
                Predicted Benign    Predicted Vulnerable
-True Benign            286                   315
-True Vulnerable        296                   303
+True Benign          1,420                 1,358
+True Vulnerable      1,228                 1,406
 ```
 
 ### Forensic Resolution of CodeBERT's Earlier Reported Behavior
 - Earlier runs reported: Accuracy 54.67%, Recall 98.05%, MCC 0.0138.
 - **Audit Finding:** With `--freeze_encoder`, the linear head was trained with `lr=2e-5` for only 3 epochs on 1,500 samples. The head parameters barely updated from initialization, causing the model to collapse into predicting "vulnerable" for 98% of samples. This yielded an artificially high recall (98%) on a 53% positive test set, but an MCC of virtually 0.
-- **Corrected Behavior:** With proper classification head training, class weighting, and validation calibration, the model's positive prediction rate is **50.7%** (matching the ground truth 49.92%), resolving the collapse.
-- **Scientific Takeaway:** Standard pretrained CodeBERT [CLS] embeddings without graph reachability or data-flow slicing hover near random chance on un-leaked function-level vulnerability benchmarks, verifying findings by Chakraborty et al. (IEEE TSE 2021).
+- **Corrected Behavior:** With proper classification head training, class weighting, and validation calibration, the model's positive prediction rate across the 5,412 test set is **51.07%** (matching the ground truth 48.67%), resolving the head collapse.
+- **Scientific Takeaway:** Standard pretrained CodeBERT sequence embeddings without graph reachability or data-flow slicing hover near random chance on un-leaked function-level vulnerability benchmarks, verifying findings by Chakraborty et al. (IEEE TSE 2021).
 
 ---
 
 ## 7. Provenance-Aware Research Contribution
 
 ### 7.1 Experiment 1: Real-World Open-Source Benchmark (Devign + PrimeVul)
+Evaluated on the full 5,412 held-out test split using genuine trained Logistic Regression models:
 
 | Model Configuration | Accuracy | Precision | Recall | F1 Score | AUROC | MCC |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -145,20 +157,23 @@ True Vulnerable        296                   303
 | **Model B (Code + Provenance)** | 50.39% | 49.68% | 52.81% | 51.19% | 0.5129 | +0.0094 |
 | **Delta ($\Delta$)** | **+0.69%** | **+0.65%** | **+1.14%** | **+0.88%** | **+0.0034** | **+0.0140** |
 
-**Finding:** In homogeneous open-source repositories where all code is human-written ($\text{AI Involvement} = 0.0$), provenance features provide zero discriminant signal.
+**Finding:** In homogeneous open-source repositories where all code is historically human-written ($\text{AI Involvement} = 0.0$), provenance features provide zero discriminant signal.
 
 ### 7.2 Experiment 2: Controlled Human-AI Evolution Benchmark (32 Units across 8 CWEs)
+Evaluated on the 32-sample multi-CWE benchmark tracking 4 versions per task ($v_1$: Human baseline, $v_2$: AI generation, $v_3$: Human fix, $v_4$: AI regression):
 
 | Model Configuration | Accuracy | Precision | Recall | F1 Score | AUROC | MCC |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Model A (CodeBERT-Only)** | 59.38% | 60.00% | 56.25% | 58.06% | 0.5664 | +0.1879 |
-| **Model B (CodeBERT + Provenance)** | **84.38%** | **82.35%** | **87.50%** | **84.85%** | **0.9375** | **+0.6999** |
+| **Model B (Provenance-Weighted)** | **84.38%** | **82.35%** | **87.50%** | **84.85%** | **0.9375** | **+0.6999** |
+
+*Methodological Note:* In this controlled experiment, Model B represents an operational risk-weighting heuristic ($S_{\text{prov}} = P_{\text{code}} \times [0.6 + 0.8 \times \text{AI Involvement}]$). Because the benchmark intentionally tests AI risk by having $v_2$ (100% AI) and $v_4$ (75% AI) introduce vulnerabilities while $v_1$ (0% AI) and $v_3$ (50% AI) remediate them, the high separation confirms the efficacy of the heuristic on curated workflows. It is an illustrative proof-of-concept, not an end-to-end trained deep neural network.
 
 ---
 
 ## 8. Review Prioritization Evaluation
 
-In practical DevSecOps, engineering teams can only manually review a fraction of incoming pull requests. We evaluated how effectively provenance awareness ranks risky code compared to code-only baselines and static analysis:
+In practical DevSecOps, engineering teams can only manually review a fraction of incoming pull requests. We evaluated how effectively provenance-aware ranking prioritizes risky code compared to code-only baselines and static analysis:
 
 | Review Budget (% Inspected) | Code-Only Recall | Code-Only Precision | Provenance-Aware Recall | Provenance-Aware Precision | Static Analysis Recall | Static Analysis Precision |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -167,9 +182,10 @@ In practical DevSecOps, engineering teams can only manually review a fraction of
 | **37.5% (Top 12 PRs)** | 43.8% (7/16) | 58.3% | **75.0% (12/16)** | **100.0%** | 50.0% (8/16) | 66.7% |
 | **50.0% (Top 16 PRs)** | 56.2% (9/16) | 56.2% | **87.5% (14/16)** | **87.5%** | 56.2% (9/16) | 56.2% |
 
-### Key Observations:
+### Key Observations & Scientific Interpretation:
 - **Doubled Triage Recall at 25% Budget:** Inspecting the top 25% of code ranked by provenance catches **50.0% of all vulnerabilities** (8 of 16) with **100% precision**, compared to only 25.0% (4 of 16) for code-only ranking.
 - **Outperforming Static Analysis Alone:** At a 37.5% budget, Provenance-Aware Prioritization discovers **75.0% of vulnerabilities** (12 of 16), whereas static analysis catches 50.0% (8 of 16) due to missing subtle logic and bounds regressions in AI-edited code.
+- **Proper Scientific Framing:** This result demonstrates the utility of provenance-aware ranking as a *curated demonstration* of DevSecOps triage policy. It should be presented as an operational case study on representative CWE patterns, rather than a statistical proof of generalizability across unconstrained codebases.
 
 ---
 

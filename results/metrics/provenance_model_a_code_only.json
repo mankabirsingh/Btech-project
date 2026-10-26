@@ -8,6 +8,9 @@
     "mcc": 0.18786728732554486,
     "auroc": 0.56640625,
     "average_precision": 0.5826571005247476,
-    "brier_score": 0.2471524164516558
+    "brier_score": 0.2471524164516558,
+    "n_samples": 32,
+    "n_positive": 16,
+    "n_negative": 16
   }
 }
