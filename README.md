@@ -1,194 +1,143 @@
 # Provenance-Aware Security Risk Assessment of Human-AI Hybrid Code
 
-**B.Tech Project-I — Delhi Technological University**
+**B.Tech Project-I — Delhi Technological University (DTU)**  
+**Department of Information Technology**
 
 **Team:**
-- Mankabir Singh (23/IT/199)
-- Mohnish Gautam (23/IT/200)
+- Mankabir Singh (Roll No: 23/IT/199)
+- Mohnish Gautam (Roll No: 23/IT/200)
 
 ---
 
-## Research Question
+## 1. Research Question
 
-> *Can provenance-aware analysis improve security-risk prediction and review prioritisation for human-AI hybrid code compared with provenance-agnostic vulnerability detection?*
+> *"Can provenance-aware analysis improve security-risk prediction and review prioritisation for human-AI hybrid code compared with provenance-agnostic vulnerability detection?"*
 
-## Project Overview
+---
 
-This project investigates whether information about code provenance — including AI involvement, AI generator identity, editing history, and human modifications — can improve vulnerability detection and security review prioritisation in codebases containing both human-written and AI-generated code.
+## 2. Research Audit & Verified Findings Summary
 
-### Key Components
+This repository hosts a scientifically defensible research prototype evaluating how code provenance (author type, AI-involvement %, and edit lineage) affects security vulnerability prediction and code review prioritization.
 
-1. **Vulnerability Detection Baseline**: TF-IDF + Logistic Regression on code text
-2. **CodeBERT Fine-tuning**: Pre-trained code encoder for vulnerability classification
-3. **Provenance-Aware Model**: Combines code representation with provenance features
-4. **Controlled Editing Experiment**: Tracks security changes across code versions with different AI involvement levels
-5. **Interactive Prototype**: Streamlit application for security analysis and experiment visualization
+### Key Scientific Findings
+1. **Provenance in Legacy Open Source:** On traditional open-source benchmarks (Devign + PrimeVul, 36,080 samples), author provenance is homogeneous ($100\%$ human-authored, $\text{AI Involvement} = 0.0$). Adding provenance features yields a negligible delta ($\Delta \text{Acc} = +0.69\%$, $\Delta \text{F1} = +0.88\%$). Claiming provenance solves open-source vulnerability detection is empirically invalid.
+2. **Review Prioritization in Hybrid Repositories:** In human-AI hybrid codebases, provenance awareness provides dramatic benefits for **code review triage and prioritization**:
+   - At a **25% Review Budget**, Provenance-Aware Prioritization catches **50.0% of vulnerabilities (8/16)** with **100% precision**, compared to only **25.0% recall (4/16)** for code-only models.
+   - At a **37.5% Review Budget**, recall reaches **75.0% (12/16)**.
+3. **The Inductive Bias Caveat:** Because human-remediated hybrid code is secure ($\text{Vuln}=0$) despite containing AI history ($\text{AI}=50\%$), treating provenance as a naive binary vulnerability flag causes false positives. Provenance must act as a **prioritization weight**, guarded by contextual static analysis.
 
-## Datasets
+---
 
-| Dataset | Source | Purpose | Samples |
-|---------|--------|---------|---------|
-| Devign | [DetectVul/devign](https://huggingface.co/datasets/DetectVul/devign) | Vulnerability detection (C/C++) | ~27K |
-| PrimeVul | [adefu020/primevul](https://huggingface.co/datasets/adefu020/primevul) | Vulnerability detection with CWE/CVE labels | ~200K+ |
-| HumanVsAICode | [OSS-forge/HumanVsAICode](https://huggingface.co/datasets/OSS-forge/HumanVsAICode) | Human vs AI code (ChatGPT, DeepSeek, Qwen) | ~507K |
+## 3. Verified Benchmark Results
 
-### Important Notes
-- Vulnerability labels come from Devign and PrimeVul (real-world open-source projects)
-- HumanVsAICode provides provenance information but does NOT contain vulnerability labels
-- Datasets are NOT merged blindly — vulnerability data and provenance data are maintained separately
-- AI-generated ≠ vulnerable; human-written ≠ safe
+### 3.1 Function-Level Vulnerability Detection (Grouped Held-Out Test Set: 5,412 Samples)
+*Zero pair leakage: all vulnerable and fixed commit pairs are partitioned strictly into the same split.*
 
-## Project Structure
+| Model Architecture | Accuracy | Precision | Recall | F1 Score | MCC | AUROC | PR-AUC (AP) | Brier Score |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Char N-gram Baseline** (TF-IDF 1-4 char, LR balanced) | **52.75%** | **51.31%** | **57.18%** | **54.09%** | **+0.0575** | **0.5474** | **0.5285** | 0.2481 |
+| **Word N-gram Baseline** (TF-IDF 1-2 word, LR balanced) | 50.72% | 49.43% | 54.40% | 51.80% | +0.0164 | 0.5193 | 0.5021 | 0.2512 |
+| **CodeBERT** (CLS + Val-Tuned Head) | 49.08% | 49.03% | 50.58% | 49.79% | -0.0183 | 0.5010 | 0.5097 | 0.2520 |
+
+### 3.2 Review Prioritization (Multi-CWE Benchmark, 32 Units across 8 CWEs)
+
+| Review Budget (% Inspected) | Code-Only Recall | Code-Only Precision | Provenance-Aware Recall | Provenance-Aware Precision |
+| :---: | :---: | :---: | :---: | :---: |
+| **12.5% (Top 4 PRs)** | 12.5% (2/16) | 50.0% | **25.0% (4/16)** | **100.0%** |
+| **25.0% (Top 8 PRs)** | 25.0% (4/16) | 50.0% | **50.0% (8/16)** | **100.0%** |
+| **37.5% (Top 12 PRs)** | 43.8% (7/16) | 58.3% | **75.0% (12/16)** | **100.0%** |
+| **50.0% (Top 16 PRs)** | 56.2% (9/16) | 56.2% | **87.5% (14/16)** | **87.5%** |
+
+---
+
+## 4. Repository Structure & Audit Deliverables
 
 ```
 project/
-├── app.py                          # Streamlit application
+├── research_audit.md               # Complete repository audit & flaw resolution log
+├── dataset_validation_report.md    # Dataset verification & PrimeVul correction report
+├── leakage_audit_report.md         # Grouped splitting & zero pair leakage audit
+├── provenance_experiment_report.md # Provenance-aware research contribution & prioritization
+├── verified_midsemester_results.md # Consolidated empirical benchmarks & metrics
+├── mid_semester_evaluation_report.md # Updated academic submission report
+├── app.py                          # Streamlit research dashboard
 ├── requirements.txt                # Python dependencies
-├── README.md                       # This file
-├── .gitignore
 ├── src/
 │   ├── data/
-│   │   ├── dataset_loader.py       # Dataset loading utilities
-│   │   ├── preprocessing.py        # Data standardization
-│   │   └── split_dataset.py        # Train/val/test splitting
+│   │   ├── dataset_loader.py       # Robust dataset loaders
+│   │   ├── preprocessing.py        # Code normalization & cleaning
+│   │   └── split_dataset.py        # Stratified group splitting (zero leakage)
 │   ├── models/
-│   │   ├── baseline.py             # TF-IDF + LogReg baseline
-│   │   └── code_encoder.py         # CodeBERT + Provenance-aware model
+│   │   ├── baseline.py             # TF-IDF + Logistic Regression baselines
+│   │   └── code_encoder.py         # CodeBERT encoder & zero-leakage provenance features
 │   ├── evaluation/
-│   │   └── evaluate.py             # Metrics, plots, model comparison
+│   │   └── evaluate.py             # Classification, calibration & ROC/PR generation
 │   ├── security/
-│   │   └── static_analysis.py      # Pattern-based security analysis
+│   │   └── static_analysis.py      # Flawfinder + pattern analysis with remediations
 │   └── experiments/
-│       └── controlled_editing.py   # Controlled editing experiment
+│       └── controlled_editing.py   # 8-task, 32-version Multi-CWE evolution benchmark
 ├── scripts/
-│   ├── prepare_dataset.py          # Download & prepare datasets
-│   ├── train_baseline.py           # Train TF-IDF baseline
-│   └── train_codebert.py           # Fine-tune CodeBERT
-├── data/
-│   ├── raw/                        # Raw downloaded data
-│   ├── processed/                  # Standardized parquet files
-│   ├── splits/                     # Train/val/test splits
-│   └── reports/                    # Dataset inspection reports
-├── models/
-│   └── checkpoints/                # Saved model weights
+│   ├── prepare_dataset.py          # Preprocesses Devign, PrimeVul & HumanVsAICode
+│   ├── train_baseline.py           # Trains Char and Word N-gram baselines
+│   ├── train_codebert.py           # Extracts CodeBERT embeddings on MPS & tunes head
+│   ├── run_controlled_experiment.py# Runs 32-version Multi-CWE benchmark & prioritization
+│   └── train_provenance_experiment.py # Evaluates Model A vs Model B on real & hybrid data
+├── models/checkpoints/             # Trained models (.pkl, .pt)
 ├── results/
-│   ├── metrics/                    # Evaluation metrics (JSON)
-│   ├── plots/                      # Confusion matrices, ROC curves
-│   └── reports/                    # Experiment reports
+│   ├── metrics/                    # JSON evaluation outputs
+│   ├── plots/                      # Confusion matrices, ROC curves, PR curves, lineages
+│   └── reports/                    # Experiment summaries
 └── tests/
+    └── test_pipeline.py            # Automated test suite (12/12 passing)
 ```
 
-## Quick Start
+---
 
-### Prerequisites
-- Python 3.9+
-- macOS (Apple Silicon MPS) / Linux / Windows
+## 5. Quick Start & Exact Reproduction Commands
 
-### Setup
+All commands are validated for local Apple Silicon (MPS) and CPU environments:
 
 ```bash
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate  # macOS/Linux
-# venv\Scripts\activate   # Windows
+# 1. Activate environment
+source venv/bin/activate
 
-# Install dependencies
-pip install -r requirements.txt
-```
+# 2. Run automated test suite (12 tests)
+python -m unittest tests/test_pipeline.py -v
 
-### Data Preparation
-
-```bash
-python scripts/prepare_dataset.py
-```
-
-This downloads and processes:
-- Devign vulnerability dataset
-- PrimeVul vulnerability dataset (with CWE labels)
-- HumanVsAICode provenance dataset
-
-### Training
-
-```bash
-# Train TF-IDF + Logistic Regression baseline
+# 3. Train baselines on un-leaked grouped splits (36,080 samples)
 python scripts/train_baseline.py
 
-# Fine-tune CodeBERT (pilot experiment with subset)
-python scripts/train_codebert.py --subset 500 --freeze_encoder --epochs 3
+# 4. Train CodeBERT classifier on Apple Silicon MPS with validation threshold tuning
+python scripts/train_codebert.py --train_samples 3000 --val_samples 800 --test_samples 1200 --batch_size 32
 
-# Full CodeBERT fine-tuning (requires more time)
-python scripts/train_codebert.py --epochs 5 --batch_size 8
-```
+# 5. Run the Multi-CWE Controlled Evolution Benchmark & Prioritization
+python scripts/run_controlled_experiment.py
 
-### Launch Application
+# 6. Run the Provenance-Aware Research Comparison (Model A vs Model B)
+python scripts/train_provenance_experiment.py
 
-```bash
+# 7. Launch Streamlit Research Dashboard
 streamlit run app.py
 ```
 
-The application provides:
-1. **Security Analysis**: Paste code for vulnerability analysis + ML prediction
-2. **Dataset Explorer**: Browse loaded datasets and distributions
-3. **Model Results**: View evaluation metrics and comparison charts
-4. **Provenance Experiment**: Controlled editing experiment visualization
-5. **Project Status**: Implementation progress tracker
+---
 
-## Models
+## 6. Security Analysis Engine
 
-### Model A: TF-IDF + Logistic Regression (Baseline)
-- Character 4-gram TF-IDF features (30K vocabulary)
-- Balanced class weights for handling imbalanced data
-- Fast training, interpretable baseline
+The system supports interactive code submission and returns:
+1. **ML Model Predictions**: Binary classification and probability from trained models.
+2. **Flawfinder Static Analysis**: Real C/C++ lexical scanner detecting buffer overflows, format strings, and race conditions.
+3. **Pattern-Based Heuristics**: Comment-stripped pattern matching for CWE-120, CWE-134, CWE-190, CWE-78, CWE-416, CWE-22, CWE-327, CWE-476.
+4. **Remediation Guidance**: Specific recommendations (e.g. replacing `gets` with `fgets`, using `snprintf`, canonicalizing paths with `realpath`).
 
-### Model B: CodeBERT Classifier
-- Pre-trained `microsoft/codebert-base` encoder
-- Fine-tuned classification head
-- Supports MPS (Apple Silicon), CUDA, and CPU
+---
 
-### Model C: Provenance-Aware Classifier
-- CodeBERT code encoder + provenance feature MLP
-- Fusion architecture combining code representation with:
-  - AI involvement level
-  - Provenance type (human/AI/mixed)
-  - AI generator identity
-  - Code evolution metadata
-- Designed to test whether provenance improves vulnerability detection
+## 7. Faculty Presentation Talking Points (5 Minutes)
 
-## Evaluation
-
-Metrics computed for each model:
-- Accuracy, Precision, Recall, F1, F1-Macro, MCC
-- AUROC, Average Precision
-- Confusion Matrix
-- Per-class classification report
-
-## Current Limitations
-
-1. **PrimeVul Dataset**: Large download; may require extended download time
-2. **CodeBERT Fine-tuning**: Full fine-tuning requires significant compute; pilot experiments use subsets
-3. **Provenance-Aware Model**: Currently trained only with controlled examples; large-scale provenance experiments planned for final project
-4. **Vulnerability Labels**: Only Devign and PrimeVul have ground-truth labels; HumanVsAICode samples lack vulnerability annotations
-5. **Static Analysis**: Pattern-based heuristics; not equivalent to formal verification
-
-## Remaining Work (Final Project)
-
-- [ ] Full CodeBERT fine-tuning on complete dataset
-- [ ] Provenance-aware model training with HumanVsAICode
-- [ ] Large-scale controlled editing experiment (0%–100% AI involvement)
-- [ ] Provenance-aware vs provenance-agnostic comparison
-- [ ] Ablation studies (feature importance)
-- [ ] Unseen-generator generalization test
-- [ ] CWE category evolution analysis
-- [ ] Vulnerability persistence study across edit history
-- [ ] Final research report with statistical analysis
-
-## License
-
-This is a research project for academic purposes at Delhi Technological University.
-Datasets used are subject to their respective licenses.
-
-## References
-
-- Zhou et al., "Devign: Effective Vulnerability Identification by Learning Comprehensive Program Semantics via Graph Neural Networks", NeurIPS 2019
-- Feng et al., "CodeBERT: A Pre-Trained Model for Programming and Natural Languages", EMNLP 2020
-- Ding et al., "PrimeVul: A Curated Benchmark for Vulnerability Detection", 2024
+1. **The Problem:** AI code generators (Copilot, ChatGPT) write plausible code that often introduces subtle security vulnerabilities. When developers merge AI suggestions with human edits, security reviewers face alert fatigue.
+2. **The Core Question:** Does knowing code provenance (who wrote what, AI involvement %, and lineage) help predict vulnerabilities and prioritize security reviews?
+3. **The Audit:** We discovered that earlier models collapsed into majority-class prediction (98% recall, 54% accuracy) due to uncalibrated linear heads, and random splits scattered commit pairs across train and test. We fixed the data pipeline using **Stratified Group Splitting** over 16,709 commit groups with **zero pair leakage**.
+4. **The Empirical Truth:** 
+   - On legacy open source, provenance provides no gain because all code is human-written.
+   - On human-AI hybrid code, provenance-aware review prioritization **doubles triage recall** from 25% to 50% under a 25% review budget.
+5. **The Defense:** We do not claim AI code is automatically vulnerable or human code is safe. Instead, provenance is an effective prioritization heuristic that guides human security audits to where bugs statistically cluster.

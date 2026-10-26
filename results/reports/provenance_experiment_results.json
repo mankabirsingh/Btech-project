@@ -1,0 +1,133 @@
+{
+  "timestamp": "2026-10-27 00:04:54",
+  "research_question": "Can provenance-aware analysis improve security-risk prediction and review prioritisation for human-AI hybrid code compared with provenance-agnostic vulnerability detection?",
+  "real_world_experiment": {
+    "dataset": "Devign + PrimeVul (36,080 samples)",
+    "model_a_code_only": {
+      "accuracy": 0.4970436067997044,
+      "precision": 0.48452883263009844,
+      "recall": 0.5231586940015186,
+      "f1": 0.5031033223804308,
+      "mcc": -0.004563412526779448,
+      "auroc": 0.5094756200825119,
+      "average_precision": 0.4883389614285838,
+      "brier_score": 0.2663879511302212
+    },
+    "model_b_code_provenance": {
+      "accuracy": 0.503880266075388,
+      "precision": 0.4911056853854203,
+      "recall": 0.5345482156416097,
+      "f1": 0.5119069260134521,
+      "mcc": 0.009363508927224803,
+      "auroc": 0.5128524342198411,
+      "average_precision": 0.49202201428783576,
+      "brier_score": 0.2661444489285519
+    },
+    "delta_accuracy": 0.006836659275683665,
+    "delta_f1": 0.00880360363302135,
+    "delta_auroc": 0.003376814137329154,
+    "finding": "In open-source software vulnerability benchmarks (Devign, PrimeVul), author provenance is homogenous (100% human-written code, ai_involvement=0.0). Consequently, provenance features exhibit zero variance across author categories, resulting in negligible delta between Model A and Model B."
+  },
+  "controlled_hybrid_experiment": {
+    "dataset": "Multi-CWE Controlled Evolution Benchmark (8 tasks, 32 code units, balanced)",
+    "model_a_code_only": {
+      "accuracy": 0.59375,
+      "precision": 0.6,
+      "recall": 0.5625,
+      "f1": 0.5806451612903226,
+      "mcc": 0.18786728732554486,
+      "auroc": 0.56640625,
+      "average_precision": 0.5826571005247476,
+      "brier_score": 0.2471524164516558
+    },
+    "model_b_code_provenance": {
+      "accuracy": 0.84375,
+      "precision": 0.7894736842105263,
+      "recall": 0.9375,
+      "f1": 0.8571428571428571,
+      "mcc": 0.6999132392733555,
+      "auroc": 0.9375,
+      "average_precision": 0.9563078703703705,
+      "brier_score": 0.15845295279925328
+    },
+    "prioritization": {
+      "top_4": {
+        "k": 4,
+        "budget_pct": 12.5,
+        "code_only": {
+          "precision": 0.5,
+          "recall": 0.125,
+          "vuln_found": 2
+        },
+        "provenance_aware": {
+          "precision": 1.0,
+          "recall": 0.25,
+          "vuln_found": 4
+        },
+        "static_analysis": {
+          "precision": 1.0,
+          "recall": 0.25,
+          "vuln_found": 4
+        }
+      },
+      "top_8": {
+        "k": 8,
+        "budget_pct": 25.0,
+        "code_only": {
+          "precision": 0.5,
+          "recall": 0.25,
+          "vuln_found": 4
+        },
+        "provenance_aware": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "vuln_found": 8
+        },
+        "static_analysis": {
+          "precision": 0.875,
+          "recall": 0.4375,
+          "vuln_found": 7
+        }
+      },
+      "top_12": {
+        "k": 12,
+        "budget_pct": 37.5,
+        "code_only": {
+          "precision": 0.5833333333333334,
+          "recall": 0.4375,
+          "vuln_found": 7
+        },
+        "provenance_aware": {
+          "precision": 1.0,
+          "recall": 0.75,
+          "vuln_found": 12
+        },
+        "static_analysis": {
+          "precision": 0.6666666666666666,
+          "recall": 0.5,
+          "vuln_found": 8
+        }
+      },
+      "top_16": {
+        "k": 16,
+        "budget_pct": 50.0,
+        "code_only": {
+          "precision": 0.5625,
+          "recall": 0.5625,
+          "vuln_found": 9
+        },
+        "provenance_aware": {
+          "precision": 0.875,
+          "recall": 0.875,
+          "vuln_found": 14
+        },
+        "static_analysis": {
+          "precision": 0.5625,
+          "recall": 0.5625,
+          "vuln_found": 9
+        }
+      }
+    },
+    "finding": "In hybrid human-AI codebases, provenance awareness provides dramatic benefits for code review triage and prioritisation (Recall@25% review budget increases from 25.0% to 50.0%, and Recall@37.5% increases from 44.0% to 75.0%). However, provenance features must not be treated as deterministic vulnerability labels to prevent false alarms on secure human-edited hybrid code."
+  }
+}

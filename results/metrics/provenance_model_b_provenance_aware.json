@@ -1,0 +1,13 @@
+{
+  "model_name": "Model_B_Provenance_Aware",
+  "metrics": {
+    "accuracy": 0.84375,
+    "precision": 0.7894736842105263,
+    "recall": 0.9375,
+    "f1": 0.8571428571428571,
+    "mcc": 0.6999132392733555,
+    "auroc": 0.9375,
+    "average_precision": 0.9563078703703705,
+    "brier_score": 0.15845295279925328
+  }
+}

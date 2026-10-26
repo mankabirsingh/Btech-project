@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-26 20:56:58",
+  "timestamp": "2026-10-26 23:53:09",
   "datasets": {
     "devign": {
       "loaded": true,
@@ -8,7 +8,7 @@
     },
     "primevul": {
       "loaded": true,
-      "n_samples": 4416,
+      "n_samples": 8822,
       "source": "adefu020/primevul"
     },
     "humanvsaicode": {
@@ -18,14 +18,14 @@
     }
   },
   "vulnerability_data": {
-    "total": 31674,
+    "total": 36080,
     "vuln": 16840,
-    "benign": 14834
+    "benign": 19240
   },
   "splits": {
-    "train": 23754,
-    "val": 3168,
-    "test": 4752
+    "train": 27060,
+    "val": 3608,
+    "test": 5412
   },
-  "elapsed_sec": 15.136668920516968
+  "elapsed_sec": 19.784631967544556
 }

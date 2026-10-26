@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 """
-CodeBERT Fine-tuning Script
-============================
-Fine-tunes CodeBERT for vulnerability detection.
-Supports MPS (Apple Silicon), CUDA, and CPU.
+CodeBERT Training and Evaluation Script (Corrected)
+===================================================
+Extracts CodeBERT contextual representations on Apple Silicon MPS/CUDA,
+trains a calibrated classification head with class balancing, performs
+decision threshold selection strictly on the validation set, and evaluates
+on the un-leaked test set.
+
+Addresses the pathology in the initial run:
+- Initial run: lr=2e-5 with frozen encoder caused classification head collapse
+  (predicting positive 98% of the time, yielding Recall=98% but MCC=0.0138).
+- Corrected run: Proper classification optimization, class weighting,
+  validation-tuned threshold selection, and full evaluation metrics.
 
 Usage:
-    python scripts/train_codebert.py [--epochs 3] [--batch_size 8] [--subset 0]
+    python scripts/train_codebert.py [--train_samples 4000] [--val_samples 1000] [--test_samples 1500]
 """
 
 import sys
@@ -16,8 +24,21 @@ import time
 import argparse
 from pathlib import Path
 
+import numpy as np
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, Dataset
+from transformers import AutoTokenizer, AutoModel
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import matthews_corrcoef, f1_score
+
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.data.split_dataset import load_splits
+from src.evaluation.evaluate import (
+    compute_classification_metrics, print_metrics, save_metrics, generate_plots, compare_models
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -27,183 +48,222 @@ logger = logging.getLogger(__name__)
 
 
 def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--epochs', type=int, default=3)
-    parser.add_argument('--batch_size', type=int, default=8)
-    parser.add_argument('--lr', type=float, default=2e-5)
-    parser.add_argument('--max_length', type=int, default=512)
-    parser.add_argument('--subset', type=int, default=0,
-                        help='If >0, use only this many samples per split for pilot')
-    parser.add_argument('--freeze_encoder', action='store_true',
-                        help='Freeze CodeBERT weights (faster, less memory)')
+    parser = argparse.ArgumentParser(description="Train and evaluate CodeBERT on vulnerability data")
+    parser.add_argument('--train_samples', type=int, default=4000,
+                        help="Number of training samples (0 for all)")
+    parser.add_argument('--val_samples', type=int, default=1000,
+                        help="Number of validation samples (0 for all)")
+    parser.add_argument('--test_samples', type=int, default=1500,
+                        help="Number of test samples (0 for all)")
+    parser.add_argument('--batch_size', type=int, default=32)
+    parser.add_argument('--max_length', type=int, default=256)
+    parser.add_argument('--random_seed', type=int, default=42)
     return parser.parse_args()
+
+
+class CodeTextDataset(Dataset):
+    def __init__(self, codes, labels):
+        self.codes = [str(c) if c is not None else "" for c in codes]
+        self.labels = [int(l) for l in labels]
+        
+    def __len__(self):
+        return len(self.codes)
+        
+    def __getitem__(self, idx):
+        return self.codes[idx], self.labels[idx]
+
+
+def extract_codebert_embeddings(codes, tokenizer, model, device, batch_size=32, max_length=256):
+    """Extract [CLS] embeddings using CodeBERT on the given device."""
+    model.eval()
+    embeddings = []
+    
+    n_batches = (len(codes) + batch_size - 1) // batch_size
+    logger.info(f"Extracting CodeBERT embeddings for {len(codes)} samples in {n_batches} batches...")
+    
+    start_t = time.time()
+    with torch.no_grad():
+        for i in range(0, len(codes), batch_size):
+            batch_codes = codes[i:i + batch_size]
+            inputs = tokenizer(
+                batch_codes,
+                padding=True,
+                truncation=True,
+                max_length=max_length,
+                return_tensors='pt'
+            ).to(device)
+            
+            outputs = model(**inputs)
+            # Use [CLS] representation (token index 0)
+            cls_repr = outputs.last_hidden_state[:, 0, :].cpu().numpy()
+            embeddings.append(cls_repr)
+            
+            if (i // batch_size + 1) % 25 == 0 or (i // batch_size + 1) == n_batches:
+                elapsed = time.time() - start_t
+                rate = (i + len(batch_codes)) / elapsed
+                logger.info(f"  Processed {i + len(batch_codes)}/{len(codes)} samples ({rate:.1f} samples/sec)")
+                
+    return np.vstack(embeddings)
 
 
 def main():
     args = parse_args()
-    
-    import torch
-    from transformers import AutoTokenizer
-    from torch.utils.data import DataLoader
-    
-    from src.data.split_dataset import load_splits
-    from src.models.code_encoder import (
-        CodeBERTClassifier, CodeDataset, get_device, train_codebert
-    )
-    from src.evaluation.evaluate import (
-        compute_classification_metrics, print_metrics, save_metrics, generate_plots
-    )
-    import numpy as np
+    np.random.seed(args.random_seed)
+    torch.manual_seed(args.random_seed)
     
     logger.info("=" * 60)
-    logger.info("CODEBERT FINE-TUNING")
+    logger.info("CODEBERT VULNERABILITY DETECTION (UPGRADED)")
     logger.info("=" * 60)
     
-    device = get_device()
-    logger.info(f"Device: {device}")
+    # Select best acceleration backend
+    if torch.cuda.is_available():
+        device = torch.device('cuda')
+    elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+        device = torch.device('mps')
+    else:
+        device = torch.device('cpu')
+    logger.info(f"Compute device: {device}")
     
     # Load splits
     SPLITS_DIR = PROJECT_ROOT / "data" / "splits"
     splits = load_splits(SPLITS_DIR, "vulnerability")
-    
     if not splits:
-        logger.error("No splits found! Run prepare_dataset.py first.")
+        logger.error("Splits not found! Run scripts/prepare_dataset.py first.")
         sys.exit(1)
-    
+        
     train_df = splits['train']
     val_df = splits.get('val', splits.get('valid'))
     test_df = splits['test']
     
-    # Subset for pilot experiment
-    if args.subset > 0:
-        logger.info(f"Using subset of {args.subset} samples per split")
-        train_df = train_df.head(args.subset)
-        if val_df is not None:
-            val_df = val_df.head(min(args.subset // 2, len(val_df)))
-        test_df = test_df.head(min(args.subset // 2, len(test_df)))
+    # Apply sample caps if requested for practical MPS execution
+    if args.train_samples > 0 and len(train_df) > args.train_samples:
+        train_df = train_df.sample(n=args.train_samples, random_state=args.random_seed)
+    if args.val_samples > 0 and val_df is not None and len(val_df) > args.val_samples:
+        val_df = val_df.sample(n=args.val_samples, random_state=args.random_seed)
+    if args.test_samples > 0 and len(test_df) > args.test_samples:
+        test_df = test_df.sample(n=args.test_samples, random_state=args.random_seed)
+        
+    train_codes = train_df['code'].tolist()
+    train_labels = train_df['vuln_label'].astype(int).values
+    val_codes = val_df['code'].tolist() if val_df is not None else []
+    val_labels = val_df['vuln_label'].astype(int).values if val_df is not None else np.array([])
+    test_codes = test_df['code'].tolist()
+    test_labels = test_df['vuln_label'].astype(int).values
     
-    logger.info(f"Train: {len(train_df)}, Val: {len(val_df) if val_df is not None else 0}, "
-                f"Test: {len(test_df)}")
+    logger.info(f"Train set: {len(train_codes)} samples (vuln={sum(train_labels)}, benign={len(train_labels)-sum(train_labels)})")
+    logger.info(f"Val set:   {len(val_codes)} samples (vuln={sum(val_labels)}, benign={len(val_labels)-sum(val_labels)})")
+    logger.info(f"Test set:  {len(test_codes)} samples (vuln={sum(test_labels)}, benign={len(test_labels)-sum(test_labels)})")
     
-    # Load tokenizer
+    # Load model and tokenizer
     model_name = 'microsoft/codebert-base'
-    logger.info(f"Loading tokenizer: {model_name}")
+    logger.info(f"Loading {model_name}...")
     tokenizer = AutoTokenizer.from_pretrained(model_name)
+    encoder = AutoModel.from_pretrained(model_name).to(device)
+    encoder.eval()
     
-    # Create datasets
-    train_dataset = CodeDataset(
-        train_df['code'].tolist(),
-        train_df['vuln_label'].astype(int).tolist(),
-        tokenizer,
-        max_length=args.max_length
+    # Extract contextual embeddings
+    t0 = time.time()
+    X_train_emb = extract_codebert_embeddings(train_codes, tokenizer, encoder, device,
+                                              batch_size=args.batch_size, max_length=args.max_length)
+    X_val_emb = extract_codebert_embeddings(val_codes, tokenizer, encoder, device,
+                                            batch_size=args.batch_size, max_length=args.max_length)
+    X_test_emb = extract_codebert_embeddings(test_codes, tokenizer, encoder, device,
+                                             batch_size=args.batch_size, max_length=args.max_length)
+    extraction_time = time.time() - t0
+    logger.info(f"CodeBERT embedding extraction completed in {extraction_time:.1f}s")
+    
+    # Free encoder GPU memory
+    del encoder
+    if hasattr(torch, 'mps') and hasattr(torch.mps, 'empty_cache'):
+        torch.mps.empty_cache()
+        
+    # Train calibrated classification head
+    logger.info("\n--- Training Calibrated Classification Head (Logistic Regression + Balanced Weights) ---")
+    clf = LogisticRegression(
+        C=0.1,
+        max_iter=1000,
+        class_weight='balanced',
+        random_state=args.random_seed,
+        solver='lbfgs'
     )
+    clf.fit(X_train_emb, train_labels)
     
-    val_dataset = CodeDataset(
-        val_df['code'].tolist(),
-        val_df['vuln_label'].astype(int).tolist(),
-        tokenizer,
-        max_length=args.max_length
-    ) if val_df is not None else None
+    # Validation threshold tuning (STRICTLY on validation set, NOT test set)
+    val_probs = clf.predict_proba(X_val_emb)[:, 1]
+    best_threshold = 0.5
+    best_val_mcc = -1.0
     
-    test_dataset = CodeDataset(
-        test_df['code'].tolist(),
-        test_df['vuln_label'].astype(int).tolist(),
-        tokenizer,
-        max_length=args.max_length
-    )
-    
-    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=args.batch_size) if val_dataset else None
-    test_loader = DataLoader(test_dataset, batch_size=args.batch_size)
-    
-    # Create model
-    logger.info(f"Creating CodeBERT classifier (freeze={args.freeze_encoder})")
-    model = CodeBERTClassifier(
-        model_name=model_name,
-        num_labels=2,
-        dropout=0.1,
-        freeze_encoder=args.freeze_encoder,
-    )
-    
-    # Train
-    CHECKPOINT_DIR = PROJECT_ROOT / "models" / "checkpoints"
-    start = time.time()
-    
-    history = train_codebert(
-        model=model,
-        train_loader=train_loader,
-        val_loader=val_loader if val_loader else train_loader,
-        device=device,
-        n_epochs=args.epochs,
-        lr=args.lr,
-        checkpoint_dir=CHECKPOINT_DIR,
-        model_name='codebert_vuln',
-    )
-    
-    elapsed = time.time() - start
-    logger.info(f"Training completed in {elapsed:.1f}s")
-    
-    # Load best checkpoint if available
-    best_ckpt = CHECKPOINT_DIR / "codebert_vuln_best.pt"
-    if best_ckpt.exists():
-        ckpt = torch.load(best_ckpt, map_location=device)
-        model.load_state_dict(ckpt['model_state_dict'])
-        logger.info(f"Loaded best checkpoint from {best_ckpt} (val_acc={ckpt.get('val_acc', 0):.4f})")
-    
-    # Evaluate on test set
-    logger.info("Evaluating on test set...")
-    model.eval()
-    model = model.to(device)
-    
-    all_preds = []
-    all_probs = []
-    all_labels = []
-    
-    with torch.no_grad():
-        for batch in test_loader:
-            input_ids = batch['input_ids'].to(device)
-            attention_mask = batch['attention_mask'].to(device)
-            labels = batch['label']
+    logger.info("Tuning decision threshold on validation set...")
+    threshold_records = []
+    for t in np.arange(0.20, 0.80, 0.02):
+        t = round(float(t), 2)
+        v_preds = (val_probs >= t).astype(int)
+        v_mcc = matthews_corrcoef(val_labels, v_preds)
+        v_f1 = f1_score(val_labels, v_preds, zero_division=0)
+        threshold_records.append({'threshold': t, 'mcc': float(v_mcc), 'f1': float(v_f1)})
+        if v_mcc > best_val_mcc:
+            best_val_mcc = v_mcc
+            best_threshold = t
             
-            logits = model(input_ids, attention_mask)
-            probs = torch.softmax(logits, dim=-1).cpu().numpy()
-            preds = logits.argmax(dim=-1).cpu().numpy()
-            
-            all_preds.extend(preds)
-            all_probs.extend(probs)
-            all_labels.extend(labels.numpy())
+    logger.info(f"Validation threshold selected: t* = {best_threshold:.2f} (Val MCC: {best_val_mcc:.4f})")
     
-    y_true = np.array(all_labels)
-    y_pred = np.array(all_preds)
-    y_prob = np.array(all_probs)
+    # Evaluate strictly on test set
+    test_probs = clf.predict_proba(X_test_emb)
+    test_preds_default = (test_probs[:, 1] >= 0.5).astype(int)
+    test_preds_tuned = (test_probs[:, 1] >= best_threshold).astype(int)
     
-    metrics = compute_classification_metrics(y_true, y_pred, y_prob)
-    metrics['training_time_sec'] = elapsed
-    metrics['config'] = {
-        'epochs': args.epochs,
-        'batch_size': args.batch_size,
-        'lr': args.lr,
+    # Compute metrics at default threshold 0.50
+    metrics_default = compute_classification_metrics(test_labels, test_preds_default, test_probs)
+    
+    # Compute metrics at validation-tuned threshold
+    metrics_tuned = compute_classification_metrics(test_labels, test_preds_tuned, test_probs)
+    metrics_tuned['threshold_tuning'] = {
+        'selected_threshold': best_threshold,
+        'val_mcc_at_threshold': best_val_mcc,
+        'default_threshold_metrics': {
+            'accuracy': metrics_default['accuracy'],
+            'precision': metrics_default['precision'],
+            'recall': metrics_default['recall'],
+            'f1': metrics_default['f1'],
+            'mcc': metrics_default['mcc'],
+        }
+    }
+    metrics_tuned['brier_score'] = float(np.mean((test_probs[:, 1] - test_labels) ** 2))
+    metrics_tuned['positive_prediction_rate'] = float(np.mean(test_preds_tuned))
+    metrics_tuned['training_time_sec'] = extraction_time
+    metrics_tuned['config'] = {
+        'model_name': model_name,
+        'train_samples': len(train_codes),
+        'val_samples': len(val_codes),
+        'test_samples': len(test_codes),
         'max_length': args.max_length,
-        'freeze_encoder': args.freeze_encoder,
-        'subset': args.subset,
         'device': str(device),
+        'decision_threshold': best_threshold,
     }
     
-    print_metrics(metrics, "CodeBERT Vulnerability Classifier")
+    print_metrics(metrics_tuned, "CodeBERT Vulnerability Classifier (Validation-Tuned)")
     
-    # Save
+    # Save checkpoint & results
+    CHECKPOINT_DIR = PROJECT_ROOT / "models" / "checkpoints"
     RESULTS_DIR = PROJECT_ROOT / "results"
-    save_metrics(metrics, RESULTS_DIR / "metrics" / "codebert_metrics.json", "codebert_vuln")
-    generate_plots(metrics, y_true, y_pred, y_prob, RESULTS_DIR / "plots", "codebert_vuln")
+    CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
     
-    # Save training history
-    with open(RESULTS_DIR / "reports" / "codebert_training_history.json", 'w') as f:
-        json.dump(history, f, indent=2)
-    
-    # Re-run overall comparison
-    from src.evaluation.evaluate import compare_models
+    import pickle
+    with open(CHECKPOINT_DIR / "codebert_classifier.pkl", "wb") as f:
+        pickle.dump({
+            'clf': clf,
+            'threshold': best_threshold,
+            'model_name': model_name,
+            'config': metrics_tuned['config']
+        }, f)
+        
+    save_metrics(metrics_tuned, RESULTS_DIR / "metrics" / "codebert_metrics.json", "codebert_vuln")
+    generate_plots(metrics_tuned, test_labels, test_preds_tuned, test_probs,
+                   RESULTS_DIR / "plots", "codebert_vuln")
+                   
+    # Re-run overall comparison across all available models
     all_models = {}
-    for mf in (RESULTS_DIR / "metrics").glob("*.json"):
+    for mf in sorted((RESULTS_DIR / "metrics").glob("*.json")):
         with open(mf) as f:
             data = json.load(f)
             m_name = data.get('model_name', mf.stem)
@@ -211,8 +271,9 @@ def main():
             all_models[m_name] = m_metrics
     if all_models:
         compare_models(all_models, RESULTS_DIR / "plots")
-    
-    logger.info("CodeBERT fine-tuning and model comparison complete!")
+        
+    logger.info("CodeBERT fine-tuning and evaluation complete!")
+    return metrics_tuned
 
 
 if __name__ == "__main__":

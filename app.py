@@ -332,13 +332,16 @@ int main() {
             
             for finding in analysis['findings']:
                 sev_class = f"severity-{finding['severity']}"
+                remed = finding.get('remediation')
+                remed_html = f"<br><span style='color: #2ed573;'><small>💡 <b>Recommended Remediation:</b> {remed}</small></span>" if remed else ""
                 st.markdown(f"""
                 <div class="finding-card" style="border-color: {'#ff4757' if finding['severity']=='critical' else '#ff6b6b' if finding['severity']=='high' else '#ffa502' if finding['severity']=='medium' else '#2ed573'};">
                     <strong class="{sev_class}">[{finding['severity'].upper()}]</strong> 
                     <code>{finding['cwe']}</code> — {finding['message']}<br>
-                    <small>Line {finding.get('line', '?')} | Tool: {finding['tool']} | 
-                    Confidence: {finding['confidence']}</small>
+                    <small>Line {finding.get('line', '?')} | Tool: {finding['tool'].upper()} | 
+                    Confidence: {finding['confidence'].title()}</small>
                     {f"<br><code>{finding.get('code_snippet', '')}</code>" if finding.get('code_snippet') else ""}
+                    {remed_html}
                 </div>
                 """, unsafe_allow_html=True)
             
@@ -527,107 +530,94 @@ elif page == "📈 Model Results":
 # PAGE 4: Provenance Experiment
 # ========================
 elif page == "🔬 Provenance Experiment":
-    st.markdown("## 🔬 Provenance-Aware Experiment")
+    st.markdown("## 🔬 Provenance-Aware Security & Review Prioritization")
     st.markdown("""
-    This page demonstrates the controlled editing experiment framework.
-    It shows how code versions with different levels of AI involvement
-    are tracked and analyzed for security changes.
+    This page investigates whether tracking code provenance (author type, AI-involvement %,
+    and edit lineage) improves security risk assessment and review prioritization for human-AI hybrid code.
     """)
     
-    # Load or create experiment
-    experiment_path = PROJECT_ROOT / "results" / "reports" / "pilot_experiment.json"
+    benchmark_32_path = PROJECT_ROOT / "results" / "reports" / "controlled_benchmark_32.json"
     
-    if st.button("🔄 Run/Reload Pilot Experiment"):
-        from src.experiments.controlled_editing import (
-            create_pilot_experiment, analyze_experiment_security
-        )
-        experiment = create_pilot_experiment()
-        security_results = analyze_experiment_security(experiment)
-        experiment.save(experiment_path)
-        
-        # Save security results
-        with open(PROJECT_ROOT / "results" / "reports" / "pilot_security_results.json", 'w') as f:
-            json.dump(security_results, f, indent=2)
-        
-        st.success("Pilot experiment executed!")
+    # Run/Reload button
+    if st.button("🔄 Run/Reload Multi-CWE Controlled Benchmark (32 Versions)", type="primary"):
+        from scripts.run_controlled_experiment import main as run_benchmark
+        with st.spinner("Executing 8-task, 32-version controlled benchmark with Flawfinder and CodeBERT..."):
+            run_benchmark()
+        st.success("Benchmark executed successfully!")
         st.rerun()
     
-    if experiment_path.exists():
-        with open(experiment_path) as f:
-            exp_data = json.load(f)
-        
-        st.markdown(f"**Task:** {exp_data['task_description']}")
-        st.markdown(f"**Language:** {exp_data['language']}")
-        st.info(f"⚠️ {exp_data['metadata'].get('note', 'These are controlled examples.')}")
-        
-        # Version cards
-        for version in exp_data['versions']:
-            with st.expander(
-                f"📄 {version['version_id']} | "
-                f"Author: {version['author_type']} | "
-                f"AI: {version['ai_involvement']*100:.0f}% | "
-                f"Vuln: {'Yes' if version.get('vuln_label')==1 else 'No' if version.get('vuln_label')==0 else 'Unknown'}"
-            ):
-                col1, col2 = st.columns([3, 2])
-                
-                with col1:
-                    st.code(version['code'], language='c')
-                
-                with col2:
-                    st.markdown(f"**Author Type:** {version['author_type']}")
-                    st.markdown(f"**AI Involvement:** {version['ai_involvement']*100:.0f}%")
-                    if version.get('ai_generator'):
-                        st.markdown(f"**AI Generator:** {version['ai_generator']}")
-                    if version.get('parent_version_id'):
-                        st.markdown(f"**Parent:** {version['parent_version_id']}")
-                    st.markdown(f"**Edit:** {version.get('edit_description', 'N/A')}")
-                    
-                    if version.get('security_findings'):
-                        sf = version['security_findings']
-                        st.markdown(f"**Security Findings:** {sf['n_findings']}")
-                        st.markdown(f"**Risk Level:** {sf['risk_level']}")
-                        if sf.get('cwes'):
-                            st.markdown(f"**CWEs:** {', '.join(sf['cwes'])}")
-        
-        # Security comparison
-        results_path = PROJECT_ROOT / "results" / "reports" / "pilot_security_results.json"
-        if results_path.exists():
-            with open(results_path) as f:
-                sec_results = json.load(f)
+    if benchmark_32_path.exists():
+        with open(benchmark_32_path) as f:
+            bench_data = json.load(f)
             
-            st.markdown("### Security Comparison Across Versions")
-            
-            comp_rows = []
-            for vr in sec_results['version_results']:
-                comp_rows.append({
-                    'Version': vr['version_id'].replace('pilot_001_', ''),
-                    'Author': vr['author_type'],
-                    'AI %': f"{vr['ai_involvement']*100:.0f}%",
-                    'Findings': vr['n_findings'],
-                    'Risk': vr['risk_level'],
-                    'CWEs': ', '.join(vr['cwes']) if vr['cwes'] else 'None',
-                    'Known Vuln': '✅ Yes' if vr.get('known_vuln_label')==1 else '❌ No' if vr.get('known_vuln_label')==0 else '?',
+        st.markdown(f"**Benchmark Scope:** {bench_data['n_tasks']} security tasks | "
+                    f"{bench_data['n_versions']} code versions (16 vulnerable, 16 secure, balanced)")
+        
+        # Prioritization Summary Card
+        st.markdown("### 🎯 Code Review Prioritization Results")
+        st.caption("How effectively does provenance awareness direct human reviewers to vulnerable code under tight audit budgets?")
+        
+        p_metrics = bench_data.get('prioritization_metrics', {})
+        if p_metrics:
+            p_rows = []
+            for k_key, p_val in p_metrics.items():
+                p_rows.append({
+                    'Review Budget': f"{p_val['budget_pct']:.1f}% ({p_val['k']} PRs)",
+                    'Code-Only Recall': f"{p_val['code_only']['recall']*100:.1f}% ({p_val['code_only']['vuln_found']}/16)",
+                    'Code-Only Precision': f"{p_val['code_only']['precision']*100:.1f}%",
+                    'Provenance-Aware Recall': f"⭐ {p_val['provenance_aware']['recall']*100:.1f}% ({p_val['provenance_aware']['vuln_found']}/16)",
+                    'Provenance-Aware Precision': f"{p_val['provenance_aware']['precision']*100:.1f}%",
+                    'Static Analysis Recall': f"{p_val['static_analysis']['recall']*100:.1f}% ({p_val['static_analysis']['vuln_found']}/16)",
                 })
-            st.dataframe(pd.DataFrame(comp_rows), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(p_rows), use_container_width=True, hide_index=True)
+        
+        # Display Prioritization Plot
+        p_plot = PROJECT_ROOT / "results" / "plots" / "review_prioritization_comparison.png"
+        l_plot = PROJECT_ROOT / "results" / "plots" / "controlled_benchmark_lineage.png"
+        
+        plot_col1, plot_col2 = st.columns(2)
+        if p_plot.exists():
+            with plot_col1:
+                st.image(str(p_plot), caption="Review Prioritization: Recall vs Review Budget")
+        if l_plot.exists():
+            with plot_col2:
+                st.image(str(l_plot), caption="Evolution Stage Dynamics: Findings & Risk across Lineage")
+                
+        st.markdown("---")
+        st.markdown("### 📂 Interactive Task Explorer (8 Tasks)")
+        
+        task_names = [f"Task {i+1}: {t['task_id'].replace('task_', '').replace('_', ' ').title()}" for i, t in enumerate(bench_data['task_summaries'])]
+        selected_task_idx = st.selectbox("Select Security Task to Inspect Lineage", range(len(task_names)), format_func=lambda i: task_names[i])
+        
+        selected_task = bench_data['task_summaries'][selected_task_idx]
+        task_records = [r for r in bench_data['records'] if r['task_id'] == selected_task['task_id']]
+        
+        st.markdown(f"**Task ID:** `{selected_task['task_id']}` | **Target CWE:** `{task_records[0].get('target_cwe', 'N/A')}`")
+        
+        # Display 4 version cards
+        for rec in task_records:
+            v_id = rec['version_id']
+            auth = rec['author_type']
+            ai_inv = rec['ai_involvement']
+            is_vuln = rec['ground_truth_vuln'] == 1
+            status_badge = "🔴 Vulnerable" if is_vuln else "🟢 Secure"
             
-            # Transitions
-            if sec_results.get('transitions'):
-                st.markdown("### Edit Transitions")
-                for t in sec_results['transitions']:
-                    direction = "✅ Fixed" if t.get('vuln_fixed') else ("🔴 Still Vulnerable" if t.get('vuln_persisted') else "➡️ Changed")
-                    st.markdown(f"""
-                    **{t['from_version'].replace('pilot_001_', '')}** → 
-                    **{t['to_version'].replace('pilot_001_', '')}** | 
-                    AI: {t['from_ai_involvement']*100:.0f}% → {t['to_ai_involvement']*100:.0f}% | 
-                    Risk Change: {t['risk_change']:+d} | 
-                    {direction}
-                    """)
-                    if t.get('cwes_fixed'):
-                        st.markdown(f"  CWEs Fixed: {', '.join(t['cwes_fixed'])}")
-                    if t.get('cwes_introduced'):
-                        st.markdown(f"  CWEs Introduced: {', '.join(t['cwes_introduced'])}")
+            with st.expander(f"📄 {v_id} | Author: {auth} | AI: {ai_inv*100:.0f}% | {status_badge}"):
+                c1, c2 = st.columns([3, 2])
+                with c1:
+                    st.markdown("**Version Summary:**")
+                    st.markdown(f"- **Author Type:** `{auth}`")
+                    st.markdown(f"- **AI Involvement:** `{ai_inv*100:.0f}%`")
+                    st.markdown(f"- **Ground Truth Label:** {status_badge}")
+                with c2:
+                    st.markdown("**Risk Scores & Predictions:**")
+                    st.markdown(f"- **Static Findings:** {rec['n_findings']} issues (Score: {rec['risk_score']})")
+                    st.markdown(f"- **CodeBERT Prob:** `{rec['codebert_vuln_prob']:.4f}`")
+                    st.markdown(f"- **Provenance-Aware Score:** `{rec['prov_adjusted_score']:.4f}`")
+                    if rec['detected_cwes']:
+                        st.markdown(f"- **Detected CWEs:** `{', '.join(rec['detected_cwes'])}`")
     else:
-        st.info("Click 'Run/Reload Pilot Experiment' to generate controlled examples.")
+        st.info("Click 'Run/Reload Multi-CWE Controlled Benchmark' to initialize the 32-sample benchmark.")
 
 
 # ========================

@@ -1,0 +1,13 @@
+{
+  "exact_code_leakage": false,
+  "exact_code_overlap_count": 0,
+  "group_leakage": false,
+  "group_overlap_count": 0,
+  "near_duplicates_flagged": 1,
+  "passed": true,
+  "details": {
+    "train_samples": 27060,
+    "val_samples": 3608,
+    "test_samples": 5412
+  }
+}

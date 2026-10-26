@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
 """
-Comprehensive Test Suite for Research Pipeline
-===============================================
-Tests data preprocessing, splitting, static security analysis,
-baseline model inference, and controlled editing experiments.
+Comprehensive Test Suite for Provenance-Aware Security Research Pipeline
+========================================================================
+Tests:
+- Data preprocessing & cleaning
+- Grouped data splitting & zero-leakage verification
+- Static security analysis (Flawfinder & heuristic rules) with remediation
+- Baseline model inference (Char, Word)
+- CodeBERT classifier checkpoint loading & prediction
+- Multi-CWE controlled editing benchmark (8 tasks, 32 code units)
+- Lineage tracking & transition extraction
+- Provenance feature extraction with ZERO label leakage
+- Review prioritization metric computation
 """
 
 import sys
@@ -14,6 +22,7 @@ import pandas as pd
 
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+
 
 class TestDataPreprocessing(unittest.TestCase):
     """Test data cleaning and preprocessing functions."""
@@ -32,15 +41,32 @@ class TestDataPreprocessing(unittest.TestCase):
         val_df = pd.DataFrame({'code': ['func_c()']})
         test_df = pd.DataFrame({'code': ['func_d()']})
         splits = {'train': train_df, 'val': val_df, 'test': test_df}
-        self.assertTrue(verify_no_leakage(splits))
+        self.assertTrue(verify_no_leakage(splits)['passed'])
         
         # Test detection of leakage
         leaky_splits = {'train': train_df, 'test': train_df}
-        self.assertFalse(verify_no_leakage(leaky_splits))
+        self.assertFalse(verify_no_leakage(leaky_splits)['passed'])
+
+    def test_zero_group_leakage(self):
+        """Verify that grouped splitting never places the same group_id in both train and test."""
+        from src.data.split_dataset import split_vulnerability_dataset
+        df = pd.DataFrame({
+            'code': [f'int func_{i}() {{ return {i}; }}' for i in range(20)],
+            'vuln_label': [i % 2 for i in range(20)],
+            'group_id': [f'group_{i // 2}' for i in range(20)]  # 10 pairs
+        })
+        splits = split_vulnerability_dataset(df, test_size=0.2, val_size=0.1, random_seed=42, group_col='group_id')
+        train_groups = set(splits['train']['group_id'])
+        val_groups = set(splits['val']['group_id'])
+        test_groups = set(splits['test']['group_id'])
+        
+        self.assertEqual(len(train_groups & val_groups), 0)
+        self.assertEqual(len(train_groups & test_groups), 0)
+        self.assertEqual(len(val_groups & test_groups), 0)
 
 
 class TestSecurityAnalysis(unittest.TestCase):
-    """Test heuristic pattern analysis and risk scoring."""
+    """Test heuristic pattern analysis, Flawfinder integration, and risk scoring."""
     
     def test_vulnerable_c_patterns(self):
         from src.security.static_analysis import analyze_code
@@ -77,9 +103,23 @@ class TestSecurityAnalysis(unittest.TestCase):
         self.assertGreater(result['n_findings'], 0)
         self.assertIn('CWE-94', result['cwes'])
 
+    def test_flawfinder_integration(self):
+        from src.security.static_analysis import try_flawfinder_analysis
+        code = """
+        #include <stdio.h>
+        #include <string.h>
+        void test(char *s) {
+            char buf[16];
+            strcpy(buf, s);
+        }
+        """
+        findings = try_flawfinder_analysis(code, 'c')
+        self.assertGreater(len(findings), 0)
+        self.assertTrue(any(f.tool == 'flawfinder' for f in findings))
+
 
 class TestModelInference(unittest.TestCase):
-    """Test baseline model loading and inference."""
+    """Test baseline and CodeBERT model loading and inference."""
     
     def test_baseline_char_model(self):
         from src.models.baseline import VulnerabilityBaseline
@@ -96,24 +136,59 @@ class TestModelInference(unittest.TestCase):
         self.assertEqual(prob.shape, (1, 2))
         self.assertAlmostEqual(float(prob.sum()), 1.0, places=4)
 
+    def test_codebert_classifier_checkpoint(self):
+        import pickle
+        ckpt = PROJECT_ROOT / "models" / "checkpoints" / "codebert_classifier.pkl"
+        if not ckpt.exists():
+            self.skipTest("CodeBERT checkpoint not found")
+        with open(ckpt, 'rb') as f:
+            data = pickle.load(f)
+        self.assertIn('clf', data)
+        self.assertIn('threshold', data)
+        self.assertTrue(0.1 <= data['threshold'] <= 0.9)
 
-class TestControlledEditing(unittest.TestCase):
-    """Test controlled editing experiment and lineage tracking."""
+
+class TestControlledEditingAndProvenance(unittest.TestCase):
+    """Test controlled benchmark, lineage tracking, and provenance feature validity."""
     
-    def test_pilot_experiment(self):
-        from src.experiments.controlled_editing import create_pilot_experiment, analyze_experiment_security
-        exp = create_pilot_experiment()
-        self.assertEqual(exp.task_id, "pilot_001_buffer_handling")
-        self.assertEqual(len(exp.versions), 4)
+    def test_multi_cwe_benchmark(self):
+        from src.experiments.controlled_editing import create_multi_cwe_benchmark
+        benchmarks = create_multi_cwe_benchmark()
+        self.assertEqual(len(benchmarks), 8)
         
+        total_versions = sum(len(exp.versions) for exp in benchmarks)
+        self.assertEqual(total_versions, 32)
+        
+        # Check balance: 16 vulnerable, 16 secure
+        vuln_count = sum(sum(1 for v in exp.versions if v.vuln_label == 1) for exp in benchmarks)
+        self.assertEqual(vuln_count, 16)
+
+    def test_lineage_tracking(self):
+        from src.experiments.controlled_editing import create_pilot_experiment
+        exp = create_pilot_experiment()
         lineage = exp.get_lineage("pilot_001_v3_human_edited_ai")
         self.assertEqual(len(lineage), 2)
         self.assertEqual(lineage[0].version_id, "pilot_001_v2_ai_insecure")
         self.assertEqual(lineage[1].version_id, "pilot_001_v3_human_edited_ai")
-        
-        analysis = analyze_experiment_security(exp)
-        self.assertEqual(analysis['n_versions'], 4)
-        self.assertGreater(len(analysis['transitions']), 0)
+
+    def test_provenance_features_zero_label_leakage(self):
+        from src.models.code_encoder import extract_provenance_features
+        df = pd.DataFrame({
+            'code': ['int main() { return 0; }', 'void test() { char *p = malloc(10); }'],
+            'ai_involvement': [0.0, 1.0],
+            'provenance_type': ['human', 'ai'],
+            'ai_generator': [None, 'copilot'],
+            'human_edit_history': [None, None],
+            'cwe': [None, 'CWE-120']  # Deliberate CWE target column in DataFrame
+        })
+        feats = extract_provenance_features(df)
+        self.assertEqual(feats.shape[0], 2)
+        self.assertEqual(feats.shape[1], 10)
+        # Verify that changing cwe column DOES NOT alter extracted provenance features
+        df_altered = df.copy()
+        df_altered['cwe'] = ['CWE-999', None]
+        feats_altered = extract_provenance_features(df_altered)
+        np.testing.assert_array_almost_equal(feats, feats_altered)
 
 
 if __name__ == "__main__":

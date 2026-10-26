@@ -121,6 +121,13 @@ def standardize_devign(all_dfs):
         result['commit_id'] = df['commit_id'] if 'commit_id' in df.columns else np.nan
         result['_original_split'] = split_name
         
+        # Group ID: group by commit_id to keep functions from the same commit in the same split
+        commit_col = df['commit_id'] if 'commit_id' in df.columns else pd.Series(index=df.index, dtype=str)
+        result['group_id'] = [
+            f"devign_commit_{c}" if pd.notna(c) and str(c).strip() != '' else f"devign_sample_{sid}"
+            for c, sid in zip(commit_col, df['id'])
+        ]
+        
         # Filter empty code
         result = result[result['code'].str.len() > 10]
         frames.append(result)
@@ -141,7 +148,8 @@ def standardize_devign(all_dfs):
 def standardize_primevul(all_dfs):
     """
     Standardize PrimeVul to unified schema.
-    Uses the vulnerable_function column and is_vulnerable label.
+    Uses vulnerable_function for vulnerable rows and fixed_function for benign rows.
+    Assigns a shared group_id to ensure vulnerable-fixed pairs never cross splits.
     """
     import pandas as pd
     import numpy as np
@@ -150,32 +158,49 @@ def standardize_primevul(all_dfs):
     frames = []
     for split_name, df in all_dfs.items():
         result = pd.DataFrame()
-        result['sample_id'] = df['sample_id'].apply(lambda x: f"primevul_{split_name}_{x}")
+        is_vuln = df['is_vulnerable'].astype(bool)
         
-        # Use vulnerable_function for code
-        result['code'] = df['vulnerable_function'].apply(clean_code)
+        # Correctly assign vulnerable_function when is_vuln=True, and fixed_function when is_vuln=False
+        raw_code = np.where(is_vuln, df['vulnerable_function'], df['fixed_function'])
+        result['code'] = [clean_code(c) for c in raw_code]
+        
+        rec_ids = df['source_record_id'].astype(str)
+        result['sample_id'] = [
+            f"primevul_{split_name}_{rec}_{'vuln' if v else 'fixed'}"
+            for rec, v in zip(rec_ids, is_vuln)
+        ]
         result['language'] = 'C/C++'
-        result['vuln_label'] = df['is_vulnerable'].astype(int)
+        result['vuln_label'] = is_vuln.astype(int)
         
-        # CWE info
+        # CWE info: present for vulnerable version
         if 'cwe_ids' in df.columns:
-            result['cwe'] = df['cwe_ids'].apply(
-                lambda x: x[0] if isinstance(x, list) and len(x) > 0 else np.nan
-            )
+            result['cwe'] = [
+                (cwe_list[0] if isinstance(cwe_list, list) and len(cwe_list) > 0 else np.nan)
+                if v else np.nan
+                for cwe_list, v in zip(df['cwe_ids'], is_vuln)
+            ]
         else:
             result['cwe'] = np.nan
         
         result['severity'] = np.nan
         result['source_dataset'] = 'primevul'
-        result['task_id'] = np.nan
+        result['task_id'] = rec_ids.apply(lambda x: f"pv_task_{x}")
         result['provenance_type'] = 'human'
         result['ai_generator'] = np.nan
         result['ai_involvement'] = 0.0
         result['human_edit_history'] = np.nan
-        result['parent_sample_id'] = np.nan
+        
+        # Link fixed version to vulnerable version as parent
+        result['parent_sample_id'] = [
+            f"primevul_{split_name}_{rec}_vuln" if not v else np.nan
+            for rec, v in zip(rec_ids, is_vuln)
+        ]
         result['project'] = df['project'] if 'project' in df.columns else np.nan
         result['commit_id'] = df.get('fixing_commit_sha', pd.Series(dtype=str))
         result['_original_split'] = split_name
+        
+        # Group ID: pair-level grouping to keep both vulnerable and fixed functions in the same split!
+        result['group_id'] = rec_ids.apply(lambda x: f"pv_pair_{x}")
         
         result = result[result['code'].str.len() > 10]
         frames.append(result)
@@ -280,19 +305,23 @@ def standardize_humanvsaicode(all_dfs):
 
 
 def create_splits(vuln_df):
-    """Create train/val/test splits for vulnerability data."""
+    """Create train/val/test splits for vulnerability data using group-level isolation."""
     from src.data.split_dataset import split_vulnerability_dataset, save_splits, verify_no_leakage
     
     logger.info("=" * 60)
-    logger.info("Creating Train/Val/Test Splits")
+    logger.info("Creating Train/Val/Test Splits (Group Isolation on 'group_id')")
     logger.info("=" * 60)
     
-    splits = split_vulnerability_dataset(vuln_df, random_seed=42)
+    splits = split_vulnerability_dataset(vuln_df, group_col='group_id', test_size=0.15, val_size=0.10, random_seed=42)
     save_splits(splits, SPLITS_DIR, "vulnerability")
     
-    no_leak = verify_no_leakage(splits)
-    if not no_leak:
+    leakage_report = verify_no_leakage(splits, group_col='group_id')
+    if not leakage_report['passed']:
         logger.error("DATA LEAKAGE DETECTED!")
+    
+    # Save leakage report
+    with open(REPORTS_DIR / "leakage_audit_report.json", 'w') as f:
+        json.dump(leakage_report, f, indent=2, default=str)
     
     for split_name, split_df in splits.items():
         n_vuln = (split_df['vuln_label'] == 1).sum()
