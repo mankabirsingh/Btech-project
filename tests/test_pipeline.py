@@ -181,6 +181,17 @@ class TestModelInference(unittest.TestCase):
         self.assertEqual(prob.shape, (1, 2))
         self.assertAlmostEqual(float(prob.sum()), 1.0, places=4)
 
+    def test_phase3_codebert_enhanced_checkpoint(self):
+        import pickle
+        ckpt = PROJECT_ROOT / "models" / "checkpoints" / "phase3_codebert_enhanced_best.pkl"
+        if not ckpt.exists():
+            self.skipTest("Phase 3 CodeBERT enhanced checkpoint not found")
+        with open(ckpt, 'rb') as f:
+            data = pickle.load(f)
+        self.assertIn('clf', data)
+        self.assertIn('scaler', data)
+        self.assertEqual(data['clf'].n_features_in_, 1555)
+
 
 class TestControlledEditingAndProvenance(unittest.TestCase):
     """Test controlled benchmark, lineage tracking, and provenance feature validity."""

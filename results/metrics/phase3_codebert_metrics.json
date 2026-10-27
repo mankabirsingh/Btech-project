@@ -1,0 +1,28 @@
+{
+  "model_name": "phase3_codebert_enhanced",
+  "description": "Phase 3 CodeBERT Enhanced (512-tok Head-Tail + C++ & Logic Structural Features)",
+  "metrics": {
+    "accuracy": 0.7213632060586936,
+    "accuracy_95ci": [
+      0.7058930261912275,
+      0.7374566109182707
+    ],
+    "precision": 0.5638297872340425,
+    "recall": 0.5284147557328016,
+    "f1": 0.5455481214616572,
+    "f1_macro": 0.6723189981597251,
+    "mcc": 0.3453198080464591,
+    "auroc": 0.7415663903948357,
+    "auroc_95ci": [
+      0.7223655763200608,
+      0.7597302817406434
+    ],
+    "pr_auc": 0.5618564728366042,
+    "n_samples": 3169,
+    "fresh_5projects_accuracy": 0.6885030255196001,
+    "fresh_5projects_auroc": 0.6958694711032442,
+    "fresh_5projects_mcc": 0.2362800588832348,
+    "validation_accuracy": 0.7396,
+    "validation_auroc": 0.7859258970802767
+  }
+}
