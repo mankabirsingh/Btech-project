@@ -149,9 +149,27 @@ class TestModelInference(unittest.TestCase):
 
     def test_tri_union_best_checkpoint(self):
         import pickle
+        from scripts.train_improved_models import SecurityStructuralFeatureExtractor, c_tokenize
         ckpt = PROJECT_ROOT / "models" / "checkpoints" / "baseline_tri_union_best.pkl"
         if not ckpt.exists():
             self.skipTest("Tri-Union checkpoint not found")
+        with open(ckpt, 'rb') as f:
+            data = pickle.load(f)
+        self.assertIn('pipeline', data)
+        pipe = data['pipeline']
+        sample_code = ["void test() { char buf[32]; strcpy(buf, \"abc\"); }"]
+        pred = pipe.predict(sample_code)
+        prob = pipe.predict_proba(sample_code)
+        self.assertEqual(len(pred), 1)
+        self.assertEqual(prob.shape, (1, 2))
+        self.assertAlmostEqual(float(prob.sum()), 1.0, places=4)
+
+    def test_expanded_tri_union_checkpoint(self):
+        import pickle
+        from scripts.train_improved_models import SecurityStructuralFeatureExtractor, c_tokenize
+        ckpt = PROJECT_ROOT / "models" / "checkpoints" / "expanded_tri_union_best.pkl"
+        if not ckpt.exists():
+            self.skipTest("Expanded Tri-Union checkpoint not found")
         with open(ckpt, 'rb') as f:
             data = pickle.load(f)
         self.assertIn('pipeline', data)

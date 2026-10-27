@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-10-27 15:29:32",
+  "total_quarantined_test_matches": 800,
+  "label_conflicts_with_test": 1,
+  "conflicts_detail": [
+    {
+      "source": "diversevul",
+      "index": 3063,
+      "project": "samba",
+      "commit": "a0c31ec1c8d1220a5884e40d9ba6b191a04a24d5",
+      "target": 1,
+      "test_sample_id": "primevul_train_train:206642_fixed",
+      "test_label": 0,
+      "conflict": true
+    }
+  ],
+  "sample_quarantined": [
+    {
+      "source": "diversevul",
+      "index": 3,
+      "project": "ghostpdl",
+      "commit": "9f39ed4a92578a020ae10459643e1fe72573d134",
+      "target": 0,
+      "test_sample_id": "primevul_train_train:207758_fixed",
+      "test_label": 0,
+      "conflict": false
+    },
+    {
+      "source": "diversevul",
+      "index": 61,
+      "project": "tensorflow",
+      "commit": "be7a4de6adfbd303ce08be4332554dff70362612",
+      "target": 1,
+      "test_sample_id": "primevul_test_test:197719_vuln",
+      "test_label": 1,
+      "conflict": false
+    },
+    {
+      "source": "diversevul",
+      "index": 239,
+      "project": "cryptopp",
+      "commit": "07dbcc3d9644b18e05c1776db2a57fe04d780965",
+      "target": 0,
+      "test_sample_id": "primevul_train_train:209960_fixed",
+      "test_label": 0,
+      "conflict": false
+    },
+    {
+      "source": "diversevul",
+      "index": 401,
+      "project": "sqlite",
+      "commit": "57f7ece78410a8aae86aa4625fb7556897db384c",
+      "target": 1,
+      "test_sample_id": "primevul_train_train:203991_vuln",
+      "test_label": 1,
+      "conflict": false
+    },
+    {
+      "source": "diversevul",
+      "index": 1361,
+      "project": "linux",
+      "commit": "c70222752228a62135cee3409dccefd494a24646",
+      "target": 0,
+      "test_sample_id": "primevul_train_train:214367_fixed",
+      "test_label": 0,
+      "conflict": false
+    },
+    {
+      "source": "diversevul",
+      "index": 2574,
+      "project": "FFmpeg",
+      "commit": "27a99e2c7d450fef15594671eef4465c8a166bd7",
+      "target": 0,
+      "test_sample_id": "primevul_validation_validation:196768_fixed",
+      "test_label": 0,
+      "conflict": false
+    },
+    {
+      "source": "diversevul",
+      "index": 2699,
+      "project": "mod_auth_openidc",
+      "commit": "03e6bfb446f4e3f27c003d30d6a433e5dd8e2b3d",
+      "target": 1,
+      "test_sample_id": "primevul_train_train:208434_vuln",
+      "test_label": 1,
+      "conflict": false
+    },
+    {
+      "source": "diversevul",
+      "index": 2879,
+      "project": "pjproject",
+      "commit": "077b465c33f0aec05a49cd2ca456f9a1b112e896",
+      "target": 1,
+      "test_sample_id": "primevul_test_test:199836_vuln",
+      "test_label": 1,
+      "conflict": false
+    },
+    {
+      "source": "diversevul",
+      "index": 2985,
+      "project": "libgd",
+      "commit": "56ce6ef068b954ad28379e83cca04feefc51320c",
+      "target": 0,
+      "test_sample_id": "primevul_train_train:210532_fixed",
+      "test_label": 0,
+      "conflict": false
+    },
+    {
+      "source": "diversevul",
+      "index": 3063,
+      "project": "samba",
+      "commit": "a0c31ec1c8d1220a5884e40d9ba6b191a04a24d5",
+      "target": 1,
+      "test_sample_id": "primevul_train_train:206642_fixed",
+      "test_label": 0,
+      "conflict": true
+    }
+  ]
+}

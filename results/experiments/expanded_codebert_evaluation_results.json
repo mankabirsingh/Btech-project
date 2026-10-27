@@ -1,0 +1,167 @@
+{
+  "timestamp": "2026-10-27 15:47:11",
+  "model": "CodeBERT Expanded Hybrid (384-tok, MeanPool+CLS+SecurityStruct)",
+  "training_samples": 12000,
+  "val_threshold_acc": 0.6999999999999997,
+  "val_metrics": {
+    "accuracy": 0.8005,
+    "balanced_accuracy": 0.5967529703161887,
+    "precision": 0.515,
+    "recall": 0.254320987654321,
+    "f1": 0.34049586776859503,
+    "macro_f1": 0.6114850472863593,
+    "mcc": 0.2592094958128955,
+    "auroc": 0.7566291265141839,
+    "pr_auc": 0.4223821195358278,
+    "brier_score": 0.19887118546294902,
+    "positive_rate": 0.1,
+    "confusion_matrix": {
+      "tn": 1498,
+      "fp": 97,
+      "fn": 302,
+      "tp": 103
+    },
+    "fpr": 0.060815047021943576,
+    "fnr": 0.745679012345679
+  },
+  "test_evaluations": {
+    "untouched_original_test": {
+      "metrics_default_t50": {
+        "accuracy": 0.4935328898743533,
+        "balanced_accuracy": 0.5024775694482027,
+        "precision": 0.4881767955801105,
+        "recall": 0.8386484434320425,
+        "f1": 0.6171252968291661,
+        "macro_f1": 0.43461994718675223,
+        "mcc": 0.0066905024940735695,
+        "auroc": 0.5065150141063886,
+        "pr_auc": 0.4888706613371737,
+        "brier_score": 0.2945442832044815,
+        "positive_rate": 0.8361049519586105,
+        "confusion_matrix": {
+          "tn": 462,
+          "fp": 2316,
+          "fn": 425,
+          "tp": 2209
+        },
+        "fpr": 0.8336933045356372,
+        "fnr": 0.16135155656795747
+      },
+      "metrics_calibrated_topt": {
+        "accuracy": 0.5092387287509239,
+        "balanced_accuracy": 0.5064212630643308,
+        "precision": 0.4948405253283302,
+        "recall": 0.40053151100987094,
+        "f1": 0.44271926143516577,
+        "macro_f1": 0.5021453685848658,
+        "mcc": 0.013136931699508681,
+        "auroc": 0.5065150141063886,
+        "pr_auc": 0.4888706613371737,
+        "brier_score": 0.2945442832044815,
+        "positive_rate": 0.3939393939393939,
+        "confusion_matrix": {
+          "tn": 1701,
+          "fp": 1077,
+          "fn": 1579,
+          "tp": 1055
+        },
+        "fpr": 0.3876889848812095,
+        "fnr": 0.5994684889901291
+      },
+      "inference_time_sec": 0.015360116958618164,
+      "n_samples": 5412
+    },
+    "novel_projects_test": {
+      "metrics_default_t50": {
+        "accuracy": 0.7181954887218045,
+        "balanced_accuracy": 0.6888063627444485,
+        "precision": 0.5942658557775847,
+        "recall": 0.5927209705372617,
+        "f1": 0.5934924078091106,
+        "macro_f1": 0.6889211175984564,
+        "mcc": 0.37784354391559666,
+        "auroc": 0.745412587702877,
+        "pr_auc": 0.6050828563380947,
+        "brier_score": 0.19565247905779487,
+        "positive_rate": 0.34616541353383457,
+        "confusion_matrix": {
+          "tn": 1704,
+          "fp": 467,
+          "fn": 470,
+          "tp": 684
+        },
+        "fpr": 0.21510824504836482,
+        "fnr": 0.4072790294627383
+      },
+      "metrics_calibrated_topt": {
+        "accuracy": 0.6869172932330827,
+        "balanced_accuracy": 0.5641826598768866,
+        "precision": 0.714828897338403,
+        "recall": 0.16291161178509533,
+        "f1": 0.26534932956951307,
+        "macro_f1": 0.5332097307125226,
+        "mcc": 0.22641232042198745,
+        "auroc": 0.745412587702877,
+        "pr_auc": 0.6050828563380947,
+        "brier_score": 0.19565247905779487,
+        "positive_rate": 0.07909774436090225,
+        "confusion_matrix": {
+          "tn": 2096,
+          "fp": 75,
+          "fn": 966,
+          "tp": 188
+        },
+        "fpr": 0.03454629203132197,
+        "fnr": 0.8370883882149047
+      },
+      "inference_time_sec": 0.005118846893310547,
+      "n_samples": 3325
+    },
+    "synthetic_juliet_test": {
+      "metrics_default_t50": {
+        "accuracy": 0.5,
+        "balanced_accuracy": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "macro_f1": 0.3333333333333333,
+        "mcc": 0.0,
+        "auroc": 0.7895215,
+        "pr_auc": 0.7784081582781199,
+        "brier_score": 0.29190906598629535,
+        "positive_rate": 0.0,
+        "confusion_matrix": {
+          "tn": 2000,
+          "fp": 0,
+          "fn": 2000,
+          "tp": 0
+        },
+        "fpr": 0.0,
+        "fnr": 1.0
+      },
+      "metrics_calibrated_topt": {
+        "accuracy": 0.5,
+        "balanced_accuracy": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "macro_f1": 0.3333333333333333,
+        "mcc": 0.0,
+        "auroc": 0.7895215,
+        "pr_auc": 0.7784081582781199,
+        "brier_score": 0.29190906598629535,
+        "positive_rate": 0.0,
+        "confusion_matrix": {
+          "tn": 2000,
+          "fp": 0,
+          "fn": 2000,
+          "tp": 0
+        },
+        "fpr": 0.0,
+        "fnr": 1.0
+      },
+      "inference_time_sec": 0.006006717681884766,
+      "n_samples": 4000
+    }
+  }
+}
