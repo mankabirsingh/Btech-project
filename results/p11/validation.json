@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-11-22 03:19:41 UTC",
+  "overall_status": "PASS",
+  "checks": {
+    "1.1_numbers_match_sources": {
+      "status": "PASS",
+      "n_checks": 18,
+      "discrepancies": [],
+      "details": "Verified 18 numerical claims against ground truth JSON files within tolerance 0.0005."
+    },
+    "1.2_test_access_log": {
+      "status": "PASS",
+      "p11_accesses_count": 0,
+      "freeze_precedence_confirmed": true,
+      "total_log_entries": 33,
+      "details": "Confirmed zero accesses to locked test sets during P11 and freeze_a.json written before test2 was loaded in P10."
+    },
+    "1.3_juliet_leak_check": {
+      "status": "PASS",
+      "forbidden_tokens_found_in_code": 0,
+      "char_3gram_accuracy": {
+        "split_flow": 0.6581617427633543,
+        "split_cwe": 0.7596030141518103,
+        "split_rand": 0.8669590643274854
+      },
+      "threshold": 0.75,
+      "details": "Zero forbidden identifiers found in sanitized Juliet corpus. S-flow leakage accuracy is 65.82% (<= 75.0%)."
+    },
+    "1.4_juliet_split_disjointness": {
+      "status": "PASS",
+      "overlaps": {
+        "split_rand": {
+          "train_val": 0,
+          "train_test": 0,
+          "val_test": 0
+        },
+        "split_flow": {
+          "train_val": 0,
+          "train_test": 0,
+          "val_test": 0
+        },
+        "split_cwe": {
+          "train_val": 0,
+          "train_test": 0,
+          "val_test": 0
+        }
+      },
+      "details": "All Juliet partitions (train, val, test) across S-rand, S-flow, and S-cwe are strictly disjoint by testcase_id."
+    },
+    "1.5_model_b_exec_labels": {
+      "status": "PASS",
+      "class_a_sanitizer_vulnerable": 54,
+      "class_b_assertions_zeroed": 9,
+      "class_c_timeouts_ooms_zeroed": 9,
+      "suspect_tasks_count": 9,
+      "details": "exec_label_v2 strictly requires AddressSanitizer/UBSan in task function (54 units). 9 assertion aborts and 9 timeouts/OOMs are zeroed."
+    },
+    "1.6_model_b_fallback": {
+      "status": "PASS",
+      "max_diff": 0.0,
+      "tested_functions": 20,
+      "tolerance": 1e-06,
+      "details": "Tested 20 functions from dev_heldout. Maximum |P_risk - P_code| difference was 0.00e+00 (< 1e-6)."
+    },
+    "1.7_unit_test_suite": {
+      "status": "PASS",
+      "tests_run": 88,
+      "passed": 88,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 21.26,
+      "details": "Ran 88 tests: 88 passed, 0 failed, 0 errors, 0 skipped in 21.3s."
+    }
+  }
+}

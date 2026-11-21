@@ -12,6 +12,11 @@ build/
 
 # Data (large files)
 data/raw/
+data/cache/
+*.parquet
+*.npy
+*.npz
+*.tar.gz
 data/processed/*.parquet
 data/processed/*.csv
 data/splits/*_expanded.parquet

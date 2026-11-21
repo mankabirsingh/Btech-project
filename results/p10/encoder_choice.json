@@ -1,0 +1,31 @@
+{
+  "chosen_model": "Qwen/Qwen2.5-Coder-0.5B",
+  "chosen_max_length": 512,
+  "decision_reason": "Qwen 0.5B at 1024 tokens > 90 min; fallback to 0.5B at 512 tokens",
+  "benchmark_0_5b_1024": {
+    "model_name": "Qwen/Qwen2.5-Coder-0.5B",
+    "max_len": 1024,
+    "batch_size": 16,
+    "sample_count": 100,
+    "inference_time_s": 14.225845098495483,
+    "ms_per_function": 142.25845098495483,
+    "projected_total_functions": 74500,
+    "projected_total_min": 176.63757663965222,
+    "projected_total_hours": 2.9439596106608703,
+    "hidden_dim": 896
+  },
+  "benchmark_1_5b_1024": null,
+  "benchmark_chosen": {
+    "model_name": "Qwen/Qwen2.5-Coder-0.5B",
+    "max_len": 512,
+    "batch_size": 16,
+    "sample_count": 100,
+    "inference_time_s": 6.822370767593384,
+    "ms_per_function": 68.22370767593384,
+    "projected_total_functions": 74500,
+    "projected_total_min": 84.71110369761783,
+    "projected_total_hours": 1.4118517282936305,
+    "hidden_dim": 896
+  },
+  "timestamp": "2026-11-21 20:50:13"
+}

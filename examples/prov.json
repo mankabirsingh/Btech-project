@@ -1,0 +1,9 @@
+{
+  "author_type": "ai",
+  "ai_involvement": 1.0,
+  "temperature": 0.8,
+  "model": "gemini-flash",
+  "prompt_tokens": 150,
+  "candidate_tokens": 280,
+  "edit_history": []
+}

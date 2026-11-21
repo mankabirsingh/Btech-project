@@ -1,0 +1,28 @@
+{
+  "clang_path": "clang",
+  "is_homebrew_llvm": false,
+  "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "cppcheck_version": "Cppcheck 2.22.0",
+  "flawfinder_version": "2.0.20",
+  "python_packages": {
+    "python": "3.9.6",
+    "torch": "2.8.0",
+    "mps_available": true,
+    "transformers": "4.57.6",
+    "lightgbm": "4.6.0",
+    "scikit-learn": "1.6.1",
+    "pandas": "2.3.3",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1"
+  },
+  "fuzzer_test": {
+    "compiles": false,
+    "runs": false,
+    "output_snippet": "Compile failed: ld: library '/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.fuzzer_osx.a' not found\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+  },
+  "clang_fuzzer": {
+    "path": "/opt/homebrew/opt/llvm/bin/clang",
+    "version": "Homebrew clang 23.1.6",
+    "fuzzer_supported": true
+  }
+}

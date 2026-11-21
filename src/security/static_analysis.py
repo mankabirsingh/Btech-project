@@ -10,6 +10,8 @@ import json
 import logging
 import subprocess
 import tempfile
+import shutil
+import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict
@@ -310,7 +312,8 @@ def try_flawfinder_analysis(code: str, language: str = 'c') -> List[SecurityFind
         f.flush()
         
         try:
-            cmd = ['flawfinder', '--columns', '--dataonly', '--singleline', f.name]
+            flawfinder_bin = shutil.which('flawfinder') or str(Path(sys.prefix) / 'bin' / 'flawfinder')
+            cmd = [flawfinder_bin, '--columns', '--dataonly', '--singleline', f.name]
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
             if result.returncode == 0 or result.stdout:
                 code_lines = code.splitlines()

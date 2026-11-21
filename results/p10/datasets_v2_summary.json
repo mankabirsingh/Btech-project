@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-11-21 21:19:43",
+  "clean_pool_size": 114728,
+  "clean_pool_vuln": 20763,
+  "clean_pool_safe": 93965,
+  "train_v2": {
+    "path": "/Users/mankabir/Desktop/Btech project/data/p10/train_v2.parquet",
+    "n_samples": 25000,
+    "prevalence": 0.5,
+    "sha256": "a3d390fb9f8ea82323541b710c7f41aa60a3770ee771843ce128f9a5445f17a7"
+  },
+  "train_pairs_v2": {
+    "path": "/Users/mankabir/Desktop/Btech project/data/p10/train_pairs_v2.parquet",
+    "n_pairs": 3916,
+    "sha256": "49726e992a851392675642a7a1157023b25a5e0e217d174ae35d03bdccbe0603"
+  },
+  "exclusions": {
+    "dev_projects": [
+      "qpdf",
+      "radare2",
+      "tcpdump",
+      "openexr"
+    ],
+    "old_test_projects": [
+      "openssl",
+      "vim",
+      "envoy",
+      "gpac"
+    ],
+    "test2_projects": [
+      "node",
+      "iperf",
+      "libvpx",
+      "cryptopp",
+      "MilkyTracker",
+      "libcomps",
+      "yubico-pam",
+      "libyaml",
+      "php-src",
+      "Bento4",
+      "Onigmo",
+      "contiki-ng"
+    ],
+    "near_dups_dev_count": 14824,
+    "near_dups_old_test_count": 1032,
+    "near_dups_test2_count": 1205,
+    "total_near_dups_count": 15356
+  }
+}

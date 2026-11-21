@@ -1,3 +1,50 @@
+# Final System: Multi-Modal Security Scanner & Audit Dashboard
+
+> **Full Empirical Report:** See [reports/FINAL_RESULTS.md](file:///Users/mankabir/Desktop/Btech%20project/reports/FINAL_RESULTS.md) for complete footnoted benchmark results, contamination analysis, and operational recommendations.
+
+### 1. Installation
+Install the pinned dependencies into your Python virtual environment:
+```bash
+./venv/bin/pip install -r requirements_final.txt
+```
+*(Optional external tool)*: Ensure `cppcheck` is installed on your system (`brew install cppcheck` or `apt-get install cppcheck`).
+
+### 2. Command-Line Security Scanner
+Audit any C or C++ source code file:
+```bash
+# Standard human-readable audit
+./venv/bin/python scripts/scan.py path/to/file.c
+
+# Audit with optional AI provenance metadata (Model B)
+./venv/bin/python scripts/scan.py examples/mixed.cpp --provenance examples/prov.json
+
+# Structured JSON output for CI/CD integration
+./venv/bin/python scripts/scan.py path/to/file.c --json
+```
+
+**CLI Exit Codes:**
+- `0`: All functions assessed as **SAFE**
+- `1`: At least one function assessed as **UNSURE** (requires security review)
+- `2`: At least one function assessed as **VULNERABLE**
+- `3`: Input file not found or unreadable
+
+### 3. Streamlit Interactive Web Application
+Launch the multi-tab interactive dashboard:
+```bash
+./venv/bin/streamlit run app_final.py
+```
+- **Tab 1 ("Scan code"):** Interactive snippet scanner, preloaded audit examples, neural token occlusion attribution, and collapsible static findings.
+- **Tab 2 ("Model performance"):** Verified empirical tables loaded directly from disk JSON outputs (`results/p11/` and `results/p10/`).
+- **Tab 3 ("About"):** System architecture flowchart and verbatim threat model disclosures.
+
+### 4. Summary of Verified Performance (`test2-clean`, $N=1,991$)
+- **Model A v2 (V3):** AUROC $0.6351$ $[0.5871, 0.6881]$, Length-matched AUROC $0.4889$, Top 10% Precision $29.0\%$, Lift $1.39\times$.
+- **Triage Stacker (V6):** AUROC $0.6753$ $[0.6290, 0.7244]$, Length-matched AUROC $0.4888$, Top 10% Precision $37.5\%$, Lift $1.72\times$.
+- **Three-Way Policy:** Yields calibrated Negative Predictive Value (NPV) of $87.8\% - 90.5\%$ on `SAFE` verdicts and $30.3\% - 65.0\%$ precision on `VULNERABLE` alerts.
+- **Model B Execution Oracle ($N=36$ clean tasks):** AI-generated code exhibited lower runtime sanitizer crash rates ($11.1\%$ and $8.3\%$) than human code ($27.8\%$, $p < 0.05$). Provenance features alone are indistinguishable from chance (AUROC $0.4965$, $95\%$ CI spans $0.5$).
+
+---
+
 # Provenance-Aware Security Risk Assessment of Human-AI Hybrid Code
 
 **B.Tech Project-I — Delhi Technological University (DTU)**  
@@ -101,28 +148,43 @@ All commands are validated for local Apple Silicon (MPS) and CPU environments:
 # 1. Activate environment
 source venv/bin/activate
 
-# 2. Run automated test suite (12 tests)
-python -m unittest tests/test_pipeline.py -v
+# 2. Run automated test suite (27 tests across all 9 phases)
+python -m unittest discover tests -v
 
 # 3. Train baselines on un-leaked grouped splits (36,080 samples)
 python scripts/train_baseline.py
 
-# 4. Train CodeBERT classifier on Apple Silicon MPS with validation threshold tuning
-python scripts/train_codebert.py --train_samples 3000 --val_samples 800 --test_samples 1200 --batch_size 32
-
-# 5. Run the Multi-CWE Controlled Evolution Benchmark & Prioritization
+# 4. Run the Multi-CWE Controlled Evolution Benchmark & Prioritization
 python scripts/run_controlled_experiment.py
 
-# 6. Run the Provenance-Aware Research Comparison (Model A vs Model B)
-python scripts/train_provenance_experiment.py
+# 5. Launch the Streamlit Research & Presentation Application (Phase 13 Build)
+streamlit run app.py --server.port=8501
 
-# 7. Launch Streamlit Research Dashboard
-streamlit run app.py
+# 6. Execute Full Unit Test Suite (48/48 Passing)
+python -m unittest discover tests -v
 ```
 
 ---
 
-## 6. Security Analysis Engine
+## 6. Phase 13: Presentation-Ready UI & Dataset Expansion
+
+The presentation-ready Streamlit application provides:
+1. **Model A (Code Only):** Provenance-agnostic baseline utilizing the Tri-Union feature extractor (Char n-grams + Token n-grams + Security AST keywords) and Calibrated SVM trained on 50,000 C/C++ vulnerability samples (<2ms CPU latency).
+2. **Model B (Code + Provenance):** Provenance-aware fusion prototype accepting identical source code plus an explicit provenance selector (`Human-written`, `AI-generated, unreviewed`, `AI-generated, human-edited`, `Human-written, AI-modified`, `Unknown / unavailable`). Computes calibrated risk and maps to review priority tiers (`Tier-1 Urgent`, `Tier-2 Elevated`, `Tier-3 Standard`).
+3. **Preset Presentation Scenarios:**
+   - **Vulnerable C Example:** Unbounded `strcpy()` buffer overflow in unreviewed AI code.
+   - **Safer C Example:** Bounds-checked `snprintf()` copy with NULL verification.
+   - **Custom Code Mode:** Test arbitrary C/C++ functions under interactive provenance settings.
+4. **Verified Code-Only Fallback:** If provenance is marked unknown, Model B cleanly falls back to Model A base probability ($P_{\text{final}} = P_{\text{code}}$).
+5. **Phase 13 Documentation & Reports:**
+   - [Phase 13 Final Comprehensive Report](file:///Users/mankabir/Desktop/Btech%20project/reports/phase13_final_report.md)
+   - [Phase 13A Dataset Expansion & Audit Report](file:///Users/mankabir/Desktop/Btech%20project/reports/phase13_dataset_expansion.md)
+   - [Phase 13B Model B Results & Ablation Report](file:///Users/mankabir/Desktop/Btech%20project/reports/phase13_model_b_results.md)
+   - [Phase 13C Model A Evaluation Report](file:///Users/mankabir/Desktop/Btech%20project/reports/phase13_model_a_comparison.md)
+
+---
+
+## 7. Security Analysis Engine
 
 The system supports interactive code submission and returns:
 1. **ML Model Predictions**: Binary classification and probability from trained models.
@@ -132,7 +194,7 @@ The system supports interactive code submission and returns:
 
 ---
 
-## 7. Faculty Presentation Talking Points (5 Minutes)
+## 8. Faculty Presentation Talking Points (5 Minutes)
 
 1. **The Problem:** AI code generators (Copilot, ChatGPT) write plausible code that often introduces subtle security vulnerabilities. When developers merge AI suggestions with human edits, security reviewers face alert fatigue.
 2. **The Core Question:** Does knowing code provenance (who wrote what, AI involvement %, and lineage) help predict vulnerabilities and prioritize security reviews?

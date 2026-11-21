@@ -1,0 +1,262 @@
+{
+  "experiment": "Phase 13 Model B Training & Evaluation",
+  "dataset_path": "/Users/mankabir/Desktop/Btech project/data/phase13_model_b",
+  "checkpoint_path": "/Users/mankabir/Desktop/Btech project/models/checkpoints/phase13_model_b_fusion_best.pkl",
+  "checkpoint_sha256": "32a2e2f6d57b8263bb9619673a250eb0e13a1a6580fce27c8d08b4c2941c049d",
+  "model_architecture": "Late Fusion Calibrated Logistic Regression",
+  "hyperparameter_c": 10.0,
+  "learned_weights": {
+    "logit_code": 0.0064,
+    "has_provenance": -0.0144,
+    "ai_involvement": 2.5512,
+    "is_pure_ai": 1.6079,
+    "is_human_edited": -1.3804,
+    "is_ai_edited": 2.178,
+    "confidence": -0.5387
+  },
+  "learned_bias": -1.510535427346599,
+  "ablations": {
+    "majority_baseline": {
+      "accuracy": 0.5,
+      "ci_low": 0.2799959967716162,
+      "ci_high": 0.7200040032283839,
+      "balanced_accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "mcc": 0.0,
+      "auroc": 0.5,
+      "prauc": 0.5,
+      "brier_score": 0.25,
+      "confusion_matrix": {
+        "TN": 8,
+        "FP": 0,
+        "FN": 8,
+        "TP": 0
+      },
+      "fpr": 0.0,
+      "fnr": 1.0,
+      "n_samples": 16
+    },
+    "provenance_only": {
+      "accuracy": 0.5,
+      "ci_low": 0.2799959967716162,
+      "ci_high": 0.7200040032283839,
+      "balanced_accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "mcc": 0.0,
+      "auroc": 0.5,
+      "prauc": 0.5,
+      "brier_score": 0.35837767224919337,
+      "confusion_matrix": {
+        "TN": 4,
+        "FP": 4,
+        "FN": 4,
+        "TP": 4
+      },
+      "fpr": 0.5,
+      "fnr": 0.5,
+      "n_samples": 16
+    },
+    "model_a_code_only": {
+      "accuracy": 0.5,
+      "ci_low": 0.2799959967716162,
+      "ci_high": 0.7200040032283839,
+      "balanced_accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "mcc": 0.0,
+      "auroc": 0.296875,
+      "prauc": 0.428731684981685,
+      "brier_score": 0.39355008635677236,
+      "confusion_matrix": {
+        "TN": 8,
+        "FP": 0,
+        "FN": 8,
+        "TP": 0
+      },
+      "fpr": 0.0,
+      "fnr": 1.0,
+      "n_samples": 16
+    },
+    "model_b_full": {
+      "accuracy": 0.5,
+      "ci_low": 0.2799959967716162,
+      "ci_high": 0.7200040032283839,
+      "balanced_accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "mcc": 0.0,
+      "auroc": 0.453125,
+      "prauc": 0.4839743589743589,
+      "brier_score": 0.4026206679565113,
+      "confusion_matrix": {
+        "TN": 4,
+        "FP": 4,
+        "FN": 4,
+        "TP": 4
+      },
+      "fpr": 0.5,
+      "fnr": 0.5,
+      "n_samples": 16
+    },
+    "model_b_fallback": {
+      "accuracy": 0.5,
+      "ci_low": 0.2799959967716162,
+      "ci_high": 0.7200040032283839,
+      "balanced_accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "mcc": 0.0,
+      "auroc": 0.296875,
+      "prauc": 0.428731684981685,
+      "brier_score": 0.39355008635677236,
+      "confusion_matrix": {
+        "TN": 8,
+        "FP": 0,
+        "FN": 8,
+        "TP": 0
+      },
+      "fpr": 0.0,
+      "fnr": 1.0,
+      "n_samples": 16
+    },
+    "model_b_masked": {
+      "accuracy": 0.5,
+      "ci_low": 0.2799959967716162,
+      "ci_high": 0.7200040032283839,
+      "balanced_accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "mcc": 0.0,
+      "auroc": 0.296875,
+      "prauc": 0.428731684981685,
+      "brier_score": 0.3544840644074921,
+      "confusion_matrix": {
+        "TN": 8,
+        "FP": 0,
+        "FN": 8,
+        "TP": 0
+      },
+      "fpr": 0.0,
+      "fnr": 1.0,
+      "n_samples": 16
+    },
+    "model_b_permuted": {
+      "accuracy": 0.5,
+      "ci_low": 0.2799959967716162,
+      "ci_high": 0.7200040032283839,
+      "balanced_accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "mcc": 0.0,
+      "auroc": 0.40625,
+      "prauc": 0.549404761904762,
+      "brier_score": 0.403225488826521,
+      "confusion_matrix": {
+        "TN": 4,
+        "FP": 4,
+        "FN": 4,
+        "TP": 4
+      },
+      "fpr": 0.5,
+      "fnr": 0.5,
+      "n_samples": 16
+    }
+  },
+  "subgroup_metrics": {
+    "Pure Human Baseline": {
+      "n_samples": 4,
+      "vuln_count": 2,
+      "safe_count": 2,
+      "model_a_acc": 0.5,
+      "model_b_acc": 0.5,
+      "model_a_brier": 0.39415753907393203,
+      "model_b_brier": 0.4010216590783696,
+      "brier_delta": 0.0069
+    },
+    "Pure AI Generation": {
+      "n_samples": 4,
+      "vuln_count": 2,
+      "safe_count": 2,
+      "model_a_acc": 0.5,
+      "model_b_acc": 0.5,
+      "model_a_brier": 0.45808714972377185,
+      "model_b_brier": 0.4039291331033674,
+      "brier_delta": -0.0542
+    },
+    "Human-Edited AI": {
+      "n_samples": 4,
+      "vuln_count": 2,
+      "safe_count": 2,
+      "model_a_acc": 0.5,
+      "model_b_acc": 0.5,
+      "model_a_brier": 0.3217883341593647,
+      "model_b_brier": 0.4045230276105044,
+      "brier_delta": 0.0827
+    },
+    "AI-Edited Human": {
+      "n_samples": 4,
+      "vuln_count": 2,
+      "safe_count": 2,
+      "model_a_acc": 0.5,
+      "model_b_acc": 0.5,
+      "model_a_brier": 0.4001673224700207,
+      "model_b_brier": 0.40100885203380393,
+      "brier_delta": 0.0008
+    }
+  },
+  "prior_locked_benchmark_32": {
+    "model_a": {
+      "accuracy": 0.625,
+      "ci_low": 0.4525444129166595,
+      "ci_high": 0.7706608847886202,
+      "balanced_accuracy": 0.625,
+      "precision": 0.6666666666666666,
+      "recall": 0.5,
+      "f1": 0.5714285714285714,
+      "mcc": 0.2581988897471611,
+      "auroc": 0.609375,
+      "prauc": 0.7366429387287707,
+      "brier_score": 0.2996321079788731,
+      "confusion_matrix": {
+        "TN": 12,
+        "FP": 4,
+        "FN": 8,
+        "TP": 8
+      },
+      "fpr": 0.25,
+      "fnr": 0.5,
+      "n_samples": 32
+    },
+    "model_b": {
+      "accuracy": 0.96875,
+      "ci_low": 0.8425577423578254,
+      "ci_high": 0.9944621240369733,
+      "balanced_accuracy": 0.96875,
+      "precision": 1.0,
+      "recall": 0.9375,
+      "f1": 0.967741935483871,
+      "mcc": 0.9393364366277243,
+      "auroc": 1.0,
+      "prauc": 1.0,
+      "brier_score": 0.036193547982554856,
+      "confusion_matrix": {
+        "TN": 16,
+        "FP": 0,
+        "FN": 1,
+        "TP": 15
+      },
+      "fpr": 0.0,
+      "fnr": 0.0625,
+      "n_samples": 32
+    }
+  }
+}

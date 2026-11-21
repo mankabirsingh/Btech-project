@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-11-22 01:28:28 UTC",
+  "candidates": {
+    "B1(a)": "Model A v2 code-only risk score (V3)",
+    "B1(b)": "Juliet J* code-only risk score (J2)",
+    "B1(c)": "VM code-only risk score (Stacker)",
+    "B2": "Provenance-only LR [role one-hot, ai_involvement, temperature] (edit_distance_ratio and churn dropped as constant in real provenance)",
+    "B3": "Static-only LR [flawfinder and cppcheck family findings]",
+    "B4": "Model B v2 Offset Fusion: logit(P_risk) = logit(P_code) + w * prov + b",
+    "B4s": "Model B v2 Offset Fusion with static: logit(P_risk) = logit(P_code) + w * prov + v * static + b",
+    "B5": "Control model: B4 with provenance features permuted/shuffled within task"
+  },
+  "evaluation_protocol": {
+    "cross_validation": "5-fold GroupKFold by task_id x 5 seeds (42, 43, 44, 45, 46)",
+    "decision_threshold": "Tuned inside train folds to maximize balanced accuracy",
+    "metrics": [
+      "AUROC",
+      "AUPRC",
+      "Accuracy",
+      "Balanced Accuracy",
+      "Precision@20%"
+    ],
+    "bootstrap_ci": "2000 resamples grouped by task_id",
+    "hypotheses_paired_tests": [
+      "B4 vs B1(a) (provenance improves code risk)",
+      "B4 vs B5 (provenance signal is non-random)",
+      "B4s vs B3 (code+provenance beats static alone)",
+      "B1(b) vs B1(a) (Juliet model beats real-world Model A)"
+    ],
+    "correction": "Holm step-down across the 4 paired comparisons",
+    "selection_rule": "Highest AUROC among models not significantly worse than next simpler; if provenance adds nothing, Model B = Model A + static fusion"
+  }
+}
