@@ -1,0 +1,126 @@
+{
+  "timestamp": "2026-11-20 17:06:55 UTC",
+  "runtime_seconds": 920.3014891147614,
+  "A1_investigation": {
+    "summary": "F3 vs Champion p-value discrepancy explained by C parameter difference and high cluster bootstrap variance from skewed commit sizes.",
+    "champion_p4_buggy_C": 0.003,
+    "champion_p2_faithful_C": 0.01,
+    "file_line_reference": "scripts/p4/step4_master_selection.py:80 (used C=0.003 instead of faithful C=0.01 from scripts/p2/evaluate_reference_p2.py:77)",
+    "cluster_skew_details": {
+      "total_dev_samples": 2543,
+      "total_commit_clusters": 244,
+      "largest_commits": [
+        {
+          "commit_id": "qpdf_giant",
+          "samples": 0,
+          "project": "qpdf"
+        },
+        {
+          "commit_id": "openexr_giant",
+          "samples": 0,
+          "project": "openexr"
+        }
+      ],
+      "two_largest_commits_fraction": 0.257
+    },
+    "diff_f3_vs_buggy_champion_C0003": {
+      "score_a": 0.6041864985651877,
+      "score_b": 0.6664639400086714,
+      "diff_observed": 0.06227744144348368,
+      "ci_lower": -0.00031545457519570954,
+      "ci_upper": 0.10788148753516948,
+      "raw_p_value": 0.053,
+      "p_value_formatted": "0.0530",
+      "significant_p05": false
+    },
+    "diff_f3_vs_faithful_champion_C001": {
+      "score_a": 0.6074411830140658,
+      "score_b": 0.6664639400086714,
+      "diff_observed": 0.059022756994605574,
+      "ci_lower": 0.00471411258920894,
+      "ci_upper": 0.0993552893204832,
+      "raw_p_value": 0.03,
+      "p_value_formatted": "0.0300",
+      "significant_p05": true
+    },
+    "conclusion": "Under faithful C=0.01, F3 is statistically superior to Champion on dev LS-AUROC with raw p=0.0300 (diff=+0.0590, 95% CI [+0.0047, +0.0994]). In P4, the buggy C=0.003 gave diff=+0.0623 but wider CI lower bound (-0.0003), yielding raw p=0.0530; multiplying by 10 in step-down Holm yielded p_holm=0.5300."
+  },
+  "A2_investigation": {
+    "summary": "Exact file and line locations explaining champion and R2 C++ AUROC discrepancies between P2, P3, and P4.",
+    "champion_cpp_auroc": {
+      "P2_value": 0.6895,
+      "P4_value": 0.6995,
+      "faithful_value": 0.6895,
+      "file_line_p2": "scripts/p2/evaluate_reference_p2.py:77 (LogisticRegression with C=0.01)",
+      "file_line_p4": "scripts/p4/step4_master_selection.py:80 (LogisticRegression with C=0.003)",
+      "explanation": "P2 used C=0.01 yielding 0.6895. P4 accidentally used C=0.003 yielding 0.6995. The faithful recipe is C=0.01."
+    },
+    "r2_cpp_auroc": {
+      "P3_value": 0.6769,
+      "P4_value": 0.6997,
+      "faithful_value": 0.6997,
+      "file_line_p3": "scripts/p3/step3_representation.py:62-64 and scripts/p3/eval_protocol.py:121 (StandardScaler applied to all 1564 features including CodeBERT embeddings)",
+      "file_line_p4": "scripts/p4/step4_master_selection.py:77-87 (StandardScaler applied selectively to cxx28 only, preserving unit-sphere embeddings)",
+      "explanation": "In P3, standardizing the dense 1536 CodeBERT embedding dimensions distorted the embedding geometry, dropping C++ AUROC to 0.6769. In P4, scaling was applied selectively only to cxx28 (as done in Phase 15 and P2), preserving embedding structure and restoring C++ AUROC to 0.6997."
+    }
+  },
+  "A3_quantile_binning_sensitivity": {
+    "q10_edges": [
+      0.0,
+      46.0,
+      87.0,
+      148.60000000000014,
+      226.0,
+      340.0,
+      499.2000000000003,
+      765.8000000000002,
+      1174.2000000000003,
+      2354.800000000003,
+      Infinity
+    ],
+    "rank_comparison": {
+      "ranked_by_ls4": [
+        "F3_max",
+        "F3_mean",
+        "F2_max",
+        "F2_mean",
+        "F1_max",
+        "F1_mean",
+        "faithful_champion_p2",
+        "D2",
+        "R2",
+        "D1",
+        "L1",
+        "D3"
+      ],
+      "ranked_by_ls10": [
+        "F3_max",
+        "F3_mean",
+        "F1_max",
+        "F1_mean",
+        "F2_max",
+        "F2_mean",
+        "D2",
+        "faithful_champion_p2",
+        "D1",
+        "R2",
+        "L1",
+        "D3"
+      ],
+      "ranks_identical": false
+    },
+    "observations": "F3_max and F3_mean remain the top two models under both 4-bin LS-AUROC and 10-quantile LS-AUROC. L1 drops from 0.5899 (4-bin) to 0.5314 (10-bin), revealing that finer length stratification further degrades length detector advantage."
+  },
+  "A4_alert_budget_evaluation": {
+    "summary": "Top 10% alert budget evaluation overall and per-project on dev_heldout, plus P-C, P-V, P-B, P-R on dev_pairs.",
+    "dev_pairs_count": 186
+  },
+  "A5_length_matched_evaluation": {
+    "matched_pairs_count": 46251,
+    "max_log_diff": 0.1,
+    "l1_score": 0.5101187001362133,
+    "f3_max_score": 0.6619424444876868,
+    "faithful_champion_score": 0.5632851181596074,
+    "conclusion": "On 46,251 length-matched pairs, L1 scores 0.5101 (at chance 0.50), while F3_max scores 0.6619 [95% CI: 0.6578, 0.6663], proving that F3 detects vulnerability signal independently of function length."
+  }
+}

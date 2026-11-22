@@ -1,0 +1,37 @@
+{
+  "version": "phase15_model_b_v1.0",
+  "n_total_tasks": 150,
+  "n_total_units": 600,
+  "splits": {
+    "train": {
+      "file": "model_b_p15_train.json",
+      "sha256": "4e55c2debabf10c577e53f0dc923662ce082b001b2e38c1574137ea4546246a1",
+      "n_tasks": 105,
+      "n_samples": 420,
+      "vuln_samples": 210,
+      "safe_samples": 210,
+      "balance": "50.0% / 50.0%"
+    },
+    "val": {
+      "file": "model_b_p15_val.json",
+      "sha256": "0ea56f4b848547e231598bc79e2e0918869d4eb0b8ee16aaf72fbee641a1d071",
+      "n_tasks": 22,
+      "n_samples": 88,
+      "vuln_samples": 44,
+      "safe_samples": 44,
+      "balance": "50.0% / 50.0%"
+    },
+    "test": {
+      "file": "model_b_p15_test.json",
+      "sha256": "2bae76d31ecb6415331893f15c82394378ecdc8ae9b8eab782e61e239297caab",
+      "n_tasks": 23,
+      "n_samples": 92,
+      "vuln_samples": 46,
+      "safe_samples": 46,
+      "balance": "50.0% / 50.0%"
+    }
+  },
+  "cwe_distribution": {},
+  "provenance_distribution": {},
+  "total_distinct_cwes": 50
+}

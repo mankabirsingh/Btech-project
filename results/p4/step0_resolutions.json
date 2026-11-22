@@ -1,0 +1,113 @@
+{
+  "metadata": {
+    "timestamp": "2026-11-20 10:22:35 UTC",
+    "runtime_seconds": 351.23,
+    "n_resamples": 2000
+  },
+  "investigation_0_1": {
+    "faithful_phase15_recipe": {
+      "source_files": [
+        "scripts/phase15_train_model_a.py:320-324, 377",
+        "scripts/p2/evaluate_reference_p2.py:70-75"
+      ],
+      "scaler_scope": "cxx28_features_only (28 dims)",
+      "embedding_scope": "raw_unscaled_codebert (1536 dims)",
+      "dev_auroc": 0.7109237073016488,
+      "dev_length_stratified_auroc": 0.6074411830140658,
+      "dev_cpp_auroc": 0.6894792281681069
+    },
+    "p3_n0_recipe": {
+      "source_files": [
+        "scripts/p3/eval_protocol.py:120-123",
+        "scripts/p3/step2_label_noise.py:90-94"
+      ],
+      "scaler_scope": "global_all_features (1564 dims)",
+      "dev_auroc": 0.6968632979361915,
+      "dev_length_stratified_auroc": 0.605649881055505,
+      "dev_cpp_auroc": 0.6516591970371961
+    },
+    "root_cause_explanation": "In Phase 15 and P2, StandardScaler was fit solely on the 28 modern C++ structural features, leaving the 1536 CodeBERT dense embedding features in their natural unscaled geometry. In P3, StandardScaler was fit globally across all 1564 features. Standardizing dense transformer embeddings distorts representation geometry by scaling low-variance embedding noise dimensions up, which degraded dev AUROC by 0.0141 (from 0.7109 to 0.6969). The faithful Phase 15 recipe is 0.7109."
+  },
+  "draw_variance_0_2": {
+    "dev_auroc_mean": 0.7008525763205126,
+    "dev_auroc_std": 0.006675245357465723,
+    "dev_ls_auroc_mean": 0.5979352855643866,
+    "dev_ls_auroc_std": 0.009089110684765356,
+    "dev_cpp_auroc_mean": 0.6630749825559553,
+    "dev_cpp_auroc_std": 0.012096168559909283,
+    "seeds": [
+      {
+        "seed": 0,
+        "dev_auroc": 0.7102235963379038,
+        "dev_length_stratified_auroc": 0.6107867733903156,
+        "dev_cpp_auroc": 0.6742056250335463
+      },
+      {
+        "seed": 1,
+        "dev_auroc": 0.6999887279573009,
+        "dev_length_stratified_auroc": 0.5931094761351899,
+        "dev_cpp_auroc": 0.6647053298266331
+      },
+      {
+        "seed": 2,
+        "dev_auroc": 0.6935351175366633,
+        "dev_length_stratified_auroc": 0.5872716140730182,
+        "dev_cpp_auroc": 0.6456175191884495
+      },
+      {
+        "seed": 3,
+        "dev_auroc": 0.6960493686192186,
+        "dev_length_stratified_auroc": 0.5957325522304362,
+        "dev_cpp_auroc": 0.6738768718801997
+      },
+      {
+        "seed": 4,
+        "dev_auroc": 0.7044660711514759,
+        "dev_length_stratified_auroc": 0.6027760119929734,
+        "dev_cpp_auroc": 0.6569695668509474
+      }
+    ],
+    "comparison_vs_label_variants": {
+      "n0_ls_auroc": 0.605649881055505,
+      "n1_ls_auroc": 0.5833122978975351,
+      "n2_ls_auroc": 0.6152490151272481,
+      "delta_n1_vs_n0": -0.022337583157969854,
+      "delta_n2_vs_n0": 0.009599134071743065,
+      "draw_std_ls_auroc": 0.009089110684765356,
+      "n2_exceeds_draw_std": true,
+      "n1_exceeds_draw_std": true
+    }
+  },
+  "recomputed_h3_table_0_4": {
+    "candidate_id": "H3",
+    "classifier": "TwoLayerMLP",
+    "description": "2-layer MLP on R2 (hidden=256, dropout=0.3, AdamW, 5 seeds)",
+    "cv_description": "Cross-validation GroupKFold OOF AUROC (macro over 5 folds per seed)",
+    "dev_seed_dispersion": {
+      "dev_auroc_mean": 0.7042412158581539,
+      "dev_auroc_std": 0.014083510567274164,
+      "dev_ls_auroc_mean": 0.6014211624658109,
+      "dev_ls_auroc_std": 0.015647424268954612,
+      "dev_cpp_auroc_mean": 0.6707007138639902,
+      "dev_cpp_auroc_std": 0.03659055378874339
+    },
+    "dev_ensemble_metrics": {
+      "dev_auroc": 0.7118412076603045,
+      "dev_auroc_ci_95": [
+        0.6903642882656572,
+        0.733183338310599
+      ],
+      "dev_length_stratified_auroc": 0.6058982551669608,
+      "dev_length_stratified_ci_95": [
+        0.5799650879715308,
+        0.6341584575052901
+      ],
+      "dev_cpp_auroc": 0.6763660028983952,
+      "dev_cpp_auroc_ci_95": [
+        0.6354649173420645,
+        0.7120253207020557
+      ],
+      "dev_auprc": 0.4870293625779685
+    }
+  }
+}

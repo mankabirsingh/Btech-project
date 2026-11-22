@@ -1,0 +1,157 @@
+{
+  "metadata": {
+    "timestamp": "2026-11-19 15:51:07 UTC",
+    "total_runtime_seconds": 12543.19,
+    "device": "mps",
+    "model": "microsoft/codebert-base"
+  },
+  "datasets": {
+    "train_minus_dev": {
+      "dataset_sha256": "57340bfd48c29815c873827229b905e32c78a4141081d5eda3c443d503c4437d",
+      "sample_count": 25000,
+      "files": {
+        "emb_codebert_256": {
+          "path": "data/cache/emb_codebert_256_57340bfd48c29815c873827229b905e32c78a4141081d5eda3c443d503c4437d.npy",
+          "shape": [
+            25000,
+            1536
+          ],
+          "dtype": "float32",
+          "runtime_s": 0.1
+        },
+        "emb_codebert_chunked_mean_256": {
+          "path": "data/cache/emb_codebert_chunked_mean_256_57340bfd48c29815c873827229b905e32c78a4141081d5eda3c443d503c4437d.npy",
+          "shape": [
+            25000,
+            1536
+          ],
+          "dtype": "float32",
+          "runtime_s": 12271.14
+        },
+        "emb_codebert_chunked_max_256": {
+          "path": "data/cache/emb_codebert_chunked_max_256_57340bfd48c29815c873827229b905e32c78a4141081d5eda3c443d503c4437d.npy",
+          "shape": [
+            25000,
+            1536
+          ],
+          "dtype": "float32",
+          "runtime_s": 12271.14
+        },
+        "feat_cxx28": {
+          "path": "data/cache/feat_cxx28_57340bfd48c29815c873827229b905e32c78a4141081d5eda3c443d503c4437d.npy",
+          "shape": [
+            25000,
+            28
+          ],
+          "dtype": "float32"
+        },
+        "feat_cxx38": {
+          "path": "data/cache/feat_cxx38_57340bfd48c29815c873827229b905e32c78a4141081d5eda3c443d503c4437d.npy",
+          "shape": [
+            25000,
+            38
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    "dev_heldout": {
+      "dataset_sha256": "c749c38c040c36f4d03d0b6a516e2d063c8d7c681a43d9bd5b82f02683cb6201",
+      "sample_count": 2543,
+      "files": {
+        "emb_codebert_256": {
+          "path": "data/cache/emb_codebert_256_c749c38c040c36f4d03d0b6a516e2d063c8d7c681a43d9bd5b82f02683cb6201.npy",
+          "shape": [
+            2543,
+            1536
+          ],
+          "dtype": "float32",
+          "runtime_s": 21.02
+        },
+        "emb_codebert_chunked_mean_256": {
+          "path": "data/cache/emb_codebert_chunked_mean_256_c749c38c040c36f4d03d0b6a516e2d063c8d7c681a43d9bd5b82f02683cb6201.npy",
+          "shape": [
+            2543,
+            1536
+          ],
+          "dtype": "float32",
+          "runtime_s": 97.77
+        },
+        "emb_codebert_chunked_max_256": {
+          "path": "data/cache/emb_codebert_chunked_max_256_c749c38c040c36f4d03d0b6a516e2d063c8d7c681a43d9bd5b82f02683cb6201.npy",
+          "shape": [
+            2543,
+            1536
+          ],
+          "dtype": "float32",
+          "runtime_s": 97.77
+        },
+        "feat_cxx28": {
+          "path": "data/cache/feat_cxx28_c749c38c040c36f4d03d0b6a516e2d063c8d7c681a43d9bd5b82f02683cb6201.npy",
+          "shape": [
+            2543,
+            28
+          ],
+          "dtype": "float32"
+        },
+        "feat_cxx38": {
+          "path": "data/cache/feat_cxx38_c749c38c040c36f4d03d0b6a516e2d063c8d7c681a43d9bd5b82f02683cb6201.npy",
+          "shape": [
+            2543,
+            38
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    "test_clean": {
+      "dataset_sha256": "ebd95dfc837f12264dd0fd8126563d00ede27908bca38fe46611e25d7bb45bbc",
+      "sample_count": 3169,
+      "files": {
+        "emb_codebert_256": {
+          "path": "data/cache/emb_codebert_256_ebd95dfc837f12264dd0fd8126563d00ede27908bca38fe46611e25d7bb45bbc.npy",
+          "shape": [
+            3169,
+            1536
+          ],
+          "dtype": "float32",
+          "runtime_s": 25.86
+        },
+        "emb_codebert_chunked_mean_256": {
+          "path": "data/cache/emb_codebert_chunked_mean_256_ebd95dfc837f12264dd0fd8126563d00ede27908bca38fe46611e25d7bb45bbc.npy",
+          "shape": [
+            3169,
+            1536
+          ],
+          "dtype": "float32",
+          "runtime_s": 125.15
+        },
+        "emb_codebert_chunked_max_256": {
+          "path": "data/cache/emb_codebert_chunked_max_256_ebd95dfc837f12264dd0fd8126563d00ede27908bca38fe46611e25d7bb45bbc.npy",
+          "shape": [
+            3169,
+            1536
+          ],
+          "dtype": "float32",
+          "runtime_s": 125.15
+        },
+        "feat_cxx28": {
+          "path": "data/cache/feat_cxx28_ebd95dfc837f12264dd0fd8126563d00ede27908bca38fe46611e25d7bb45bbc.npy",
+          "shape": [
+            3169,
+            28
+          ],
+          "dtype": "float32"
+        },
+        "feat_cxx38": {
+          "path": "data/cache/feat_cxx38_ebd95dfc837f12264dd0fd8126563d00ede27908bca38fe46611e25d7bb45bbc.npy",
+          "shape": [
+            3169,
+            38
+          ],
+          "dtype": "float32"
+        }
+      }
+    }
+  }
+}

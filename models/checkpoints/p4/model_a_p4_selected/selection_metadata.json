@@ -1,0 +1,15 @@
+{
+  "selected": true,
+  "candidate": "F3_max",
+  "data_variant": "D2 debiased (inverse-propensity weighted)",
+  "run": "F3",
+  "inference_pooling": "max",
+  "operating_threshold_10fpr": 0.8866,
+  "source_checkpoint": "/Users/mankabir/Desktop/Btech project/models/checkpoints/p4/F3_unixcoder_debiased_seed7/best_model.pt",
+  "dev_length_stratified_auroc": 0.6664639400086714,
+  "delta_vs_l1_ls_auroc": 0.07657003486633096,
+  "p_value_holm_vs_l1": 0.0,
+  "dev_auroc": 0.7178340550368464,
+  "pair_correct": 0.553763440860215,
+  "working_model_fallback": "R2"
+}

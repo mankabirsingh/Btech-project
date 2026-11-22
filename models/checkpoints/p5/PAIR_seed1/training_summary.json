@@ -1,0 +1,9 @@
+{
+  "run_name": "PAIR_seed1",
+  "seed": 1,
+  "total_opt_steps": 2000,
+  "best_composite_val": 0.6263672870487731,
+  "dev_ls_auroc": 0.6296426891894268,
+  "dev_auroc": 0.659002775557527,
+  "wall_time_s": 3783.83
+}

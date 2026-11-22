@@ -1,0 +1,92 @@
+{
+  "preregistration_metadata": {
+    "title": "Phase 16 - Prompt 5 Model A Multi-Seed Confirmation, Pairwise Regularisation, and Model Selection Protocol",
+    "timestamp_utc": "2026-11-20 16:55:00 UTC",
+    "status": "LOCKED_PRIOR_TO_TRAINING",
+    "constraints": [
+      "Use ONLY train_minus_dev (and source pool for pairs) and dev_heldout.",
+      "Never call load_locked_test or touch locked test set.",
+      "All hypothesis tests use 2000-resample bootstrap grouped by commit.",
+      "Formatting convention: p-values < 0.0005 formatted as '<0.0005'."
+    ]
+  },
+  "planned_runs": {
+    "C1": {
+      "recipe": "D2 (UniXcoder fine-tuning with inverse-propensity length debiasing)",
+      "seeds": [1, 2, 3],
+      "existing_seeds": [42, 7],
+      "total_seed_pool": [42, 7, 1, 2, 3],
+      "architecture": "microsoft/unixcoder-base + linear classification head",
+      "pooling": "max",
+      "max_sequence_length": 512,
+      "batch_size": 16,
+      "learning_rate": 2e-5,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "loss": "Inverse-propensity weighted BCE",
+      "max_epochs": 3,
+      "early_stopping_metric": "fold0_ls_auroc"
+    },
+    "C2": {
+      "recipe": "PAIR (Pairwise-regularised fine-tuning with hard vulnerable/fixed pairs)",
+      "seeds": [42, 7, 1],
+      "data_sources": {
+        "train_pairs": "data/splits/p5/train_pairs.parquet",
+        "fold0_pairs": "data/splits/p5/fold0_pairs.parquet",
+        "cleaning": "Excluded all dev projects, test projects, and MinHash >= 0.8 near-duplicates with dev and test sets"
+      },
+      "batch_composition": {
+        "weighted_samples_per_step": 12,
+        "pairs_per_step": 2,
+        "functions_per_pair": 2,
+        "total_batch_size": 16
+      },
+      "loss_function": {
+        "definition": "weighted_bce + 1.0 * mean(softplus(-(logit_v - logit_f)))",
+        "margin": "softplus ranking penalty driving logit_v > logit_f"
+      },
+      "early_stopping_metric": "0.5 * (fold0_ls_auroc + fold0_pair_correct) evaluated on fold0_pairs"
+    },
+    "C3": {
+      "recipe": "N0 (Frozen CodeBERT CLS+mean + selective cxx28, C=0.01 balanced)",
+      "seeds": [7],
+      "existing_seeds": [42],
+      "total_seed_pool": [42, 7],
+      "purpose": "Negative control verifying frozen model draw and optimization variance"
+    }
+  },
+  "ensemble_rule": {
+    "method": "Unweighted arithmetic average of predicted logits across all seeds in the recipe family",
+    "formula": "p_ensemble = sigmoid(mean([logit_seed_k for k in seeds]))",
+    "ensembles": {
+      "D2_ensemble": "Average of 5 seeds (42, 7, 1, 2, 3)",
+      "PAIR_ensemble": "Average of 3 seeds (42, 7, 1)",
+      "N0_ensemble": "Average of 2 seeds (42, 7)"
+    }
+  },
+  "mechanical_model_selection_rule": {
+    "candidates": [
+      "D2_ensemble",
+      "PAIR_ensemble",
+      "N0_ensemble"
+    ],
+    "gate_1": {
+      "metric": "length_matched_auroc",
+      "condition": "Must beat L1 baseline on length_matched_auroc with Holm-adjusted p < 0.05 (2000-resample cluster bootstrap by commit on dev_heldout)",
+      "rationale": "Verifies that the model learns genuine vulnerability semantics beyond function length token count."
+    },
+    "gate_2": {
+      "metric": "dev_ls_auroc",
+      "condition": "Must not be significantly worse than Faithful Champion P2 (C=0.01) on dev LS-AUROC (p >= 0.05)",
+      "rationale": "Ensures no regression on length-stratified security detection relative to the Phase 15 baseline."
+    },
+    "selection_objective": {
+      "composite_metric": "0.5 * (length_matched_auroc + pair_correct)",
+      "rule": "Among all candidates passing Gate 1 and Gate 2, select the candidate that achieves the maximum composite metric."
+    },
+    "tie_breaker": {
+      "rule": "If PAIR_ensemble and D2_ensemble composite scores fall within each other's 95% bootstrap confidence interval, select D2_ensemble.",
+      "rationale": "Occam's razor: prefer the simpler single-sample debiasing recipe over the pairwise objective when performance is statistically indistinguishable."
+    }
+  }
+}

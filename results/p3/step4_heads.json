@@ -1,0 +1,332 @@
+{
+  "metadata": {
+    "timestamp": "2026-11-20 05:54:41 UTC",
+    "runtime_seconds": 107.1,
+    "representation_used": "R2"
+  },
+  "heads": {
+    "H1": {
+      "candidate_id": "H1",
+      "description": "Logistic Regression on R2 (C*=0.003)",
+      "classifier": "LogisticRegression",
+      "category": "Representation",
+      "C_chosen": 0.003,
+      "cv_fold_aurocs": [
+        0.6342805101777215,
+        0.7791665616368658,
+        0.7257861247789406,
+        0.6985683987274655,
+        0.6834370995525492
+      ],
+      "cv_mean_auroc": 0.7042477389747086,
+      "cv_std_auroc": 0.047827780162722884,
+      "oof_threshold_info": {
+        "threshold": 0.6884,
+        "target_fpr": 0.1,
+        "target_prevalence": 0.3,
+        "actual_fpr": 0.1,
+        "recall_at_target_fpr": 0.2777,
+        "precision_at_target_fpr": 0.5434
+      },
+      "oof_threshold": 0.6884,
+      "dev_auroc": 0.711091690015898,
+      "dev_auroc_ci_95": [
+        0.6880052656542321,
+        0.7329221416588348
+      ],
+      "dev_length_stratified_auroc": 0.6097695107641894,
+      "dev_length_stratified_ci_95": [
+        0.583475221040891,
+        0.6379010626617514
+      ],
+      "dev_cpp_auroc": 0.6768893242445387,
+      "dev_cpp_auroc_ci_95": [
+        0.6367643309537867,
+        0.7130806854167785
+      ],
+      "dev_auprc": 0.49455864655047604,
+      "dev_recall_at_10fpr": 0.125810635538262,
+      "dev_precision_at_10fpr": 0.6178343949044586,
+      "dev_fpr_at_10fpr": 0.033860045146726865,
+      "diff_vs_champion": {
+        "overall_auroc": {
+          "score_a": 0.6968632979361915,
+          "score_b": 0.711091690015898,
+          "diff_observed": 0.014228392079706498,
+          "ci_lower": 0.0005568350215652087,
+          "ci_upper": 0.029040193176419263,
+          "p_value": 0.048,
+          "significant_p05": true
+        },
+        "length_stratified_auroc": {
+          "score_a": 0.605649881055505,
+          "score_b": 0.6097695107641894,
+          "diff_observed": 0.0041196297086844025,
+          "ci_lower": -0.017759817118090614,
+          "ci_upper": 0.02303749595024178,
+          "p_value": 0.654,
+          "significant_p05": false
+        },
+        "cpp_auroc": {
+          "score_a": 0.6516591970371961,
+          "score_b": 0.6768893242445387,
+          "diff_observed": 0.025230127207342634,
+          "ci_lower": 0.0067282736922289225,
+          "ci_upper": 0.05028484778371812,
+          "p_value": 0.024,
+          "significant_p05": true
+        }
+      },
+      "runtime_seconds": 32.92,
+      "c_tuning": {
+        "0.001": {
+          "macro_mean_auroc": 0.7022823510009237,
+          "std_auroc": 0.05068454966138006,
+          "fold_aurocs": [
+            0.6285457833277143,
+            0.7844130209551713,
+            0.7197337789174053,
+            0.6927904356952592,
+            0.6859287361090687
+          ]
+        },
+        "0.003": {
+          "macro_mean_auroc": 0.7042477389747086,
+          "std_auroc": 0.047827780162722884,
+          "fold_aurocs": [
+            0.6342805101777215,
+            0.7791665616368658,
+            0.7257861247789406,
+            0.6985683987274655,
+            0.6834370995525492
+          ]
+        },
+        "0.01": {
+          "macro_mean_auroc": 0.7023067884007148,
+          "std_auroc": 0.04628033809428826,
+          "fold_aurocs": [
+            0.6351493710347607,
+            0.7737338583913567,
+            0.7250557300930953,
+            0.6991629837132751,
+            0.6784319987710858
+          ]
+        },
+        "0.03": {
+          "macro_mean_auroc": 0.6979377259866386,
+          "std_auroc": 0.04561555778826207,
+          "fold_aurocs": [
+            0.6321532809961864,
+            0.7685665527421127,
+            0.7199590093454585,
+            0.6955060817258084,
+            0.6735037051236267
+          ]
+        },
+        "0.1": {
+          "macro_mean_auroc": 0.6924415337562695,
+          "std_auroc": 0.045189561651971466,
+          "fold_aurocs": [
+            0.6272124558323227,
+            0.7624441047455113,
+            0.7136941062779613,
+            0.6909380616801896,
+            0.6679189402453627
+          ]
+        },
+        "0.3": {
+          "macro_mean_auroc": 0.6888106708490744,
+          "std_auroc": 0.04515547847918464,
+          "fold_aurocs": [
+            0.6236631040627696,
+            0.7588818685275218,
+            0.7091237252984464,
+            0.6886390678433048,
+            0.663745588513329
+          ]
+        },
+        "1.0": {
+          "macro_mean_auroc": 0.6866712525233802,
+          "std_auroc": 0.044848914517497104,
+          "fold_aurocs": [
+            0.6221439548843868,
+            0.7563691810613689,
+            0.7060048292997195,
+            0.687864166276747,
+            0.660974131094679
+          ]
+        }
+      },
+      "feature_dim": 1564
+    },
+    "H2": {
+      "candidate_id": "H2",
+      "description": "LightGBM on R2 (num_leaves=31, lr=0.05, n_est=22)",
+      "category": "Classifier Head",
+      "classifier": "LightGBM",
+      "tuning": {
+        "15": {
+          "macro_mean_auroc": 0.6915552332768048,
+          "std_auroc": 0.056998593904980945,
+          "fold_aurocs": [
+            0.6084680219448227,
+            0.7867854635330377,
+            0.6762283721037676,
+            0.6891511567163925,
+            0.6971431520860031
+          ],
+          "mean_best_iteration": 21
+        },
+        "31": {
+          "macro_mean_auroc": 0.6945006893553356,
+          "std_auroc": 0.05579396943529826,
+          "fold_aurocs": [
+            0.6131147899873464,
+            0.7881547577857588,
+            0.6816700772071941,
+            0.6931535377806656,
+            0.6964102840157133
+          ],
+          "mean_best_iteration": 22
+        }
+      },
+      "cv_mean_auroc": 0.6945006893553356,
+      "cv_std_auroc": 0.05579396943529826,
+      "oof_threshold_info": {
+        "threshold": 0.5943,
+        "target_fpr": 0.1,
+        "target_prevalence": 0.3,
+        "actual_fpr": 0.1,
+        "recall_at_target_fpr": 0.2468,
+        "precision_at_target_fpr": 0.514
+      },
+      "oof_threshold": 0.5943,
+      "dev_auroc": 0.7069806882094434,
+      "dev_auroc_ci_95": [
+        0.6859853192623108,
+        0.7287810200759473
+      ],
+      "dev_length_stratified_auroc": 0.578160071614713,
+      "dev_length_stratified_ci_95": [
+        0.5514944048088833,
+        0.6045556178101805
+      ],
+      "dev_cpp_auroc": 0.6952827277118782,
+      "dev_cpp_auroc_ci_95": [
+        0.6575813664054533,
+        0.7311897844989533
+      ],
+      "dev_auprc": 0.4783803095967818,
+      "dev_recall_at_10fpr": 0.24773022049286642,
+      "dev_precision_at_10fpr": 0.5335195530726257,
+      "dev_fpr_at_10fpr": 0.09424379232505643,
+      "diff_vs_champion": {
+        "overall_auroc": {
+          "score_a": 0.6968632979361915,
+          "score_b": 0.7069806882094434,
+          "diff_observed": 0.01011739027325187,
+          "ci_lower": -0.014119832487674632,
+          "ci_upper": 0.029210400165999836,
+          "p_value": 0.364,
+          "significant_p05": false
+        },
+        "length_stratified_auroc": {
+          "score_a": 0.605649881055505,
+          "score_b": 0.578160071614713,
+          "diff_observed": -0.027489809440792046,
+          "ci_lower": -0.08008426811423541,
+          "ci_upper": 0.009556726240567548,
+          "p_value": 0.142,
+          "significant_p05": false
+        },
+        "cpp_auroc": {
+          "score_a": 0.6516591970371961,
+          "score_b": 0.6952827277118782,
+          "diff_observed": 0.043623530674682054,
+          "ci_lower": 0.02638030794839791,
+          "ci_upper": 0.08992476200751094,
+          "p_value": 0.0,
+          "significant_p05": true
+        }
+      }
+    },
+    "H3": {
+      "candidate_id": "H3",
+      "description": "2-layer MLP on R2 (hidden=256, dropout=0.3, ensemble of 5 seeds)",
+      "category": "Classifier Head",
+      "classifier": "TwoLayerMLP",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "seed_stats": {
+        "dev_auroc_mean": 0.7042412158581539,
+        "dev_auroc_std": 0.014083510567274164,
+        "dev_ls_auroc_mean": 0.6014211624658109,
+        "dev_ls_auroc_std": 0.015647424268954612,
+        "dev_cpp_auroc_mean": 0.6707007138639902,
+        "dev_cpp_auroc_std": 0.03659055378874339
+      },
+      "oof_threshold_info": {
+        "threshold": 0.7001,
+        "target_fpr": 0.1,
+        "target_prevalence": 0.3,
+        "actual_fpr": 0.1,
+        "recall_at_target_fpr": 0.3212,
+        "precision_at_target_fpr": 0.5792
+      },
+      "oof_threshold": 0.7001,
+      "dev_auroc": 0.7118412076603045,
+      "dev_auroc_ci_95": [
+        0.6903642882656572,
+        0.733183338310599
+      ],
+      "dev_length_stratified_auroc": 0.6058982551669608,
+      "dev_length_stratified_ci_95": [
+        0.5799650879715308,
+        0.6341584575052901
+      ],
+      "dev_cpp_auroc": 0.6763660028983952,
+      "dev_cpp_auroc_ci_95": [
+        0.6354649173420645,
+        0.7120253207020557
+      ],
+      "dev_auprc": 0.4870293625779685,
+      "dev_recall_at_10fpr": 0.10376134889753567,
+      "dev_precision_at_10fpr": 0.6349206349206349,
+      "dev_fpr_at_10fpr": 0.025959367945823927,
+      "diff_vs_champion": {
+        "overall_auroc": {
+          "score_a": 0.6968632979361915,
+          "score_b": 0.7118412076603045,
+          "diff_observed": 0.014977909724112948,
+          "ci_lower": -0.008547309359353168,
+          "ci_upper": 0.03305173572668607,
+          "p_value": 0.21,
+          "significant_p05": false
+        },
+        "length_stratified_auroc": {
+          "score_a": 0.605649881055505,
+          "score_b": 0.6058982551669608,
+          "diff_observed": 0.0002483741114558402,
+          "ci_lower": -0.039496747090437184,
+          "ci_upper": 0.026050336071590973,
+          "p_value": 0.926,
+          "significant_p05": false
+        },
+        "cpp_auroc": {
+          "score_a": 0.6516591970371961,
+          "score_b": 0.6763660028983952,
+          "diff_observed": 0.02470680586119911,
+          "ci_lower": 0.0034486532215554696,
+          "ci_upper": 0.06302172460849095,
+          "p_value": 0.034,
+          "significant_p05": true
+        }
+      }
+    }
+  }
+}

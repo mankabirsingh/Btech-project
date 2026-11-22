@@ -1,0 +1,99 @@
+{
+  "model_name": "Model A Final (D2 UniXcoder 5-Seed Ensemble)",
+  "timestamp": "2026-11-21 13:59:22 UTC",
+  "architecture": "microsoft/unixcoder-base (12-layer Transformer, 768 hidden, 12 heads)",
+  "recipe": "D2: UniXcoder fine-tuning with inverse-propensity token length debiasing weights",
+  "ensemble_rule": "Arithmetic average of predicted logits across 5 seeds: sigmoid(mean([logit_k for k in [42, 7, 1, 2, 3]]))",
+  "seeds": [
+    42,
+    7,
+    1,
+    2,
+    3
+  ],
+  "inference_strategy": "Sliding window (512 token window, 256 stride, max-pooling per function)",
+  "operating_threshold_top10": 0.6443848013877869,
+  "dev_heldout_metrics": {
+    "dev_auroc": 0.7371465775443343,
+    "dev_auroc_ci_95": [
+      0.7160750857114416,
+      0.7580873429599506
+    ],
+    "dev_ls_auroc": 0.6573913834923194,
+    "dev_ls_auroc_ci_95": [
+      0.6322040154195003,
+      0.6838265397657882
+    ],
+    "dev_lsauroc10": 0.6381405522616573,
+    "dev_lsauroc10_ci_95": [
+      0.6112664565236755,
+      0.6653487079395879
+    ],
+    "length_matched_auroc": 0.6374024345419559,
+    "length_matched_ci_95": [
+      0.6329795571987633,
+      0.6418028799377311
+    ],
+    "dev_cpp_auroc": 0.7144242123342815,
+    "pair_correct": 0.5268817204301075,
+    "pair_correct_ci_95": [
+      0.45698924731182794,
+      0.6021505376344086
+    ],
+    "alert_budget_top10_overall": {
+      "precision": 0.7204724409448819,
+      "recall": 0.23735408560311283,
+      "lift": 2.3763442507429766,
+      "prevalence": 0.3031852143138026
+    },
+    "alert_budget_top10_per_project": {
+      "qpdf": {
+        "n_total": 543,
+        "prevalence": 0.3848987108655617,
+        "precision": 0.7037037037037037,
+        "recall": 0.18181818181818182,
+        "lift": 1.8282828282828283
+      },
+      "openexr": {
+        "n_total": 390,
+        "prevalence": 0.12307692307692308,
+        "precision": 0.28205128205128205,
+        "recall": 0.22916666666666666,
+        "lift": 2.2916666666666665
+      },
+      "tcpdump": {
+        "n_total": 768,
+        "prevalence": 0.3854166666666667,
+        "precision": 0.8051948051948052,
+        "recall": 0.20945945945945946,
+        "lift": 2.089154089154089
+      },
+      "radare2": {
+        "n_total": 842,
+        "prevalence": 0.2589073634204275,
+        "precision": 0.6547619047619048,
+        "recall": 0.25229357798165136,
+        "lift": 2.528942769768458
+      }
+    },
+    "paired_alert_dev_pairs": {
+      "P-C": 0.06989247311827956,
+      "P-V": 0.26344086021505375,
+      "P-B": 0.6397849462365591,
+      "P-R": 0.026881720430107527
+    }
+  },
+  "comparisons_vs_baselines": {
+    "delta_vs_l1_length_matched_auroc": 0.1272837344057426,
+    "p_holm_vs_l1_length_matched_auroc": "<0.0005",
+    "delta_vs_champion_ls_auroc": 0.049950200478253604,
+    "p_raw_vs_champion_ls_auroc": "0.0500"
+  },
+  "weight_files": {
+    "d2_seed42.pt": "1c7522cb5f25b94caaef35cb3e5e3d524cd54a218fec245f06bf67442e720085",
+    "d2_seed7.pt": "55820e8d280723ba650cbbd632ea0b10c3e01e6c86989017b19b602fe0045c3e",
+    "d2_seed1.pt": "63ffc9a40449e3e87c823987cddae1a9af46fee180403f1d2aaebba8aa8b33f7",
+    "d2_seed2.pt": "60fc387baa39832fd9f2e1e72eb668b12d1c6c23c071d08c2d1f601c69282358",
+    "d2_seed3.pt": "4fcafd146820f7ef418485da28a792de3e5599e2d9d0068d81da4012ef7884b1"
+  }
+}

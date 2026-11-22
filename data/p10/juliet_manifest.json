@@ -1,0 +1,44 @@
+{
+  "dataset_name": "juliet_extracted_40k",
+  "file_name": "juliet_extracted_40k.parquet",
+  "sha256": "297546bb1fe05285031f194229904f2ae1f07ff28a6a3d7c2192eb65cbb6ce55",
+  "n_functions": 27626,
+  "n_testcases": 9059,
+  "n_cwes": 82,
+  "vuln_balance": {
+    "vulnerable": 9059,
+    "safe": 18567,
+    "prevalence": 0.3279157315572287
+  },
+  "splits": {
+    "S_rand": {
+      "train": 22153,
+      "val": 2737,
+      "test": 2736
+    },
+    "S_flow": {
+      "train": 16733,
+      "test": 6702,
+      "val": 4191
+    },
+    "S_cwe": {
+      "train": 17722,
+      "test": 5441,
+      "val": 4463
+    }
+  },
+  "held_out_10_cwes": [
+    "CWE127",
+    "CWE190",
+    "CWE36",
+    "CWE401",
+    "CWE415",
+    "CWE680",
+    "CWE690",
+    "CWE758",
+    "CWE78",
+    "CWE835"
+  ],
+  "leak_check_unit_test": "PASSED (0 forbidden substrings found)",
+  "timestamp": "2026-11-21 21:03:06"
+}

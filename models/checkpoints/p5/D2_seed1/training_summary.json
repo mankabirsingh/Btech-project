@@ -1,0 +1,9 @@
+{
+  "run_name": "D2_seed1",
+  "seed": 1,
+  "total_opt_steps": 1000,
+  "best_fold0_ls_auroc": 0.6392119399683556,
+  "dev_ls_auroc": 0.660597826940365,
+  "dev_auroc": 0.7406032153135823,
+  "wall_time_s": 2856.28
+}

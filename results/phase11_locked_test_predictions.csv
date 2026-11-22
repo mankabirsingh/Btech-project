@@ -1,0 +1,17 @@
+example_id,task_id,cwe,cwe_name,author_type,ai_involvement,ground_truth_vuln,model_a_prob,model_a_pred,model_b_prob,model_b_pred,model_b_triage_score,model_b_fallback_prob,checkpoint_used
+p11_task_037_v1_human_vulnerable,p11_task_037_ring_buffer_pop,CWE-193,Off-by-one Error,human,0.0,1,0.0769,0,0.3506,0,0.3506,0.0769,phase11_model_b_fusion_best.pkl
+p11_task_037_v2_ai_secure,p11_task_037_ring_buffer_pop,CWE-193,Off-by-one Error,ai,1.0,0,0.1558,0,0.3616,0,0.5424,0.1558,phase11_model_b_fusion_best.pkl
+p11_task_037_v3_human_edit_of_ai_vulnerable,p11_task_037_ring_buffer_pop,CWE-193,Off-by-one Error,human_edit_of_ai,0.5,1,0.1292,0,0.4068,0,0.5084,0.1292,phase11_model_b_fusion_best.pkl
+p11_task_037_v4_ai_edit_of_human_secure,p11_task_037_ring_buffer_pop,CWE-193,Off-by-one Error,ai_edit_of_human,0.8,0,0.1263,0,0.3198,0,0.4478,0.1263,phase11_model_b_fusion_best.pkl
+p11_task_038_v1_human_secure,p11_task_038_sql_query_builder,CWE-89,Improper Neutralization of Special Elements used in an SQL Command,human,0.0,0,0.0321,0,0.2775,0,0.2775,0.0321,phase11_model_b_fusion_best.pkl
+p11_task_038_v2_ai_vulnerable,p11_task_038_sql_query_builder,CWE-89,Improper Neutralization of Special Elements used in an SQL Command,ai,1.0,1,0.52,1,0.5217,1,0.7826,0.52,phase11_model_b_fusion_best.pkl
+p11_task_038_v3_human_edit_of_ai_secure,p11_task_038_sql_query_builder,CWE-89,Improper Neutralization of Special Elements used in an SQL Command,human_edit_of_ai,0.5,0,0.042,0,0.3027,0,0.3783,0.042,phase11_model_b_fusion_best.pkl
+p11_task_038_v4_ai_edit_of_human_vulnerable,p11_task_038_sql_query_builder,CWE-89,Improper Neutralization of Special Elements used in an SQL Command,ai_edit_of_human,0.75,1,0.52,1,0.5019,1,0.6901,0.52,phase11_model_b_fusion_best.pkl
+p11_task_039_v1_human_vulnerable,p11_task_039_hash_table_lookup,CWE-476,NULL Pointer Dereference,human,0.0,1,0.0272,0,0.265,0,0.265,0.0272,phase11_model_b_fusion_best.pkl
+p11_task_039_v2_ai_secure,p11_task_039_hash_table_lookup,CWE-476,NULL Pointer Dereference,ai,1.0,0,0.1529,0,0.3597,0,0.5396,0.1529,phase11_model_b_fusion_best.pkl
+p11_task_039_v3_human_edit_of_ai_vulnerable,p11_task_039_hash_table_lookup,CWE-476,NULL Pointer Dereference,human_edit_of_ai,0.5,1,0.0505,0,0.3194,0,0.3992,0.0505,phase11_model_b_fusion_best.pkl
+p11_task_039_v4_ai_edit_of_human_secure,p11_task_039_hash_table_lookup,CWE-476,NULL Pointer Dereference,ai_edit_of_human,0.8,0,0.1078,0,0.3055,0,0.4277,0.1078,phase11_model_b_fusion_best.pkl
+p11_task_040_v1_human_secure,p11_task_040_image_header_parse,CWE-190,Integer Overflow or Wraparound,human,0.0,0,0.2258,0,0.4618,0,0.4618,0.2258,phase11_model_b_fusion_best.pkl
+p11_task_040_v2_ai_vulnerable,p11_task_040_image_header_parse,CWE-190,Integer Overflow or Wraparound,ai,1.0,1,0.85,1,0.6681,1,1.0022,0.85,phase11_model_b_fusion_best.pkl
+p11_task_040_v3_human_edit_of_ai_secure,p11_task_040_image_header_parse,CWE-190,Integer Overflow or Wraparound,human_edit_of_ai,0.5,0,0.52,1,0.5872,1,0.734,0.52,phase11_model_b_fusion_best.pkl
+p11_task_040_v4_ai_edit_of_human_vulnerable,p11_task_040_image_header_parse,CWE-190,Integer Overflow or Wraparound,ai_edit_of_human,0.8,1,0.0555,0,0.2532,0,0.3545,0.0555,phase11_model_b_fusion_best.pkl

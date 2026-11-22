@@ -1,0 +1,382 @@
+{
+  "metadata": {
+    "task": "Model B Reproducibility and Validity Audit",
+    "runtime_seconds": 8.24,
+    "timestamp": "2026-11-19 14:47:30"
+  },
+  "b1_reproduction": {
+    "n_units": 92,
+    "n_tasks": 23,
+    "n_positive": 46,
+    "auroc": 0.6618620037807184,
+    "auroc_ci_95_task_bootstrap": [
+      0.46540051984877134,
+      0.8426394139886578
+    ],
+    "auprc": 0.6661309434419332,
+    "precision_at_20pct": {
+      "k_caught": 13,
+      "n_inspected": 18,
+      "precision": 0.7222222222222222
+    }
+  },
+  "b2_ablation": {
+    "models": {
+      "(i) P_code only": {
+        "auroc": 0.46219281663516065,
+        "auroc_ci_95": [
+          0.35961720226843097,
+          0.5638055293005672
+        ]
+      },
+      "(ii) Provenance features only": {
+        "auroc": 0.6398865784499055,
+        "auroc_ci_95": [
+          0.4394671550094518,
+          0.818141540642722
+        ]
+      },
+      "(iii) Author role one-hot only": {
+        "auroc": 0.6086956521739131,
+        "auroc_ci_95": [
+          0.391304347826087,
+          0.782608695652174
+        ]
+      },
+      "(iv) Existing fusion": {
+        "auroc": 0.6618620037807184,
+        "auroc_ci_95": [
+          0.46540051984877134,
+          0.8426394139886578
+        ]
+      }
+    },
+    "delong_iv_vs_i": {
+      "auc1": 0.6618620037807184,
+      "auc2": 0.46219281663516076,
+      "delta": 0.1996691871455576,
+      "z_score": 2.187660199353695,
+      "p_value": 0.028694363260491993,
+      "significant_p05": true
+    }
+  },
+  "b4_label_rate_by_role": {
+    "train": {
+      "human": {
+        "n": 105,
+        "n_vulnerable": 44,
+        "vuln_rate": 0.41904761904761906,
+        "pct": 41.9
+      },
+      "ai": {
+        "n": 105,
+        "n_vulnerable": 61,
+        "vuln_rate": 0.580952380952381,
+        "pct": 58.1
+      },
+      "human_edit_of_ai": {
+        "n": 105,
+        "n_vulnerable": 44,
+        "vuln_rate": 0.41904761904761906,
+        "pct": 41.9
+      },
+      "ai_edit_of_human": {
+        "n": 105,
+        "n_vulnerable": 61,
+        "vuln_rate": 0.580952380952381,
+        "pct": 58.1
+      }
+    },
+    "val": {
+      "human": {
+        "n": 22,
+        "n_vulnerable": 10,
+        "vuln_rate": 0.45454545454545453,
+        "pct": 45.45
+      },
+      "ai": {
+        "n": 22,
+        "n_vulnerable": 12,
+        "vuln_rate": 0.5454545454545454,
+        "pct": 54.55
+      },
+      "human_edit_of_ai": {
+        "n": 22,
+        "n_vulnerable": 10,
+        "vuln_rate": 0.45454545454545453,
+        "pct": 45.45
+      },
+      "ai_edit_of_human": {
+        "n": 22,
+        "n_vulnerable": 12,
+        "vuln_rate": 0.5454545454545454,
+        "pct": 54.55
+      }
+    },
+    "test": {
+      "human": {
+        "n": 23,
+        "n_vulnerable": 9,
+        "vuln_rate": 0.391304347826087,
+        "pct": 39.13
+      },
+      "ai": {
+        "n": 23,
+        "n_vulnerable": 14,
+        "vuln_rate": 0.6086956521739131,
+        "pct": 60.87
+      },
+      "human_edit_of_ai": {
+        "n": 23,
+        "n_vulnerable": 9,
+        "vuln_rate": 0.391304347826087,
+        "pct": 39.13
+      },
+      "ai_edit_of_human": {
+        "n": 23,
+        "n_vulnerable": 14,
+        "vuln_rate": 0.6086956521739131,
+        "pct": 60.87
+      }
+    }
+  },
+  "b5_feature_ranges": {
+    "ai_involvement": {
+      "human": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai": {
+        "min": 1.0,
+        "max": 1.0,
+        "unique_values": [
+          1.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "human_edit_of_ai": {
+        "min": 0.5,
+        "max": 0.5,
+        "unique_values": [
+          0.5
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai_edit_of_human": {
+        "min": 0.7,
+        "max": 0.75,
+        "unique_values": [
+          0.7,
+          0.75
+        ],
+        "is_constant": false,
+        "flag": "VARIABLE"
+      }
+    },
+    "human_edit_count": {
+      "human": {
+        "min": 1.0,
+        "max": 1.0,
+        "unique_values": [
+          1.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "human_edit_of_ai": {
+        "min": 1.0,
+        "max": 2.0,
+        "unique_values": [
+          1.0,
+          2.0
+        ],
+        "is_constant": false,
+        "flag": "VARIABLE"
+      },
+      "ai_edit_of_human": {
+        "min": 0.0,
+        "max": 1.0,
+        "unique_values": [
+          0.0,
+          1.0
+        ],
+        "is_constant": false,
+        "flag": "VARIABLE"
+      }
+    },
+    "provenance_confidence": {
+      "human": {
+        "min": 1.0,
+        "max": 1.0,
+        "unique_values": [
+          1.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai": {
+        "min": 0.95,
+        "max": 0.95,
+        "unique_values": [
+          0.95
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "human_edit_of_ai": {
+        "min": 0.9,
+        "max": 0.9,
+        "unique_values": [
+          0.9
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai_edit_of_human": {
+        "min": 0.85,
+        "max": 0.9,
+        "unique_values": [
+          0.85,
+          0.9
+        ],
+        "is_constant": false,
+        "flag": "VARIABLE"
+      }
+    },
+    "is_pure_ai": {
+      "human": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai": {
+        "min": 1.0,
+        "max": 1.0,
+        "unique_values": [
+          1.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "human_edit_of_ai": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai_edit_of_human": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      }
+    },
+    "is_human_edited": {
+      "human": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "human_edit_of_ai": {
+        "min": 1.0,
+        "max": 1.0,
+        "unique_values": [
+          1.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai_edit_of_human": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      }
+    },
+    "is_ai_edited": {
+      "human": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "human_edit_of_ai": {
+        "min": 0.0,
+        "max": 0.0,
+        "unique_values": [
+          0.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      },
+      "ai_edit_of_human": {
+        "min": 1.0,
+        "max": 1.0,
+        "unique_values": [
+          1.0
+        ],
+        "is_constant": true,
+        "flag": "CONSTANT"
+      }
+    }
+  },
+  "b6_fallback_test": {
+    "n_units_tested": 92,
+    "max_abs_diff": 0.0,
+    "claim_verified": true
+  }
+}

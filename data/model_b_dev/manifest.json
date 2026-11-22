@@ -1,0 +1,10 @@
+{
+  "dataset_name": "model_b_development_corpus",
+  "created_at": "2026-10-27T22:02:51.420388",
+  "total_tasks": 16,
+  "total_units": 64,
+  "train_units": 48,
+  "val_units": 16,
+  "locked_test_benchmark": "results/reports/controlled_benchmark_32.json",
+  "zero_overlap_verified": true
+}

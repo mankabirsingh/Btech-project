@@ -1,0 +1,424 @@
+{
+  "metadata": {
+    "timestamp": "2026-11-20 04:59:23 UTC",
+    "runtime_seconds": 100.47
+  },
+  "champion_p2_reference": {
+    "candidate_id": "champion_p2",
+    "description": "Champion P2 reference (CodeBERT 256 + cxx28, C=0.01, balanced)",
+    "cv_fold_aurocs": [
+      0.6325480426111361,
+      0.7646931607216053,
+      0.718514422447581,
+      0.7056440792480305,
+      0.6744699487164675
+    ],
+    "cv_mean_auroc": 0.6991739307489642,
+    "cv_std_auroc": 0.04417687774247605,
+    "oof_threshold_info": {
+      "threshold": 0.7086,
+      "target_fpr": 0.1,
+      "target_prevalence": 0.3,
+      "actual_fpr": 0.1,
+      "recall_at_target_fpr": 0.2838,
+      "precision_at_target_fpr": 0.5488
+    },
+    "oof_threshold": 0.7086,
+    "dev_auroc": 0.6968632979361915,
+    "dev_auroc_ci_95": [
+      0.6738305164205847,
+      0.7201558030525277
+    ],
+    "dev_length_stratified_auroc": 0.605649881055505,
+    "dev_length_stratified_ci_95": [
+      0.5792312360857973,
+      0.6352598432303458
+    ],
+    "dev_cpp_auroc": 0.6516591970371961,
+    "dev_cpp_auroc_ci_95": [
+      0.5322200908353779,
+      0.6163406805009429
+    ],
+    "dev_auprc": 0.4717300329507702,
+    "dev_recall_at_10fpr": 0.11932555123216602,
+    "dev_precision_at_10fpr": 0.5974025974025974,
+    "dev_fpr_at_10fpr": 0.034988713318284424
+  },
+  "baselines": {
+    "L1": {
+      "candidate_id": "L1",
+      "description": "Logistic Regression on log(n_tokens) only",
+      "category": "Confound Baseline",
+      "C_chosen": 0.01,
+      "cv_fold_aurocs": [
+        0.5564085274813806,
+        0.7085218317218686,
+        0.6581203429919328,
+        0.6884698188524987,
+        0.7317630650904354
+      ],
+      "cv_mean_auroc": 0.6686567172276232,
+      "cv_std_auroc": 0.061114431640263506,
+      "oof_threshold_info": {
+        "threshold": 0.6392,
+        "target_fpr": 0.1,
+        "target_prevalence": 0.3,
+        "actual_fpr": 0.0999,
+        "recall_at_target_fpr": 0.2427,
+        "precision_at_target_fpr": 0.5101
+      },
+      "oof_threshold": 0.6392,
+      "dev_auroc": 0.7153080927410973,
+      "dev_auroc_ci_95": [
+        0.6953693222574535,
+        0.7358251318243435
+      ],
+      "dev_length_stratified_auroc": 0.5898939051423404,
+      "dev_length_stratified_ci_95": [
+        0.5635197118268753,
+        0.6162206875954012
+      ],
+      "dev_cpp_auroc": 0.7077116096827867,
+      "dev_cpp_auroc_ci_95": [
+        0.670083966239064,
+        0.7422700237507379
+      ],
+      "dev_auprc": 0.48397512064210024,
+      "dev_recall_at_10fpr": 0.30609597924773024,
+      "dev_precision_at_10fpr": 0.5267857142857143,
+      "dev_fpr_at_10fpr": 0.11963882618510158,
+      "diff_vs_champion": {
+        "overall_auroc": {
+          "score_a": 0.6968632979361915,
+          "score_b": 0.7153080927410973,
+          "diff_observed": 0.018444794804905795,
+          "ci_lower": -0.022177968469610888,
+          "ci_upper": 0.04465912116637744,
+          "p_value": 0.388,
+          "significant_p05": false
+        },
+        "length_stratified_auroc": {
+          "score_a": 0.605649881055505,
+          "score_b": 0.5898939051423404,
+          "diff_observed": -0.015755975913164577,
+          "ci_lower": -0.09566441015516775,
+          "ci_upper": 0.027533944119396445,
+          "p_value": 0.538,
+          "significant_p05": false
+        },
+        "cpp_auroc": {
+          "score_a": 0.6516591970371961,
+          "score_b": 0.7077116096827867,
+          "diff_observed": 0.05605241264559058,
+          "ci_lower": 0.024532124244991457,
+          "ci_upper": 0.09603048521686201,
+          "p_value": 0.0,
+          "significant_p05": true
+        }
+      },
+      "runtime_seconds": 11.71
+    },
+    "L2": {
+      "candidate_id": "L2",
+      "description": "Logistic Regression on log(n_tokens) + log(n_lines) + cyclomatic proxy",
+      "category": "Confound Baseline",
+      "C_chosen": 0.01,
+      "cv_fold_aurocs": [
+        0.6029227946810514,
+        0.76310502985442,
+        0.685571985826525,
+        0.694766511311758,
+        0.7254555253870555
+      ],
+      "cv_mean_auroc": 0.694364369412162,
+      "cv_std_auroc": 0.0531619557473625,
+      "oof_threshold_info": {
+        "threshold": 0.6494,
+        "target_fpr": 0.1,
+        "target_prevalence": 0.3,
+        "actual_fpr": 0.1,
+        "recall_at_target_fpr": 0.2847,
+        "precision_at_target_fpr": 0.5496
+      },
+      "oof_threshold": 0.6494,
+      "dev_auroc": 0.7005409848544736,
+      "dev_auroc_ci_95": [
+        0.6793192601148283,
+        0.7221718975532347
+      ],
+      "dev_length_stratified_auroc": 0.5592722776355835,
+      "dev_length_stratified_ci_95": [
+        0.5324725874975117,
+        0.5881906765161227
+      ],
+      "dev_cpp_auroc": 0.6890028715581558,
+      "dev_cpp_auroc_ci_95": [
+        0.6506471908378508,
+        0.7250966970371959
+      ],
+      "dev_auprc": 0.47945230228918145,
+      "dev_recall_at_10fpr": 0.23476005188067445,
+      "dev_precision_at_10fpr": 0.5323529411764706,
+      "dev_fpr_at_10fpr": 0.08972911963882618,
+      "diff_vs_champion": {
+        "overall_auroc": {
+          "score_a": 0.6968632979361915,
+          "score_b": 0.7005409848544736,
+          "diff_observed": 0.003677686918282075,
+          "ci_lower": -0.04030214843423277,
+          "ci_upper": 0.03294867420455429,
+          "p_value": 0.93,
+          "significant_p05": false
+        },
+        "length_stratified_auroc": {
+          "score_a": 0.605649881055505,
+          "score_b": 0.5592722776355835,
+          "diff_observed": -0.046377603419921476,
+          "ci_lower": -0.13935161802922233,
+          "ci_upper": 0.008133544289643479,
+          "p_value": 0.11,
+          "significant_p05": false
+        },
+        "cpp_auroc": {
+          "score_a": 0.6516591970371961,
+          "score_b": 0.6890028715581558,
+          "diff_observed": 0.03734367452095966,
+          "ci_lower": 0.015265170470067532,
+          "ci_upper": 0.10144921872519375,
+          "p_value": 0.002,
+          "significant_p05": true
+        }
+      },
+      "runtime_seconds": 11.84
+    },
+    "L3": {
+      "candidate_id": "L3",
+      "description": "Logistic Regression on cxx28 features only",
+      "category": "Confound Baseline",
+      "C_chosen": 0.01,
+      "cv_fold_aurocs": [
+        0.6057995280024169,
+        0.7707134956684639,
+        0.6923487908141919,
+        0.6745153757770299,
+        0.7021123110675798
+      ],
+      "cv_mean_auroc": 0.6890979002659365,
+      "cv_std_auroc": 0.05290050554201004,
+      "oof_threshold_info": {
+        "threshold": 0.6549,
+        "target_fpr": 0.1,
+        "target_prevalence": 0.3,
+        "actual_fpr": 0.1,
+        "recall_at_target_fpr": 0.2934,
+        "precision_at_target_fpr": 0.5571
+      },
+      "oof_threshold": 0.6549,
+      "dev_auroc": 0.6919105526814286,
+      "dev_auroc_ci_95": [
+        0.6697310885865443,
+        0.7133762640790742
+      ],
+      "dev_length_stratified_auroc": 0.5546236462927409,
+      "dev_length_stratified_ci_95": [
+        0.5278937712980782,
+        0.5811671550384353
+      ],
+      "dev_cpp_auroc": 0.6795663142075036,
+      "dev_cpp_auroc_ci_95": [
+        0.6377569641994526,
+        0.7169933511352047
+      ],
+      "dev_auprc": 0.4745587881152751,
+      "dev_recall_at_10fpr": 0.21011673151750973,
+      "dev_precision_at_10fpr": 0.5644599303135889,
+      "dev_fpr_at_10fpr": 0.07054176072234764,
+      "diff_vs_champion": {
+        "overall_auroc": {
+          "score_a": 0.6968632979361915,
+          "score_b": 0.6919105526814286,
+          "diff_observed": -0.004952745254762858,
+          "ci_lower": -0.03240594430876287,
+          "ci_upper": 0.017113250726730898,
+          "p_value": 0.616,
+          "significant_p05": false
+        },
+        "length_stratified_auroc": {
+          "score_a": 0.605649881055505,
+          "score_b": 0.5546236462927409,
+          "diff_observed": -0.05102623476276413,
+          "ci_lower": -0.11012408575145861,
+          "ci_upper": -0.014257079190919179,
+          "p_value": 0.004,
+          "significant_p05": true
+        },
+        "cpp_auroc": {
+          "score_a": 0.6516591970371961,
+          "score_b": 0.6795663142075036,
+          "diff_observed": 0.02790711717030747,
+          "ci_lower": -0.0031344029536875,
+          "ci_upper": 0.0998990214485631,
+          "p_value": 0.098,
+          "significant_p05": false
+        }
+      },
+      "runtime_seconds": 11.84
+    },
+    "L4": {
+      "candidate_id": "L4",
+      "description": "Logistic Regression on cxx38 features only",
+      "category": "Confound Baseline",
+      "C_chosen": 0.01,
+      "cv_fold_aurocs": [
+        0.6054194780004466,
+        0.7750246411954548,
+        0.6955394750013475,
+        0.6774705074268637,
+        0.7003707749511585
+      ],
+      "cv_mean_auroc": 0.6907649753150542,
+      "cv_std_auroc": 0.054176296138602836,
+      "oof_threshold_info": {
+        "threshold": 0.6553,
+        "target_fpr": 0.1,
+        "target_prevalence": 0.3,
+        "actual_fpr": 0.1,
+        "recall_at_target_fpr": 0.2942,
+        "precision_at_target_fpr": 0.5577
+      },
+      "oof_threshold": 0.6553,
+      "dev_auroc": 0.6956306927475384,
+      "dev_auroc_ci_95": [
+        0.6733748678828761,
+        0.7170180854069501
+      ],
+      "dev_length_stratified_auroc": 0.5528737131513483,
+      "dev_length_stratified_ci_95": [
+        0.5267761766713303,
+        0.5808444427158701
+      ],
+      "dev_cpp_auroc": 0.6868257205732382,
+      "dev_cpp_auroc_ci_95": [
+        0.6441406459664002,
+        0.7256141477913156
+      ],
+      "dev_auprc": 0.4753812941131267,
+      "dev_recall_at_10fpr": 0.20881971465629054,
+      "dev_precision_at_10fpr": 0.5476190476190477,
+      "dev_fpr_at_10fpr": 0.07505643340857787,
+      "diff_vs_champion": {
+        "overall_auroc": {
+          "score_a": 0.6968632979361915,
+          "score_b": 0.6956306927475384,
+          "diff_observed": -0.0012326051886530909,
+          "ci_lower": -0.029956995428063255,
+          "ci_upper": 0.02184907622653103,
+          "p_value": 0.856,
+          "significant_p05": false
+        },
+        "length_stratified_auroc": {
+          "score_a": 0.605649881055505,
+          "score_b": 0.5528737131513483,
+          "diff_observed": -0.052776167904156734,
+          "ci_lower": -0.11538129004580618,
+          "ci_upper": -0.00957341776705204,
+          "p_value": 0.016,
+          "significant_p05": true
+        },
+        "cpp_auroc": {
+          "score_a": 0.6516591970371961,
+          "score_b": 0.6868257205732382,
+          "diff_observed": 0.035166523536042105,
+          "ci_lower": -0.003579376821768262,
+          "ci_upper": 0.0979749672093156,
+          "p_value": 0.078,
+          "significant_p05": false
+        }
+      },
+      "runtime_seconds": 11.91
+    },
+    "L_champion_partial": {
+      "candidate_id": "L_champion_partial",
+      "description": "Logistic regression on [log(n_tokens), champion_p2 logit]",
+      "category": "Confound Baseline",
+      "C_chosen": 0.01,
+      "cv_fold_aurocs": [
+        0.6171432324391066,
+        0.7736670674657387,
+        0.7170383931252743,
+        0.7154689491101998,
+        0.6934113593155895
+      ],
+      "cv_mean_auroc": 0.7033458002911818,
+      "cv_std_auroc": 0.05061445302407773,
+      "oof_threshold_info": {
+        "threshold": 0.6781,
+        "target_fpr": 0.1,
+        "target_prevalence": 0.3,
+        "actual_fpr": 0.1,
+        "recall_at_target_fpr": 0.283,
+        "precision_at_target_fpr": 0.5481
+      },
+      "oof_threshold": 0.6781,
+      "dev_auroc": 0.7142299291764382,
+      "dev_auroc_ci_95": [
+        0.6922276520774228,
+        0.7356232780856852
+      ],
+      "dev_length_stratified_auroc": 0.6117785640049294,
+      "dev_length_stratified_ci_95": [
+        0.5852096419142634,
+        0.6409219056764663
+      ],
+      "dev_cpp_auroc": 0.6795965058236273,
+      "dev_cpp_auroc_ci_95": [
+        0.6405246967419892,
+        0.7152220257903493
+      ],
+      "dev_auprc": 0.4862482070771349,
+      "dev_recall_at_10fpr": 0.18417639429312582,
+      "dev_precision_at_10fpr": 0.5657370517928287,
+      "dev_fpr_at_10fpr": 0.061512415349887134,
+      "diff_vs_champion": {
+        "overall_auroc": {
+          "score_a": 0.6968632979361915,
+          "score_b": 0.7142299291764382,
+          "diff_observed": 0.017366631240246733,
+          "ci_lower": 0.007112820034831291,
+          "ci_upper": 0.024232394107662564,
+          "p_value": 0.002,
+          "significant_p05": true
+        },
+        "length_stratified_auroc": {
+          "score_a": 0.605649881055505,
+          "score_b": 0.6117785640049294,
+          "diff_observed": 0.006128682949424369,
+          "ci_lower": -0.0042643276799469295,
+          "ci_upper": 0.011550960848505702,
+          "p_value": 0.24,
+          "significant_p05": false
+        },
+        "cpp_auroc": {
+          "score_a": 0.6516591970371961,
+          "score_b": 0.6795965058236273,
+          "diff_observed": 0.027937308786431192,
+          "ci_lower": 0.01930725198203004,
+          "ci_upper": 0.0410320974751086,
+          "p_value": 0.0,
+          "significant_p05": true
+        }
+      },
+      "runtime_seconds": 11.82,
+      "gain_over_L1": -0.0010781635646590626,
+      "paired_test_vs_L1": {
+        "score_a": 0.7153080927410973,
+        "score_b": 0.7142299291764382,
+        "diff_observed": -0.0010781635646590626,
+        "ci_lower": -0.02091693294451675,
+        "ci_upper": 0.029309808616933948,
+        "p_value": 0.978,
+        "significant_p05": false
+      }
+    }
+  }
+}

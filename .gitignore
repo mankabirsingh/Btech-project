@@ -13,20 +13,31 @@ build/
 # Data (large files)
 data/raw/
 data/cache/
+data/processed/
+scratch/
 *.parquet
 *.npy
 *.npz
 *.tar.gz
-data/processed/*.parquet
-data/processed/*.csv
-data/splits/*_expanded.parquet
+*.zip
 *.h5
 *.hdf5
 
-# Model checkpoints
-models/checkpoints/*.pt
-models/checkpoints/*.bin
+# Model checkpoints & large binary weights
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+*.onnx
+models/checkpoints/**/*.pt
+models/checkpoints/**/*.bin
 models/checkpoints/*.pkl
+
+# Whitelist small final production checkpoints (<50KB)
+!models/checkpoints/p10/
+!models/checkpoints/p10/*.pkl
+!models/checkpoints/p10/**/*.pkl
+!models/checkpoints/p10/**/*.py
 
 # IDE
 .vscode/

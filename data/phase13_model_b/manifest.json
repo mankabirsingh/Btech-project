@@ -1,0 +1,12 @@
+{
+  "dataset_version": "phase13_model_b_v1.0",
+  "total_tasks": 28,
+  "total_units": 112,
+  "train_units": 80,
+  "val_units": 16,
+  "test_units": 16,
+  "class_balance": "Strict 50/50 in every partition",
+  "provenance_balance": "Strict 25/25/25/25 across 4 categories",
+  "locked_test_checksum": "f91d951d1b18a14b3fbc475a6007c20ccc670c7002bf45f928e24e44a70d0b9b",
+  "creation_date": "2026-10-27"
+}

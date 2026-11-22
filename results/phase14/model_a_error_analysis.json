@@ -1,0 +1,454 @@
+{
+  "envoy": {
+    "n_samples": 603,
+    "n_vuln": 203,
+    "n_benign": 400,
+    "codebert_accuracy": 52.74,
+    "tri_union_accuracy": 58.54,
+    "confusion": {
+      "tp": 89,
+      "fp": 171,
+      "tn": 229,
+      "fn": 114
+    },
+    "fpr": 42.75,
+    "fnr": 56.16,
+    "median_loc": 15.0,
+    "median_loc_correct": 11.0,
+    "median_loc_incorrect": 20.0,
+    "median_tokens": 244.0,
+    "pct_truncated_384": 33.17,
+    "cpp_construct_prevalence": {
+      "template_usage": {
+        "count": 3,
+        "prevalence_pct": 0.5
+      },
+      "namespace_usage": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "class_definition": {
+        "count": 3,
+        "prevalence_pct": 0.5
+      },
+      "virtual_dispatch": {
+        "count": 57,
+        "prevalence_pct": 9.5
+      },
+      "smart_pointers": {
+        "count": 46,
+        "prevalence_pct": 7.6
+      },
+      "cpp_containers": {
+        "count": 127,
+        "prevalence_pct": 21.1
+      },
+      "cpp_casts": {
+        "count": 37,
+        "prevalence_pct": 6.1
+      },
+      "googletest_macros": {
+        "count": 217,
+        "prevalence_pct": 36.0
+      },
+      "raii_locks": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "lambda_functions": {
+        "count": 125,
+        "prevalence_pct": 20.7
+      },
+      "exception_handling": {
+        "count": 10,
+        "prevalence_pct": 1.7
+      }
+    },
+    "accuracy_on_cpp_constructs_codebert": {
+      "virtual_dispatch": 77.19,
+      "smart_pointers": 34.78,
+      "cpp_containers": 48.03,
+      "cpp_casts": 45.95,
+      "googletest_macros": 44.7,
+      "lambda_functions": 32.0,
+      "exception_handling": 70.0
+    },
+    "accuracy_on_cpp_constructs_tri_union": {
+      "virtual_dispatch": 85.96,
+      "smart_pointers": 50.0,
+      "cpp_containers": 54.33,
+      "cpp_casts": 56.76,
+      "googletest_macros": 56.68,
+      "lambda_functions": 40.8,
+      "exception_handling": 60.0
+    },
+    "representative_false_positives": [
+      {
+        "loc": 31,
+        "prob_cb": 0.5396,
+        "prob_tri": 0.2316,
+        "snippet": "TEST_F(HttpHealthCheckerImplTest, GoAwayProbeInProgress) {\n  setupHCHttp2();\n  EXPECT_CALL(runtime_.snapshot_, featureEnabled(\"health_check.verify_cluster\", 100))\n      .WillRepeatedly(Return(false));\n  cluster_->prioritySet().getMockHostSet(0)->hosts_ = {\n      makeTestHost(cluster_->info_, \"tcp://127.0.0.1:80\", simTime())};\n  cluster_->info_->sta"
+      },
+      {
+        "loc": 53,
+        "prob_cb": 0.5933,
+        "prob_tri": 0.2158,
+        "snippet": "void FilterManager::sendLocalReply(\n    Code code, absl::string_view body,\n    const std::function<void(ResponseHeaderMap& headers)>& modify_headers,\n    const absl::optional<Grpc::Status::GrpcStatus> grpc_status, absl::string_view details) {\n  ASSERT(!state_.under_on_local_reply_);\n  const bool is_head_request = state_.is_head_request_;\n  const bo"
+      },
+      {
+        "loc": 36,
+        "prob_cb": 0.5017,
+        "prob_tri": 0.2799,
+        "snippet": "TEST_F(ConnectionManagerUtilityTest, MtlsSanitizeSetClientCert) {\n  auto ssl = std::make_shared<NiceMock<Ssl::MockConnectionInfo>>();\n  ON_CALL(*ssl, peerCertificatePresented()).WillByDefault(Return(true));\n  const std::vector<std::string> local_uri_sans{\"test://foo.com/be\"};\n  EXPECT_CALL(*ssl, uriSanLocalCertificate()).WillOnce(Return(local_uri_s"
+      }
+    ],
+    "representative_false_negatives": [
+      {
+        "loc": 1,
+        "prob_cb": 0.1807,
+        "prob_tri": 0.1191,
+        "snippet": "  bool remoteComplete() const { return state_.remote_complete_; }"
+      },
+      {
+        "loc": 1,
+        "prob_cb": 0.248,
+        "prob_tri": 0.0424,
+        "snippet": "    void incNumConnections() override { ++num_listener_connections_; }"
+      },
+      {
+        "loc": 18,
+        "prob_cb": 0.4986,
+        "prob_tri": 0.5025,
+        "snippet": "TEST(HeaderMapImplTest, MoveIntoInline) {\n  HeaderMapImpl headers;\n  HeaderString key;\n  key.setCopy(Headers::get().CacheControl.get());\n  HeaderString value;\n  value.setCopy(\"hello\", 5);\n  headers.addViaMove(std::move(key), std::move(value));\n  EXPECT_EQ(\"cache-control\", headers.CacheControl()->key().getStringView());\n  EXPECT_EQ(\"hello\", headers."
+      }
+    ]
+  },
+  "openssl": {
+    "n_samples": 1257,
+    "n_vuln": 581,
+    "n_benign": 676,
+    "codebert_accuracy": 70.8,
+    "tri_union_accuracy": 67.7,
+    "confusion": {
+      "tp": 375,
+      "fp": 161,
+      "tn": 515,
+      "fn": 206
+    },
+    "fpr": 23.82,
+    "fnr": 35.46,
+    "median_loc": 49.0,
+    "median_loc_correct": 44.0,
+    "median_loc_incorrect": 58.0,
+    "median_tokens": 668.0,
+    "pct_truncated_384": 64.04,
+    "cpp_construct_prevalence": {
+      "template_usage": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "namespace_usage": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "class_definition": {
+        "count": 7,
+        "prevalence_pct": 0.6
+      },
+      "virtual_dispatch": {
+        "count": 3,
+        "prevalence_pct": 0.2
+      },
+      "smart_pointers": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "cpp_containers": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "cpp_casts": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "googletest_macros": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "raii_locks": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "lambda_functions": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "exception_handling": {
+        "count": 17,
+        "prevalence_pct": 1.4
+      }
+    },
+    "accuracy_on_cpp_constructs_codebert": {
+      "exception_handling": 76.47
+    },
+    "accuracy_on_cpp_constructs_tri_union": {
+      "exception_handling": 76.47
+    },
+    "representative_false_positives": [
+      {
+        "loc": 48,
+        "prob_cb": 0.5646,
+        "prob_tri": 0.796,
+        "snippet": "kssl_tgt_is_available(KSSL_CTX *kssl_ctx)\n        {\n        krb5_error_code\t\tkrb5rc = KRB5KRB_ERR_GENERIC;\n        krb5_context\t\tkrb5context = NULL;\n        krb5_ccache \t\tkrb5ccdef = NULL;\n        krb5_creds\t\tkrb5creds, *krb5credsp = NULL;\n        int                     rc = 0;\n\n        memset((char *)&krb5creds, 0, sizeof(krb5creds));\n\n        if"
+      },
+      {
+        "loc": 27,
+        "prob_cb": 0.5203,
+        "prob_tri": 0.3687,
+        "snippet": "static void sha1_update(SHA_CTX *c,const void *data,size_t len)\n{\tconst unsigned char *ptr = data;\n\tsize_t res;\n\n\tif ((res = c->num)) {\n\t\tres = SHA_CBLOCK-res;\n\t\tif (len<res) res=len;\n\t\tSHA1_Update (c,ptr,res);\n\t\tptr += res;\n\t\tlen -= res;\n\t}\n\n\tres = len % SHA_CBLOCK;\n\tlen -= res;\n\n\tif (len) {\n\t\tsha1_block_data_order(c,ptr,len/SHA_CBLOCK);\n\n\t\tptr +="
+      },
+      {
+        "loc": 84,
+        "prob_cb": 0.5411,
+        "prob_tri": 0.2446,
+        "snippet": "static int aes_xts_init_key(EVP_CIPHER_CTX *ctx, const unsigned char *key,\n                            const unsigned char *iv, int enc)\n{\n    EVP_AES_XTS_CTX *xctx = ctx->cipher_data;\n    if (!iv && !key)\n        return 1;\n\n    if (key)\n        do {\n# ifdef AES_XTS_ASM\n            xctx->stream = enc ? AES_xts_encrypt : AES_xts_decrypt;\n# else\n    "
+      }
+    ],
+    "representative_false_negatives": [
+      {
+        "loc": 40,
+        "prob_cb": 0.3198,
+        "prob_tri": 0.3975,
+        "snippet": "void SSL_SESSION_free(SSL_SESSION *ss)\n\t{\n\tint i;\n\n\tif(ss == NULL)\n\t    return;\n\n\ti=CRYPTO_add(&ss->references,-1,CRYPTO_LOCK_SSL_SESSION);\n#ifdef REF_PRINT\n\tREF_PRINT(\"SSL_SESSION\",ss);\n#endif\n\tif (i > 0) return;\n#ifdef REF_CHECK\n\tif (i < 0)\n\t\t{\n\t\tfprintf(stderr,\"SSL_SESSION_free, bad reference count\\n\");\n\t\tabort(); /* ok */\n\t\t}\n#endif\n\n\tCRYPTO_fr"
+      },
+      {
+        "loc": 27,
+        "prob_cb": 0.3648,
+        "prob_tri": 0.5034,
+        "snippet": "static void print_qualifiers(BIO *out, STACK_OF(POLICYQUALINFO) *quals,\n                             int indent)\n{\n    POLICYQUALINFO *qualinfo;\n    int i;\n    for (i = 0; i < sk_POLICYQUALINFO_num(quals); i++) {\n        qualinfo = sk_POLICYQUALINFO_value(quals, i);\n        switch (OBJ_obj2nid(qualinfo->pqualid)) {\n        case NID_id_qt_cps:\n     "
+      },
+      {
+        "loc": 41,
+        "prob_cb": 0.2388,
+        "prob_tri": 0.4163,
+        "snippet": "int tls1_alert_code(int code)\n\t{\n\tswitch (code)\n\t\t{\n\tcase SSL_AD_CLOSE_NOTIFY:\treturn(SSL3_AD_CLOSE_NOTIFY);\n\tcase SSL_AD_UNEXPECTED_MESSAGE:\treturn(SSL3_AD_UNEXPECTED_MESSAGE);\n\tcase SSL_AD_BAD_RECORD_MAC:\treturn(SSL3_AD_BAD_RECORD_MAC);\n\tcase SSL_AD_DECRYPTION_FAILED:\treturn(TLS1_AD_DECRYPTION_FAILED);\n\tcase SSL_AD_RECORD_OVERFLOW:\treturn(TLS1_AD"
+      }
+    ]
+  },
+  "gpac": {
+    "n_samples": 793,
+    "n_vuln": 99,
+    "n_benign": 694,
+    "codebert_accuracy": 85.62,
+    "tri_union_accuracy": 61.29,
+    "confusion": {
+      "tp": 51,
+      "fp": 66,
+      "tn": 628,
+      "fn": 48
+    },
+    "fpr": 9.51,
+    "fnr": 48.48,
+    "median_loc": 14.0,
+    "median_loc_correct": 12.0,
+    "median_loc_incorrect": 61.5,
+    "median_tokens": 191.0,
+    "pct_truncated_384": 31.65,
+    "cpp_construct_prevalence": {
+      "template_usage": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "namespace_usage": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "class_definition": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "virtual_dispatch": {
+        "count": 2,
+        "prevalence_pct": 0.3
+      },
+      "smart_pointers": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "cpp_containers": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "cpp_casts": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "googletest_macros": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "raii_locks": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "lambda_functions": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "exception_handling": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      }
+    },
+    "accuracy_on_cpp_constructs_codebert": {},
+    "accuracy_on_cpp_constructs_tri_union": {},
+    "representative_false_positives": [
+      {
+        "loc": 65,
+        "prob_cb": 0.5764,
+        "prob_tri": 0.6734,
+        "snippet": "static Bool adts_dmx_sync_frame_bs(GF_BitStream *bs, ADTSHeader *hdr)\n{\n\tu32 val;\n\tu64 pos;\n\n\twhile (gf_bs_available(bs)>7) {\n\t\tval = gf_bs_read_u8(bs);\n\t\tif (val!=0xFF) continue;\n\t\tval = gf_bs_read_int(bs, 4);\n\t\tif (val != 0x0F) {\n\t\t\tgf_bs_read_int(bs, 4);\n\t\t\tcontinue;\n\t\t}\n\t\thdr->is_mp2 = (Bool)gf_bs_read_int(bs, 1);\n\t\tgf_bs_read_int(bs, 2);\n\t\thdr"
+      },
+      {
+        "loc": 69,
+        "prob_cb": 0.5482,
+        "prob_tri": 0.65,
+        "snippet": "static GF_Err gf_m4v_parse_frame_mpeg12(GF_M4VParser *m4v, GF_M4VDecSpecInfo dsi, u8 *frame_type, u32 *time_inc, u64 *size, u64 *start, Bool *is_coded)\n{\n\tu8 go, hasVOP, firstObj, val;\n\ts32 o_type;\n\n\tif (!m4v || !size || !start || !frame_type) return GF_BAD_PARAM;\n\n\t*size = 0;\n\tfirstObj = 1;\n\thasVOP = 0;\n\t*is_coded = GF_FALSE;\n\tm4v->current_object_"
+      },
+      {
+        "loc": 108,
+        "prob_cb": 0.6214,
+        "prob_tri": 0.4897,
+        "snippet": "GF_Err DoWrite(MovieWriter *mw, GF_List *writers, GF_BitStream *bs, u8 Emulation, u64 StartOffset)\n{\n\tu32 i;\n\tGF_Err e;\n\tTrackWriter *writer;\n\tu64 offset, sampOffset, predOffset;\n\tu32 chunkNumber, descIndex, sampSize;\n\tBool force;\n\tGF_StscEntry *stsc_ent;\n\tu64 size, mdatSize = 0;\n\tGF_ISOFile *movie = mw->movie;\n\n\t/*write meta content first - WE DON"
+      }
+    ],
+    "representative_false_negatives": [
+      {
+        "loc": 17,
+        "prob_cb": 0.3044,
+        "prob_tri": 0.6894,
+        "snippet": "GF_AV1Config *gf_isom_av1_config_get(GF_ISOFile *the_file, u32 trackNumber, u32 DescriptionIndex)\n{\n\tGF_TrackBox *trak;\n\tGF_MPEGVisualSampleEntryBox *entry;\n\tif (gf_isom_get_reference_count(the_file, trackNumber, GF_ISOM_REF_TBAS)) {\n\t\tu32 ref_track;\n\t\tGF_Err e = gf_isom_get_reference(the_file, trackNumber, GF_ISOM_REF_TBAS, 1, &ref_track);\n\t\tif (e"
+      },
+      {
+        "loc": 7,
+        "prob_cb": 0.2127,
+        "prob_tri": 0.1329,
+        "snippet": "void gf_dom_event_remove_all_listeners(GF_DOMEventTarget *event_target)\n{\n\twhile (gf_list_count(event_target->listeners)) {\n\t\tGF_Node *n = (GF_Node *)gf_list_get(event_target->listeners, 0);\n\t\tgf_dom_listener_del(n, event_target);\n\t}\n}"
+      },
+      {
+        "loc": 16,
+        "prob_cb": 0.3096,
+        "prob_tri": 0.3245,
+        "snippet": "u32 gf_base16_encode(u8 *_in, u32 inSize, u8 *_out, u32 outSize)\n{\n\tu32 i = 0;\n\tunsigned char *in = (unsigned char *)_in;\n\tunsigned char *out = (unsigned char *)_out;\n\n\tif (outSize < (inSize * 2)+1) return 0;\n\n\tfor (i=0; i<inSize; i++) {\n\t\tout[2*i] = base_16[((in[i] & 0xf0) >> 4)];\n\t\tout[2*i+1] = base_16[(in[i] & 0x0f)];\n\t}\n\tout[(inSize * 2)] = 0;\n"
+      }
+    ]
+  },
+  "vim": {
+    "n_samples": 516,
+    "n_vuln": 120,
+    "n_benign": 396,
+    "codebert_accuracy": 76.55,
+    "tri_union_accuracy": 67.44,
+    "confusion": {
+      "tp": 66,
+      "fp": 67,
+      "tn": 329,
+      "fn": 54
+    },
+    "fpr": 16.92,
+    "fnr": 45.0,
+    "median_loc": 27.0,
+    "median_loc_correct": 22.0,
+    "median_loc_incorrect": 76.0,
+    "median_tokens": 307.0,
+    "pct_truncated_384": 43.22,
+    "cpp_construct_prevalence": {
+      "template_usage": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "namespace_usage": {
+        "count": 2,
+        "prevalence_pct": 0.4
+      },
+      "class_definition": {
+        "count": 1,
+        "prevalence_pct": 0.2
+      },
+      "virtual_dispatch": {
+        "count": 6,
+        "prevalence_pct": 1.2
+      },
+      "smart_pointers": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "cpp_containers": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "cpp_casts": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "googletest_macros": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "raii_locks": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "lambda_functions": {
+        "count": 0,
+        "prevalence_pct": 0.0
+      },
+      "exception_handling": {
+        "count": 4,
+        "prevalence_pct": 0.8
+      }
+    },
+    "accuracy_on_cpp_constructs_codebert": {},
+    "accuracy_on_cpp_constructs_tri_union": {},
+    "representative_false_positives": [
+      {
+        "loc": 123,
+        "prob_cb": 0.545,
+        "prob_tri": 0.6917,
+        "snippet": "aucmd_restbuf(\n    aco_save_T\t*aco)\t\t// structure holding saved values\n{\n    int\t    dummy;\n    win_T   *save_curwin;\n\n    if (aco->use_aucmd_win)\n    {\n\t--curbuf->b_nwindows;\n\t// Find \"aucmd_win\", it can't be closed, but it may be in another tab\n\t// page. Do not trigger autocommands here.\n\tblock_autocmds();\n\tif (curwin != aucmd_win)\n\t{\n\t    tabpag"
+      },
+      {
+        "loc": 122,
+        "prob_cb": 0.567,
+        "prob_tri": 0.4536,
+        "snippet": "ins_redraw(int ready)\t    // not busy with something\n{\n#ifdef FEAT_CONCEAL\n    linenr_T\tconceal_old_cursor_line = 0;\n    linenr_T\tconceal_new_cursor_line = 0;\n    int\t\tconceal_update_lines = FALSE;\n#endif\n\n    if (char_avail())\n\treturn;\n\n    // Trigger CursorMoved if the cursor moved.  Not when the popup menu is\n    // visible, the command might de"
+      },
+      {
+        "loc": 116,
+        "prob_cb": 0.5116,
+        "prob_tri": 0.2412,
+        "snippet": "trunc_string(\n    char_u\t*s,\n    char_u\t*buf,\n    int\t\troom_in,\n    int\t\tbuflen)\n{\n    size_t\troom = room_in - 3; // \"...\" takes 3 chars\n    size_t\thalf;\n    size_t\tlen = 0;\n    int\t\te;\n    int\t\ti;\n    int\t\tn;\n\n    if (*s == NUL)\n    {\n\tif (buflen > 0)\n\t    *buf = NUL;\n\treturn;\n    }\n\n    if (room_in < 3)\n\troom = 0;\n    half = room / 2;\n\n    // Fir"
+      }
+    ],
+    "representative_false_negatives": [
+      {
+        "loc": 11,
+        "prob_cb": 0.1999,
+        "prob_tri": 0.2689,
+        "snippet": "dbcs_ptr2len(\n    char_u\t*p)\n{\n    int\t\tlen;\n\n    // Check if second byte is not missing.\n    len = MB_BYTE2LEN(*p);\n    if (len == 2 && p[1] == NUL)\n\tlen = 1;\n    return len;\n}"
+      },
+      {
+        "loc": 10,
+        "prob_cb": 0.388,
+        "prob_tri": 0.069,
+        "snippet": "INTERNAL void vterm_screen_free(VTermScreen *screen)\n{\n  vterm_allocator_free(screen->vt, screen->buffers[0]);\n  if(screen->buffers[1])\n    vterm_allocator_free(screen->vt, screen->buffers[1]);\n\n  vterm_allocator_free(screen->vt, screen->sb_buffer);\n\n  vterm_allocator_free(screen->vt, screen);\n}"
+      },
+      {
+        "loc": 8,
+        "prob_cb": 0.2505,
+        "prob_tri": 0.4406,
+        "snippet": "win_alloc_lines(win_T *wp)\n{\n    wp->w_lines_valid = 0;\n    wp->w_lines = ALLOC_CLEAR_MULT(wline_T, Rows );\n    if (wp->w_lines == NULL)\n\treturn FAIL;\n    return OK;\n}"
+      }
+    ]
+  }
+}

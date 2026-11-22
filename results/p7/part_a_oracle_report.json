@@ -1,0 +1,74 @@
+{
+  "dataset_size": 600,
+  "compiles_count": 287,
+  "compile_failure_count": 313,
+  "compile_success_rate": 0.47833333333333333,
+  "compile_failure_rate": 0.5216666666666666,
+  "confusion_matrix": {
+    "tn": 253,
+    "fp": 47,
+    "fn": 216,
+    "tp": 84
+  },
+  "accuracy": 0.5616666666666666,
+  "cohen_kappa": 0.1233333333333333,
+  "orig_vuln_count": 300,
+  "orig_vuln_rate": 0.5,
+  "oracle_vuln_count": 131,
+  "oracle_vuln_rate": 0.21833333333333332,
+  "vuln_rate_by_role": {
+    "ai": {
+      "n_units": 150,
+      "orig_vuln_count": 87,
+      "orig_vuln_rate": 0.58,
+      "oracle_vuln_count": 30,
+      "oracle_vuln_rate": 0.2
+    },
+    "ai_edit_of_human": {
+      "n_units": 150,
+      "orig_vuln_count": 87,
+      "orig_vuln_rate": 0.58,
+      "oracle_vuln_count": 30,
+      "oracle_vuln_rate": 0.2
+    },
+    "human": {
+      "n_units": 150,
+      "orig_vuln_count": 63,
+      "orig_vuln_rate": 0.42,
+      "oracle_vuln_count": 36,
+      "oracle_vuln_rate": 0.24
+    },
+    "human_edit_of_ai": {
+      "n_units": 150,
+      "orig_vuln_count": 63,
+      "orig_vuln_rate": 0.42,
+      "oracle_vuln_count": 35,
+      "oracle_vuln_rate": 0.23333333333333334
+    }
+  },
+  "tool_coverage": {
+    "flawfinder": {
+      "units_with_findings": 202,
+      "units_with_family_match": 103
+    },
+    "cppcheck": {
+      "units_with_findings": 66,
+      "units_with_family_match": 30
+    },
+    "clang_analyze": {
+      "units_with_findings": 10,
+      "units_with_family_match": 10
+    },
+    "any_tool": {
+      "units_with_findings": 248,
+      "units_with_family_match": 131
+    }
+  },
+  "sanitizer_summary": {
+    "units_with_main": 0,
+    "tasks_with_harness": 0,
+    "sanitizers_run": 0,
+    "sanitizer_fires": 0,
+    "note": "All 600 units are standalone library functions without main(); no external test harness inputs exist in the repo."
+  }
+}

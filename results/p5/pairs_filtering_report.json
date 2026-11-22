@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-11-20 17:07:23 UTC",
+  "runtime_seconds": 10.883204936981201,
+  "source_file": "data/splits/vulnerability_train_expanded.parquet",
+  "initial_expanded_rows": 138412,
+  "clean_pool_rows": 131616,
+  "initial_pairs_extracted": 5190,
+  "pairs_removed_test_near_dup": 3,
+  "pairs_removed_val_near_dup": 1157,
+  "pairs_removed_both_near_dup": 0,
+  "total_pairs_removed": 1160,
+  "clean_pairs_count": 4030,
+  "fold0_pairs_count": 275,
+  "train_pairs_count": 3755
+}
