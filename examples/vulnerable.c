@@ -1,17 +1,18 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+static int wddx_stack_destroy(wddx_stack *stack)
+{
+	register int i;
 
-void vulnerable_copy(const char *user_input) {
-    char stack_buffer[64];
-    // Unbounded string copy vulnerability: CWE-120 / CWE-119
-    strcpy(stack_buffer, user_input);
-    printf("User input received: %s\n", stack_buffer);
-}
-
-int main(int argc, char *argv[]) {
-    if (argc > 1) {
-        vulnerable_copy(argv[1]);
-    }
-    return 0;
+ 	if (stack->elements) {
+ 		for (i = 0; i < stack->top; i++) {
+			if (((st_entry *)stack->elements[i])->data)	{
+ 				zval_ptr_dtor(&((st_entry *)stack->elements[i])->data);
+ 			}
+ 			if (((st_entry *)stack->elements[i])->varname) {
+				efree(((st_entry *)stack->elements[i])->varname);
+			}
+			efree(stack->elements[i]);
+		}
+		efree(stack->elements);
+	}
+	return SUCCESS;
 }
