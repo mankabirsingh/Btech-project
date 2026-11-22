@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "created_timestamp": "2026-11-19 12:09:01 UTC",
+    "runtime_seconds": 17.51
+  },
+  "dev_heldout": {
+    "path": "data/splits/p2/dev_heldout.parquet",
+    "sha256": "c749c38c040c36f4d03d0b6a516e2d063c8d7c681a43d9bd5b82f02683cb6201",
+    "total_samples": 2543,
+    "vulnerable_samples": 771,
+    "prevalence": 0.3031852143138026,
+    "cpp_samples": 849,
+    "cpp_rate": 0.3338576484467165,
+    "projects": {
+      "qpdf": {
+        "samples": 543,
+        "vuln": 209,
+        "vuln_rate": 0.3848987108655617,
+        "cpp": 500,
+        "cpp_rate": 0.9208103130755064
+      },
+      "openexr": {
+        "samples": 390,
+        "vuln": 48,
+        "vuln_rate": 0.12307692307692308,
+        "cpp": 315,
+        "cpp_rate": 0.8076923076923077
+      },
+      "tcpdump": {
+        "samples": 768,
+        "vuln": 296,
+        "vuln_rate": 0.3854166666666667,
+        "cpp": 13,
+        "cpp_rate": 0.016927083333333332
+      },
+      "radare2": {
+        "samples": 842,
+        "vuln": 218,
+        "vuln_rate": 0.2589073634204275,
+        "cpp": 21,
+        "cpp_rate": 0.02494061757719715
+      }
+    }
+  },
+  "train_minus_dev": {
+    "path": "data/splits/p2/train_minus_dev.parquet",
+    "sha256": "57340bfd48c29815c873827229b905e32c78a4141081d5eda3c443d503c4437d",
+    "total_samples": 25000,
+    "vulnerable_samples": 12500,
+    "prevalence": 0.5,
+    "num_projects": 844,
+    "near_dups_of_dev_removed": 449,
+    "group_kfold_splits": 5
+  }
+}

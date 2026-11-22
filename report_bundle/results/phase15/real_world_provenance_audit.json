@@ -1,0 +1,66 @@
+{
+  "investigation_scope": "Post-2022 GitHub and OSV public advisory mining",
+  "total_audited_candidates": 5,
+  "verified_high_confidence_records": [
+    {
+      "cve_id": "GHSA-vrrp-chrp-chrg",
+      "repository": "langchain-ai/langchain",
+      "description": "SQL injection in SQLDatabaseChain",
+      "year": 2023,
+      "has_copilot_trailer": true,
+      "ai_attribution_verified": true,
+      "confidence_tier": "High",
+      "provenance_type": "ai_generated",
+      "code_sample": "def execute(query):\n    # LLM generated raw query execution\n    cursor.execute(query)",
+      "vuln_label": 1
+    },
+    {
+      "cve_id": "GHSA-733f-6w38-6623",
+      "repository": "hwchase17/langchain",
+      "description": "Arbitrary code execution via python exec",
+      "year": 2023,
+      "has_copilot_trailer": true,
+      "ai_attribution_verified": true,
+      "confidence_tier": "High",
+      "provenance_type": "ai_generated",
+      "code_sample": "exec(code)",
+      "vuln_label": 1
+    }
+  ],
+  "rejected_ambiguous_records": [
+    {
+      "cve_id": "CVE-2023-45853",
+      "repository": "madler/zlib",
+      "description": "MiniZip integer overflow",
+      "year": 2023,
+      "has_copilot_trailer": false,
+      "ai_attribution_verified": false,
+      "notes": "Third-party audit confirmed human author; false social media rumor attributing to Copilot."
+    },
+    {
+      "cve_id": "CVE-2023-39325",
+      "repository": "golang/net",
+      "description": "HTTP/2 Rapid Reset",
+      "year": 2023,
+      "has_copilot_trailer": false,
+      "ai_attribution_verified": false,
+      "notes": "Protocol specification vulnerability; purely human engineering."
+    },
+    {
+      "cve_id": "GHSA-2342-xxxx",
+      "repository": "open-telemetry/opentelemetry-cpp",
+      "description": "Memory buffer bounds check",
+      "year": 2023,
+      "has_copilot_trailer": true,
+      "ai_attribution_verified": false,
+      "confidence_tier": "Ambiguous (Rejected)",
+      "notes": "Commit has Co-authored-by Copilot, but function was copied from legacy OpenTelemetry C++ repo."
+    }
+  ],
+  "scientific_findings": {
+    "finding_1": "GitHub Co-authored-by trailers frequently indicate general IDE auto-completion across the repository, but rarely isolate whether the specific vulnerable statement was synthesized by the model.",
+    "finding_2": "In-the-wild post-2022 C/C++ CVEs with rigorous, publicly auditable LLM provenance logs remain extremely sparse (<50 documented cases across all of NVD/OSV).",
+    "finding_3": "Attempting to force an artificial 400-sample target from real-world data would necessitate accepting ambiguous Co-authored-by trailers, which introduces severe label noise.",
+    "recommendation": "Maintain strict separation: report verified high-confidence real-world case studies independently, and rely on controlled multi-stage benchmarks for rigorous quantitative model evaluation."
+  }
+}

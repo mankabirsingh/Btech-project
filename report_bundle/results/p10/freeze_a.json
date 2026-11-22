@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-11-21 22:54:00 UTC",
+  "selected_candidate": "V3",
+  "files": {
+    "model_pkl": {
+      "path": "/Users/mankabir/Desktop/Btech project/models/checkpoints/p10/model_a_v2_best.pkl",
+      "sha256": "cd01e2c69bfc09294742de0b95a7d498a02930b0d47d50d8942dc627db3d2049"
+    },
+    "stacker_pkl": {
+      "path": "/Users/mankabir/Desktop/Btech project/models/checkpoints/p10/model_a_v2_stacker.pkl",
+      "sha256": "6222f31f3061112234e5cee5fb868eed0ad192ebee884d333b1cb1b6076d8ef8"
+    },
+    "train_v2": {
+      "path": "/Users/mankabir/Desktop/Btech project/data/p10/train_v2.parquet",
+      "sha256": "a3d390fb9f8ea82323541b710c7f41aa60a3770ee771843ce128f9a5445f17a7"
+    },
+    "train_pairs_v2": {
+      "path": "/Users/mankabir/Desktop/Btech project/data/p10/train_pairs_v2.parquet",
+      "sha256": "49726e992a851392675642a7a1157023b25a5e0e217d174ae35d03bdccbe0603"
+    }
+  },
+  "thresholds": {
+    "t_bin": 0.31,
+    "best_dev_balanced_acc": 0.68069157641713,
+    "t_high": 0.6955790031726438,
+    "t_low": 0.15848484848484848,
+    "verdict_rule": {
+      "VULNERABLE": "score >= 0.6956",
+      "SAFE": "score <= 0.1585",
+      "UNSURE": "0.1585 < score < 0.6956"
+    },
+    "length_risk_bins": {
+      "LOW": "tokens <= 256",
+      "MED": "257 <= tokens <= 1024",
+      "HIGH": "tokens > 1024"
+    }
+  }
+}

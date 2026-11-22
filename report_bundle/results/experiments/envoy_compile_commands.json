@@ -1,0 +1,26 @@
+[
+  {
+    "directory": "/Users/mankabir/Desktop/Btech project/scratch/envoy_probe",
+    "command": "/usr/bin/clang++ -std=c++17 -c -I /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/build_envoy/virtual_includes -I /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/include -I /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/source -I /opt/homebrew/include -Dabsl=1 -DENVOY_CONFIG_ASAN=1 -o /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/build_envoy/base64.o /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/source/common/common/base64.cc",
+    "file": "/Users/mankabir/Desktop/Btech project/scratch/envoy_probe/source/common/common/base64.cc",
+    "target": "//source/common/common:base64_lib",
+    "compiled_successfully": true,
+    "object_file": "/Users/mankabir/Desktop/Btech project/scratch/envoy_probe/build_envoy/base64.o"
+  },
+  {
+    "directory": "/Users/mankabir/Desktop/Btech project/scratch/envoy_probe",
+    "command": "/usr/bin/clang++ -std=c++17 -c -I /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/build_envoy/virtual_includes -I /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/include -I /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/source -I /opt/homebrew/include -Dabsl=1 -DENVOY_CONFIG_ASAN=1 -o /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/build_envoy/utility.o /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/source/common/common/utility.cc",
+    "file": "/Users/mankabir/Desktop/Btech project/scratch/envoy_probe/source/common/common/utility.cc",
+    "target": "//source/common/common:utility_lib",
+    "compiled_successfully": true,
+    "object_file": "/Users/mankabir/Desktop/Btech project/scratch/envoy_probe/build_envoy/utility.o"
+  },
+  {
+    "directory": "/Users/mankabir/Desktop/Btech project/scratch/envoy_probe",
+    "command": "/usr/bin/clang++ -std=c++17 -c -I /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/build_envoy/virtual_includes -I /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/include -I /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/source -I /opt/homebrew/include -Dabsl=1 /Users/mankabir/Desktop/Btech project/scratch/envoy_probe/source/common/http/conn_manager_impl.cc",
+    "file": "/Users/mankabir/Desktop/Btech project/scratch/envoy_probe/source/common/http/conn_manager_impl.cc",
+    "target": "//source/common/http:conn_manager_lib",
+    "compiled_successfully": false,
+    "error_reason": "Missing generated header: envoy/config/core/v3/base.pb.h"
+  }
+]

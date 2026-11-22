@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "timestamp": "2026-11-20 05:12:58 UTC",
+    "runtime_seconds": 152.16,
+    "device": "mps"
+  },
+  "benchmarks": {
+    "microsoft/codebert-base": {
+      "model_name": "microsoft/codebert-base",
+      "device": "mps",
+      "batch_size": 16,
+      "max_len": 512,
+      "timed_steps": 50,
+      "sec_per_step": 1.0274,
+      "steps_per_sec": 0.97,
+      "peak_memory_mb": 876.6,
+      "memory_delta_mb": 500.3,
+      "steps_per_epoch": 1563,
+      "total_steps_3_epochs": 4689,
+      "projected_hours_3_epochs": 1.34,
+      "projected_seconds_3_epochs": 4817.2
+    },
+    "microsoft/unixcoder-base": {
+      "model_name": "microsoft/unixcoder-base",
+      "device": "mps",
+      "batch_size": 16,
+      "max_len": 512,
+      "timed_steps": 50,
+      "sec_per_step": 1.0328,
+      "steps_per_sec": 0.97,
+      "peak_memory_mb": 1177.4,
+      "memory_delta_mb": 300.7,
+      "steps_per_epoch": 1563,
+      "total_steps_3_epochs": 4689,
+      "projected_hours_3_epochs": 1.35,
+      "projected_seconds_3_epochs": 4843.0
+    }
+  },
+  "finetuning_plan": {
+    "objective": "Full parameter or LoRA fine-tuning of pre-trained code transformer for vulnerability detection without data leakage.",
+    "architecture_and_model": {
+      "recommended_base": "microsoft/codebert-base",
+      "alternative_base": "microsoft/unixcoder-base",
+      "input_handling": "Sliding-window chunking (256-token windows, stride 128) with attention pooling over chunk embeddings to preserve entire function context beyond 512 tokens.",
+      "head": "Binary classification head with linear projection and dropout 0.2."
+    },
+    "training_hyperparameters": {
+      "batch_size": 16,
+      "gradient_accumulation_steps": 2,
+      "effective_batch_size": 32,
+      "learning_rate": 2e-05,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "lr_scheduler": "cosine",
+      "max_epochs": 3,
+      "precision": "fp32 on Apple Silicon MPS / fp16 on CUDA",
+      "loss_function": "Weighted Cross-Entropy (balanced weights for class parity)"
+    },
+    "validation_and_early_stopping_protocol": {
+      "validation_split": "Strictly GroupKFold out-of-fold folds on train_minus_dev (grouped by project) OR a dedicated held-out project slice from train_minus_dev.",
+      "prohibited_actions": [
+        "NEVER use dev_heldout for training, early stopping, or hyperparameter selection.",
+        "NEVER access locked test parquet (vulnerability_test_heldout_projects_clean.parquet)."
+      ],
+      "checkpointing_and_patience": "Evaluate validation AUROC every 250 steps; early stopping patience of 3 evaluation checks.",
+      "model_selection_metric": "Validation AUROC and length-stratified AUROC on held-out projects."
+    },
+    "hardware_and_resource_feasibility": {
+      "codebert_sec_per_step": 1.0274,
+      "codebert_projected_hours": 1.34,
+      "unixcoder_sec_per_step": 1.0328,
+      "unixcoder_projected_hours": 1.35,
+      "feasibility_assessment": "Full fine-tuning for 3 epochs is computationally feasible (~1.5 - 2.5 hours on Apple Silicon GPU), but requires explicit user approval before execution."
+    },
+    "approval_gate": "STOPPING AS DIRECTED. Awaiting user approval before launching any fine-tuning run."
+  }
+}

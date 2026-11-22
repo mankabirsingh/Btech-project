@@ -1,0 +1,38 @@
+{
+  "total_units": 600,
+  "overall": {
+    "compiles_before": 287,
+    "compiles_before_pct": 0.47833333333333333,
+    "compiles_after": 455,
+    "compiles_after_pct": 0.7583333333333333
+  },
+  "by_split": {
+    "train": {
+      "before": 186,
+      "after": 312,
+      "total": 420
+    },
+    "val": {
+      "before": 54,
+      "after": 74,
+      "total": 88
+    },
+    "test": {
+      "before": 47,
+      "after": 69,
+      "total": 92
+    }
+  },
+  "by_language": {
+    "c": {
+      "before": 287,
+      "after": 443,
+      "total": 552
+    },
+    "cpp": {
+      "before": 0,
+      "after": 12,
+      "total": 48
+    }
+  }
+}

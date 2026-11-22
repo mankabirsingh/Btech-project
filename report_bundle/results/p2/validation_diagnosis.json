@@ -1,0 +1,41 @@
+{
+  "dataset_sizes": {
+    "train_samples": 138412,
+    "val_samples": 23648,
+    "test_samples": 3169
+  },
+  "project_counts": {
+    "train_projects": 902,
+    "val_projects": 829,
+    "test_projects": 4,
+    "test_project_list": [
+      "envoy",
+      "gpac",
+      "openssl",
+      "vim"
+    ]
+  },
+  "project_overlap": {
+    "overlap_val_train_project_count": 825,
+    "pct_val_projects_in_train": 99.51749095295537,
+    "val_samples_from_train_projects": 23640,
+    "pct_val_samples_from_train_projects": 99.96617050067658,
+    "overlap_test_train_projects": [
+      "envoy",
+      "gpac",
+      "openssl",
+      "vim"
+    ]
+  },
+  "commit_overlap": {
+    "train_commits_count": 17587,
+    "val_commits_count": 6231,
+    "overlap_val_train_commits_count": 4633,
+    "pct_val_commits_in_train": 74.35403627026159,
+    "val_samples_from_train_commits": 20578,
+    "pct_val_samples_from_train_commits": 87.0179296346414,
+    "overlap_test_train_commits_count": 107
+  },
+  "is_val_random_split_of_train": true,
+  "diagnosis_narrative": "Yes, the current validation set is overwhelmingly a random split of the same repositories and commits present in the training set. Specifically, 825 out of 829 validation projects (99.52%) and 23,640 out of 23,648 validation samples (99.97%) come from projects in the training set. Furthermore, 4,633 out of 6,231 validation commits (74.35%) are directly present in the training set. Because the model was trained on functions from the exact same repositories and commits, validation evaluates in-distribution memorization rather than cross-project generalization to unseen codebases."
+}

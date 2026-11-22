@@ -1,0 +1,21 @@
+{
+  "model_name": "expanded_tri_union_best",
+  "description": "Trained on 50,000 multi-project functions (DiverseVul + BigVul + Devign)",
+  "metrics": {
+    "accuracy": 0.5005543237250555,
+    "precision": 0.49222797927461137,
+    "recall": 0.8295368261199696,
+    "f1": 0.6178424996465431,
+    "f1_macro": 0.4486173308683262,
+    "mcc": 0.02363917821887376,
+    "auroc": 0.5224109406099449,
+    "average_precision": 0.510414323012793,
+    "brier_score": 0.32431792866562154,
+    "n_samples": 5412,
+    "novel_projects_accuracy": 0.6499248120300752,
+    "novel_projects_auroc": 0.7011560135295334,
+    "novel_projects_mcc": 0.2675743091795096,
+    "validation_accuracy": 0.7584,
+    "validation_auroc": 0.8333477108498444
+  }
+}

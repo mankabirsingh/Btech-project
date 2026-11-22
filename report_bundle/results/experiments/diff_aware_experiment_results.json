@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-10-27 16:43:11",
+  "train_pairs_count": 1200,
+  "test_pairs_count": 400,
+  "results": {
+    "whole_function_baseline": {
+      "mode": "whole_function",
+      "n_pairs": 400,
+      "classification_accuracy": 0.56125,
+      "classification_auroc": 0.5881531249999999,
+      "classification_f1": 0.5650557620817844,
+      "classification_mcc": 0.1225187621220349,
+      "pairwise_ranking_accuracy": 0.64,
+      "pairwise_ranking_correct": 256,
+      "both_correct_rate": 0.1325,
+      "both_correct_count": 53,
+      "inverted_error_rate": 0.3225,
+      "mean_vuln_fix_margin": 0.014044292750392788
+    },
+    "changed_line_diff_aware": {
+      "mode": "diff_aware",
+      "n_pairs": 400,
+      "classification_accuracy": 0.58,
+      "classification_auroc": 0.61505,
+      "classification_f1": 0.5543766578249337,
+      "classification_mcc": 0.16106861104498568,
+      "pairwise_ranking_accuracy": 0.725,
+      "pairwise_ranking_correct": 290,
+      "both_correct_rate": 0.1925,
+      "both_correct_count": 77,
+      "inverted_error_rate": 0.23,
+      "mean_vuln_fix_margin": 0.03263679633736148
+    },
+    "relative_gains": {
+      "ranking_acc_delta": 0.08499999999999996,
+      "both_correct_delta": 0.06,
+      "inverted_error_reduction": 0.0925,
+      "classification_acc_delta": 0.018749999999999933,
+      "auroc_delta": 0.026896875000000042
+    }
+  }
+}

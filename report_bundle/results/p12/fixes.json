@@ -1,0 +1,1426 @@
+{
+  "timestamp": "2026-11-22 17:49:38 UTC",
+  "item_1_length_matched_auroc_ci": {
+    "test2_clean": {
+      "L1": {
+        "lm_auroc": 0.5056197946147004,
+        "old_ci": [
+          0.6752206073723785,
+          0.763214123596937
+        ],
+        "new_ci": [
+          0.49329931299555335,
+          0.5158045852754408
+        ],
+        "status": "not distinguishable from chance",
+        "source": "recomputed from data/cache/p10/test2_features_cache.pkl with simultaneous token resampling"
+      },
+      "Champion": {
+        "lm_auroc": 0.5456861001051184,
+        "old_ci": [
+          0.6323646814550051,
+          0.7507977912306176
+        ],
+        "new_ci": [
+          0.4614346114792868,
+          0.6303673116062432
+        ],
+        "status": "not distinguishable from chance",
+        "source": "recomputed from data/cache/p10/test2_features_cache.pkl with simultaneous token resampling"
+      },
+      "Static-only": {
+        "lm_auroc": 0.5243187515161316,
+        "old_ci": [
+          0.5032418547486689,
+          0.628293261024459
+        ],
+        "new_ci": [
+          0.452668103007469,
+          0.5906034970080923
+        ],
+        "status": "not distinguishable from chance",
+        "source": "recomputed from data/cache/p10/test2_features_cache.pkl with simultaneous token resampling"
+      },
+      "V3": {
+        "lm_auroc": 0.48890191639039376,
+        "old_ci": [
+          0.593579876253014,
+          0.6895021581553451
+        ],
+        "new_ci": [
+          0.4283805816643731,
+          0.5556617685967996
+        ],
+        "status": "not distinguishable from chance",
+        "source": "recomputed from data/cache/p10/test2_features_cache.pkl with simultaneous token resampling"
+      },
+      "V6": {
+        "lm_auroc": 0.48884127112476755,
+        "old_ci": [
+          0.6359131812466277,
+          0.7276207987131649
+        ],
+        "new_ci": [
+          0.4275523987275163,
+          0.5550212490654712
+        ],
+        "status": "not distinguishable from chance",
+        "source": "recomputed from data/cache/p10/test2_features_cache.pkl with simultaneous token resampling"
+      }
+    },
+    "old_test": {
+      "L1": {
+        "lm_auroc": 0.512589713809226,
+        "old_ci": [
+          0.7125868118482751,
+          0.7924280937764463
+        ],
+        "new_ci": [
+          0.5038548650646391,
+          0.5193376708653732
+        ],
+        "status": "above chance",
+        "source": "recomputed from data/cache/p10/old_test_features_cache.pkl with simultaneous token resampling"
+      },
+      "Champion": {
+        "lm_auroc": 0.5142574227940082,
+        "old_ci": [
+          0.657102755034067,
+          0.7560832886163581
+        ],
+        "new_ci": [
+          0.4682672710778457,
+          0.5654550249482316
+        ],
+        "status": "not distinguishable from chance",
+        "source": "recomputed from data/cache/p10/old_test_features_cache.pkl with simultaneous token resampling"
+      },
+      "Static-only": {
+        "lm_auroc": 0.5330414842609964,
+        "old_ci": [
+          0.5598863750495631,
+          0.6257351246744306
+        ],
+        "new_ci": [
+          0.5033724500063721,
+          0.5653760686946061
+        ],
+        "status": "above chance",
+        "source": "recomputed from data/cache/p10/old_test_features_cache.pkl with simultaneous token resampling"
+      },
+      "V3": {
+        "lm_auroc": 0.5650480955359004,
+        "old_ci": [
+          0.6788797499923691,
+          0.7687003333447979
+        ],
+        "new_ci": [
+          0.5249880499750227,
+          0.6056101289262042
+        ],
+        "status": "above chance",
+        "source": "recomputed from data/cache/p10/old_test_features_cache.pkl with simultaneous token resampling"
+      },
+      "V6": {
+        "lm_auroc": 0.5655320289466631,
+        "old_ci": [
+          0.7026338873175982,
+          0.7917110191073317
+        ],
+        "new_ci": [
+          0.5248722098723032,
+          0.6058026292933792
+        ],
+        "status": "above chance",
+        "source": "recomputed from data/cache/p10/old_test_features_cache.pkl with simultaneous token resampling"
+      }
+    }
+  },
+  "item_2_threeway_counts": {
+    "V3": {
+      "n_safe": 794,
+      "n_vuln": 66,
+      "n_unsure": 1131,
+      "sum": 1991,
+      "sum_equals_N": true,
+      "precision": 0.30303030303030304,
+      "npv": 0.8778337531486146,
+      "unsure_rate": 0.5680562531391261,
+      "source": "results/p11/test2_clean_evaluation.json, key test2_clean_norm.V3.three_way_decision"
+    },
+    "V6": {
+      "old_reported_counts": {
+        "n_safe": 810,
+        "n_vuln": 20,
+        "n_unsure": 1406,
+        "sum": 2236,
+        "error": "Prior draft reported counts from test2_clean_exact (N=2236) instead of test2_clean_norm (N=1991)"
+      },
+      "new_verified_counts": {
+        "n_safe": 667,
+        "n_vuln": 17,
+        "n_unsure": 1307,
+        "sum": 1991,
+        "sum_equals_N": true,
+        "precision": 0.6470588235294118,
+        "npv": 0.9115442278860569,
+        "unsure_rate": 0.6564540431943747
+      },
+      "source": "results/p11/test2_clean_evaluation.json, key test2_clean_norm.V6.three_way_decision"
+    }
+  },
+  "item_3_project_lists": {
+    "test2_full": {
+      "N": 2904,
+      "n_vuln": 948,
+      "prevalence": 0.32644628099173556,
+      "projects_count": 12,
+      "cpp_projects": [
+        "node",
+        "Bento4",
+        "MilkyTracker",
+        "cryptopp",
+        "libvpx"
+      ],
+      "c_projects": [
+        "iperf",
+        "contiki-ng",
+        "libyaml",
+        "yubico-pam",
+        "libcomps",
+        "Onigmo",
+        "php-src"
+      ],
+      "project_breakdown": {
+        "node": {
+          "n": 397,
+          "n_cpp": 282,
+          "frac_cpp": 0.7103274559193955,
+          "prevalence": 0.10327455919395466,
+          "n_vuln": 41
+        },
+        "Bento4": {
+          "n": 72,
+          "n_cpp": 51,
+          "frac_cpp": 0.7083333333333334,
+          "prevalence": 0.1388888888888889,
+          "n_vuln": 10
+        },
+        "MilkyTracker": {
+          "n": 62,
+          "n_cpp": 59,
+          "frac_cpp": 0.9516129032258065,
+          "prevalence": 0.04838709677419355,
+          "n_vuln": 3
+        },
+        "cryptopp": {
+          "n": 71,
+          "n_cpp": 57,
+          "frac_cpp": 0.8028169014084507,
+          "prevalence": 0.014084507042253521,
+          "n_vuln": 1
+        },
+        "libvpx": {
+          "n": 363,
+          "n_cpp": 222,
+          "frac_cpp": 0.6115702479338843,
+          "prevalence": 0.049586776859504134,
+          "n_vuln": 18
+        },
+        "iperf": {
+          "n": 181,
+          "n_cpp": 1,
+          "frac_cpp": 0.0055248618784530384,
+          "prevalence": 0.30939226519337015,
+          "n_vuln": 56
+        },
+        "contiki-ng": {
+          "n": 39,
+          "n_cpp": 0,
+          "frac_cpp": 0.0,
+          "prevalence": 0.15384615384615385,
+          "n_vuln": 6
+        },
+        "libyaml": {
+          "n": 36,
+          "n_cpp": 0,
+          "frac_cpp": 0.0,
+          "prevalence": 0.027777777777777776,
+          "n_vuln": 1
+        },
+        "yubico-pam": {
+          "n": 21,
+          "n_cpp": 1,
+          "frac_cpp": 0.047619047619047616,
+          "prevalence": 0.14285714285714285,
+          "n_vuln": 3
+        },
+        "libcomps": {
+          "n": 92,
+          "n_cpp": 0,
+          "frac_cpp": 0.0,
+          "prevalence": 0.021739130434782608,
+          "n_vuln": 2
+        },
+        "Onigmo": {
+          "n": 110,
+          "n_cpp": 0,
+          "frac_cpp": 0.0,
+          "prevalence": 0.03636363636363636,
+          "n_vuln": 4
+        },
+        "php-src": {
+          "n": 1460,
+          "n_cpp": 44,
+          "frac_cpp": 0.030136986301369864,
+          "prevalence": 0.55,
+          "n_vuln": 803
+        }
+      },
+      "source": "results/p10/test2_projects.json"
+    },
+    "test2_clean": {
+      "N": 1991,
+      "n_vuln": 415,
+      "prevalence": 0.20843797086891008,
+      "projects_count": 12,
+      "project_breakdown": {
+        "Bento4": {
+          "n": 58,
+          "n_vuln": 5,
+          "prevalence": 0.08620689655172414
+        },
+        "MilkyTracker": {
+          "n": 56,
+          "n_vuln": 3,
+          "prevalence": 0.05357142857142857
+        },
+        "Onigmo": {
+          "n": 95,
+          "n_vuln": 1,
+          "prevalence": 0.010526315789473684
+        },
+        "contiki-ng": {
+          "n": 32,
+          "n_vuln": 1,
+          "prevalence": 0.03125
+        },
+        "cryptopp": {
+          "n": 58,
+          "n_vuln": 1,
+          "prevalence": 0.017241379310344827
+        },
+        "iperf": {
+          "n": 123,
+          "n_vuln": 26,
+          "prevalence": 0.21138211382113822
+        },
+        "libcomps": {
+          "n": 69,
+          "n_vuln": 1,
+          "prevalence": 0.014492753623188406
+        },
+        "libvpx": {
+          "n": 228,
+          "n_vuln": 7,
+          "prevalence": 0.03070175438596491
+        },
+        "libyaml": {
+          "n": 28,
+          "n_vuln": 1,
+          "prevalence": 0.03571428571428571
+        },
+        "node": {
+          "n": 316,
+          "n_vuln": 23,
+          "prevalence": 0.07278481012658228
+        },
+        "php-src": {
+          "n": 910,
+          "n_vuln": 346,
+          "prevalence": 0.3802197802197802
+        },
+        "yubico-pam": {
+          "n": 18,
+          "n_vuln": 0,
+          "prevalence": 0.0
+        }
+      },
+      "source": "data/p10/test2.parquet filtered by normalized duplicate removal against train/dev/old_test"
+    },
+    "note_on_prior_hallucination": "HANDOFF_P10.md Section 3.1 hallucinated projects (git, redis, curl, systemd, libvirt, wireshark, qemu, php-src, nginx, openssl, envoy, vlc) with prevalence 18.04%. Verified ground truth test2 has 12 projects with prevalence 32.64% (full) and 20.84% (clean)."
+  },
+  "item_4_per_project_test2_clean": {
+    "status_in_saved_p11_json": "UNAVAILABLE",
+    "saved_artifact_note": "In results/p11/test2_clean_evaluation.json, per-project breakdown metrics were not saved (only dataset-level aggregates were stored).",
+    "newly_computed_from_cache_and_metadata": {
+      "Bento4": {
+        "n": 58,
+        "positives": 5,
+        "prevalence": 0.08620689655172414,
+        "models": {
+          "L1": {
+            "auroc": 0.8377358490566038,
+            "auroc_ci": [
+              0.595357142857143,
+              0.95390625
+            ]
+          },
+          "Champion": {
+            "auroc": 0.7811320754716982,
+            "auroc_ci": [
+              0.5641964285714287,
+              0.9433773712737128
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.5094339622641509,
+            "auroc_ci": [
+              0.5,
+              0.532258064516129
+            ]
+          },
+          "V3": {
+            "auroc": 0.7037735849056604,
+            "auroc_ci": [
+              0.49691581632653076,
+              0.9420000000000001
+            ]
+          },
+          "V6": {
+            "auroc": 0.7773584905660378,
+            "auroc_ci": [
+              0.5437500000000001,
+              0.9669519420671494
+            ]
+          }
+        }
+      },
+      "MilkyTracker": {
+        "n": 56,
+        "positives": 3,
+        "prevalence": 0.05357142857142857,
+        "models": {
+          "L1": {
+            "auroc": 0.9119496855345912,
+            "auroc_ci": [
+              0.0,
+              0.9119496855345912
+            ]
+          },
+          "Champion": {
+            "auroc": 0.9465408805031447,
+            "auroc_ci": [
+              0.0,
+              0.9506172839506173
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.8144654088050314,
+            "auroc_ci": [
+              0.5,
+              0.8148148148148149
+            ]
+          },
+          "V3": {
+            "auroc": 0.9119496855345912,
+            "auroc_ci": [
+              0.0,
+              1.0
+            ]
+          },
+          "V6": {
+            "auroc": 0.9245283018867925,
+            "auroc_ci": [
+              0.0,
+              0.9245283018867925
+            ]
+          }
+        }
+      },
+      "Onigmo": {
+        "n": 95,
+        "positives": 1,
+        "prevalence": 0.010526315789473684,
+        "models": {
+          "L1": {
+            "auroc": 0.28191489361702127,
+            "auroc_ci": [
+              0.23267326732673266,
+              0.5675675675675675
+            ]
+          },
+          "Champion": {
+            "auroc": 0.3829787234042553,
+            "auroc_ci": [
+              0.3137254901960784,
+              0.5945945945945945
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.4787234042553191,
+            "auroc_ci": [
+              0.4732620320855615,
+              0.49019607843137253
+            ]
+          },
+          "V3": {
+            "auroc": 0.17021276595744683,
+            "auroc_ci": [
+              0.0980392156862745,
+              0.2148760330578512
+            ]
+          },
+          "V6": {
+            "auroc": 0.21276595744680848,
+            "auroc_ci": [
+              0.1568627450980392,
+              0.3380281690140845
+            ]
+          }
+        }
+      },
+      "contiki-ng": {
+        "n": 32,
+        "positives": 1,
+        "prevalence": 0.03125,
+        "models": {
+          "L1": {
+            "auroc": 0.5806451612903225,
+            "auroc_ci": [
+              0.2222222222222222,
+              0.8
+            ]
+          },
+          "Champion": {
+            "auroc": 0.7419354838709677,
+            "auroc_ci": [
+              0.2222222222222222,
+              0.9
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.3709677419354839,
+            "auroc_ci": [
+              0.26315789473684215,
+              0.5
+            ]
+          },
+          "V3": {
+            "auroc": 0.967741935483871,
+            "auroc_ci": [
+              0.9375,
+              1.0
+            ]
+          },
+          "V6": {
+            "auroc": 0.8387096774193549,
+            "auroc_ci": [
+              0.75,
+              1.0
+            ]
+          }
+        }
+      },
+      "cryptopp": {
+        "n": 58,
+        "positives": 1,
+        "prevalence": 0.017241379310344827,
+        "models": {
+          "L1": {
+            "auroc": 0.8245614035087719,
+            "auroc_ci": [
+              0.8,
+              0.8245614035087719
+            ]
+          },
+          "Champion": {
+            "auroc": 0.8421052631578947,
+            "auroc_ci": [
+              0.8200000000000001,
+              0.8421052631578947
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.5,
+            "auroc_ci": [
+              0.48,
+              0.5
+            ]
+          },
+          "V3": {
+            "auroc": 0.7543859649122807,
+            "auroc_ci": [
+              0.74,
+              0.7543859649122807
+            ]
+          },
+          "V6": {
+            "auroc": 0.7719298245614035,
+            "auroc_ci": [
+              0.74,
+              0.7719298245614035
+            ]
+          }
+        }
+      },
+      "iperf": {
+        "n": 123,
+        "positives": 26,
+        "prevalence": 0.21138211382113822,
+        "models": {
+          "L1": {
+            "auroc": 0.6191514670896114,
+            "auroc_ci": [
+              0.6191514670896114,
+              0.6191514670896114
+            ]
+          },
+          "Champion": {
+            "auroc": 0.3140364789849326,
+            "auroc_ci": [
+              0.3140364789849326,
+              0.3140364789849326
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.7789452815226011,
+            "auroc_ci": [
+              0.7789452815226011,
+              0.7789452815226011
+            ]
+          },
+          "V3": {
+            "auroc": 0.3774781919111816,
+            "auroc_ci": [
+              0.3774781919111816,
+              0.3774781919111816
+            ]
+          },
+          "V6": {
+            "auroc": 0.43338620142743856,
+            "auroc_ci": [
+              0.43338620142743856,
+              0.43338620142743856
+            ]
+          }
+        }
+      },
+      "libcomps": {
+        "n": 69,
+        "positives": 1,
+        "prevalence": 0.014492753623188406,
+        "models": {
+          "L1": {
+            "auroc": 0.8529411764705883,
+            "auroc_ci": [
+              0.8529411764705883,
+              0.8529411764705883
+            ]
+          },
+          "Champion": {
+            "auroc": 0.8970588235294118,
+            "auroc_ci": [
+              0.8970588235294118,
+              0.8970588235294118
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.9705882352941175,
+            "auroc_ci": [
+              0.9705882352941175,
+              0.9705882352941175
+            ]
+          },
+          "V3": {
+            "auroc": 0.9411764705882353,
+            "auroc_ci": [
+              0.9411764705882353,
+              0.9411764705882353
+            ]
+          },
+          "V6": {
+            "auroc": 0.9411764705882353,
+            "auroc_ci": [
+              0.9411764705882353,
+              0.9411764705882353
+            ]
+          }
+        }
+      },
+      "libvpx": {
+        "n": 228,
+        "positives": 7,
+        "prevalence": 0.03070175438596491,
+        "models": {
+          "L1": {
+            "auroc": 0.7427278603749192,
+            "auroc_ci": [
+              0.5142708333333335,
+              0.8125
+            ]
+          },
+          "Champion": {
+            "auroc": 0.707175177763413,
+            "auroc_ci": [
+              0.5768455598455599,
+              0.7853812056737588
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.6182934712346476,
+            "auroc_ci": [
+              0.4436111111111111,
+              0.7755691738722782
+            ]
+          },
+          "V3": {
+            "auroc": 0.6910148674854557,
+            "auroc_ci": [
+              0.5136612021857924,
+              0.7937624069478908
+            ]
+          },
+          "V6": {
+            "auroc": 0.7226890756302521,
+            "auroc_ci": [
+              0.5952734375000001,
+              0.8019662060751266
+            ]
+          }
+        }
+      },
+      "libyaml": {
+        "n": 28,
+        "positives": 1,
+        "prevalence": 0.03571428571428571,
+        "models": {
+          "L1": {
+            "auroc": 0.4814814814814815,
+            "auroc_ci": [
+              0.4814814814814815,
+              0.4814814814814815
+            ]
+          },
+          "Champion": {
+            "auroc": 0.6296296296296297,
+            "auroc_ci": [
+              0.6296296296296297,
+              0.6296296296296297
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.46296296296296297,
+            "auroc_ci": [
+              0.46296296296296297,
+              0.46296296296296297
+            ]
+          },
+          "V3": {
+            "auroc": 0.40740740740740744,
+            "auroc_ci": [
+              0.40740740740740744,
+              0.40740740740740744
+            ]
+          },
+          "V6": {
+            "auroc": 0.4814814814814815,
+            "auroc_ci": [
+              0.4814814814814815,
+              0.4814814814814815
+            ]
+          }
+        }
+      },
+      "node": {
+        "n": 316,
+        "positives": 23,
+        "prevalence": 0.07278481012658228,
+        "models": {
+          "L1": {
+            "auroc": 0.8132512242172429,
+            "auroc_ci": [
+              0.7155860146261243,
+              0.8973182708352646
+            ]
+          },
+          "Champion": {
+            "auroc": 0.7655438492357918,
+            "auroc_ci": [
+              0.6595436050229209,
+              0.8519212883470696
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.4909482119008755,
+            "auroc_ci": [
+              0.3888585110337711,
+              0.567725614902339
+            ]
+          },
+          "V3": {
+            "auroc": 0.5834693574714349,
+            "auroc_ci": [
+              0.4531678921568628,
+              0.6750946929916685
+            ]
+          },
+          "V6": {
+            "auroc": 0.7388336548449325,
+            "auroc_ci": [
+              0.6423198454806199,
+              0.8144137924954153
+            ]
+          }
+        }
+      },
+      "php-src": {
+        "n": 910,
+        "positives": 346,
+        "prevalence": 0.3802197802197802,
+        "models": {
+          "L1": {
+            "auroc": 0.661578116672816,
+            "auroc_ci": [
+              0.6077104693015131,
+              0.7067938656357866
+            ]
+          },
+          "Champion": {
+            "auroc": 0.6307316648218751,
+            "auroc_ci": [
+              0.5798345582259533,
+              0.6783396993759084
+            ]
+          },
+          "Static-only": {
+            "auroc": 0.5092854507440658,
+            "auroc_ci": [
+              0.45700211090970166,
+              0.5593893402349285
+            ]
+          },
+          "V3": {
+            "auroc": 0.6817273398106014,
+            "auroc_ci": [
+              0.6339575424249927,
+              0.7199875212986308
+            ]
+          },
+          "V6": {
+            "auroc": 0.6861804616078383,
+            "auroc_ci": [
+              0.6359365032830777,
+              0.727205311514651
+            ]
+          }
+        }
+      },
+      "yubico-pam": {
+        "n": 18,
+        "positives": 0,
+        "prevalence": 0.0,
+        "models": {
+          "L1": {
+            "auroc": null,
+            "auroc_ci": null
+          },
+          "Champion": {
+            "auroc": null,
+            "auroc_ci": null
+          },
+          "Static-only": {
+            "auroc": null,
+            "auroc_ci": null
+          },
+          "V3": {
+            "auroc": null,
+            "auroc_ci": null
+          },
+          "V6": {
+            "auroc": null,
+            "auroc_ci": null
+          }
+        }
+      }
+    },
+    "source": "Computed from data/cache/p10/test2_features_cache.pkl and data/p10/test2.parquet metadata"
+  },
+  "item_5_old_test": {
+    "old_erroneous_claim": {
+      "N": 4016,
+      "prevalence": 0.3175,
+      "source_error": "Prior drafts in reports/FINAL_RESULTS.md and COMPREHENSIVE_PROJECT_DOSSIER.md stated N=4,016 with prevalence 31.75%."
+    },
+    "new_verified_value": {
+      "N": 3169,
+      "n_positives": 1003,
+      "prevalence": 0.3165036289050174,
+      "projects": {
+        "openssl": 1257,
+        "gpac": 793,
+        "envoy": 603,
+        "vim": 516
+      },
+      "source": "results/p11/old_test_evaluation.json and data/splits/vulnerability_test_heldout_projects_clean.parquet"
+    }
+  },
+  "item_6_juliet": {
+    "old_erroneous_claim": {
+      "Juliet_S_flow_N": 64099,
+      "Juliet_S_flow_AUROC": 0.9997,
+      "Juliet_S_cwe_N": 64099,
+      "Juliet_S_cwe_AUROC": 0.612,
+      "source_error": "Prior FINAL_RESULTS.md table pasted fabricated N=64,099 and AUROC=0.9997."
+    },
+    "verified_juliet_splits": {
+      "split_rand": {
+        "n_train": 22153,
+        "n_val": 2737,
+        "n_test": 2736,
+        "models": {
+          "J0_length": {
+            "auroc": 0.5921944173029832,
+            "auroc_ci": [
+              0.5789575985270738,
+              0.6057687782732281
+            ],
+            "accuracy": 0.6198830409356725,
+            "pair_accuracy": 0.4160621279761904,
+            "possible_leak": false
+          },
+          "J0_static": {
+            "auroc": 0.6401681564313202,
+            "auroc_ci": [
+              0.6247401343386109,
+              0.6547362028601139
+            ],
+            "accuracy": 0.7006578947368421,
+            "pair_accuracy": 0.3157552083333333,
+            "possible_leak": false
+          },
+          "J0_char3gram": {
+            "auroc": 0.8386967876572697,
+            "auroc_ci": [
+              0.8273992090649231,
+              0.8495967340440247
+            ],
+            "accuracy": 0.7448830409356725,
+            "pair_accuracy": 0.8005487351190477,
+            "possible_leak": false
+          },
+          "J1": {
+            "auroc": 0.791937478136045,
+            "auroc_ci": [
+              0.7798182910564573,
+              0.8037504531534762
+            ],
+            "accuracy": 0.6970029239766082,
+            "pair_accuracy": 0.7014973958333333,
+            "possible_leak": false
+          },
+          "J2": {
+            "auroc": 0.8135345420330765,
+            "auroc_ci": [
+              0.8007379997064615,
+              0.8259403045213634
+            ],
+            "accuracy": 0.7372076023391813,
+            "pair_accuracy": 0.7429780505952381,
+            "possible_leak": false
+          },
+          "J3": {
+            "auroc": 0.9113017044837695,
+            "auroc_ci": [
+              0.9014541103047841,
+              0.9202806416194015
+            ],
+            "accuracy": 0.8230994152046783,
+            "pair_accuracy": 0.8176618303571429,
+            "possible_leak": false
+          }
+        }
+      },
+      "split_flow": {
+        "n_train": 16733,
+        "n_val": 4191,
+        "n_test": 6702,
+        "models": {
+          "J0_length": {
+            "auroc": 0.6335949316975251,
+            "auroc_ci": [
+              0.6257221316165132,
+              0.6416192703738813
+            ],
+            "accuracy": 0.6014622500746046,
+            "pair_accuracy": 0.38727858293075684,
+            "possible_leak": false
+          },
+          "J0_static": {
+            "auroc": 0.6262561665403007,
+            "auroc_ci": [
+              0.6163497341815454,
+              0.6353642760812362
+            ],
+            "accuracy": 0.6833780960907192,
+            "pair_accuracy": 0.30679683306494904,
+            "possible_leak": false
+          },
+          "J0_char3gram": {
+            "auroc": 0.7378480215532085,
+            "auroc_ci": [
+              0.7293321128465565,
+              0.7462600044171338
+            ],
+            "accuracy": 0.6639809012235154,
+            "pair_accuracy": 0.6056763285024155,
+            "possible_leak": false
+          },
+          "J1": {
+            "auroc": 0.6654785029117599,
+            "auroc_ci": [
+              0.6551952087170585,
+              0.6749493649190397
+            ],
+            "accuracy": 0.587138167711131,
+            "pair_accuracy": 0.49627616747181963,
+            "possible_leak": false
+          },
+          "J2": {
+            "auroc": 0.6924592880447191,
+            "auroc_ci": [
+              0.6821021945217631,
+              0.7021967382782542
+            ],
+            "accuracy": 0.5872873769024172,
+            "pair_accuracy": 0.5849771873322598,
+            "possible_leak": false
+          },
+          "J3": {
+            "auroc": 0.722311699571425,
+            "auroc_ci": [
+              0.7124683328960202,
+              0.7321613357332725
+            ],
+            "accuracy": 0.6104148015517756,
+            "pair_accuracy": 0.5525697799248525,
+            "possible_leak": false
+          }
+        }
+      },
+      "split_cwe": {
+        "n_train": 17722,
+        "n_val": 4463,
+        "n_test": 5441,
+        "models": {
+          "J0_length": {
+            "auroc": 0.6311160930963552,
+            "auroc_ci": [
+              0.6210285337438758,
+              0.6404295873276012
+            ],
+            "accuracy": 0.6377504135269252,
+            "pair_accuracy": 0.42398074745186864,
+            "possible_leak": false
+          },
+          "J0_static": {
+            "auroc": 0.6784132633800971,
+            "auroc_ci": [
+              0.6672091307160627,
+              0.689706898483845
+            ],
+            "accuracy": 0.7596030141518103,
+            "pair_accuracy": 0.3908550396375991,
+            "possible_leak": false
+          },
+          "J0_char3gram": {
+            "auroc": 0.7788992380644217,
+            "auroc_ci": [
+              0.7694581862305305,
+              0.7885136262261073
+            ],
+            "accuracy": 0.6805734240029406,
+            "pair_accuracy": 0.7897791619479049,
+            "possible_leak": false
+          },
+          "J1": {
+            "auroc": 0.7235937319435135,
+            "auroc_ci": [
+              0.7134421730055749,
+              0.7340351931060504
+            ],
+            "accuracy": 0.6553942290020217,
+            "pair_accuracy": 0.6237259343148358,
+            "possible_leak": false
+          },
+          "J2": {
+            "auroc": 0.7871912388964646,
+            "auroc_ci": [
+              0.7767421961439901,
+              0.7982457882142034
+            ],
+            "accuracy": 0.6735894137107149,
+            "pair_accuracy": 0.7081917704794262,
+            "possible_leak": false
+          },
+          "J3": {
+            "auroc": 0.8036593708831211,
+            "auroc_ci": [
+              0.7934855765698016,
+              0.8149594095032698
+            ],
+            "accuracy": 0.6541077007902959,
+            "pair_accuracy": 0.7187617969044923,
+            "possible_leak": false
+          }
+        }
+      }
+    },
+    "leak_audit_conclusion": "In results/p10/juliet_evaluation.json, true test splits are: split_flow (N=6,702, J2 AUROC=0.6925), split_cwe (N=5,441, J2 AUROC=0.7872), split_rand (N=2,736, J2 AUROC=0.8135). Any prior claim of AUROC > 0.98 on Juliet (such as 0.9997) is flagged as a synthetic memorization artifact or test-leak.",
+    "source": "results/p10/juliet_evaluation.json and results/p10/juliet_leak_check.json"
+  },
+  "item_7_model_b": {
+    "tasks_with_validated_harness": {
+      "total_tasks_in_harnesses_json": 150,
+      "validated_harness_count": 60,
+      "no_harness_count": 90,
+      "source": "data/p10/harnesses/harnesses.json"
+    },
+    "units_per_role": {
+      "v1_human": 98,
+      "v2_ai": 98,
+      "v3_human_edit_of_ai": 98,
+      "v4_ai_edit_of_human": 98,
+      "t40_v1_human_secure": 1,
+      "t40_v2_ai_naive": 1,
+      "t40_v3_human_remediated": 1,
+      "t40_v4_ai_regressive": 1,
+      "t60_v1_human_base": 1,
+      "t60_v2_ai_naive": 1,
+      "t60_v3_human_remediated": 1,
+      "t60_v4_ai_regressive": 1,
+      "t12_v1_human_secure": 1,
+      "t12_v2_ai_naive": 1,
+      "t12_v3_human_remediated": 1,
+      "t12_v4_ai_regressive": 1,
+      "t38_v1_human_secure": 1,
+      "t38_v2_ai_naive": 1,
+      "t38_v3_human_remediated": 1,
+      "t38_v4_ai_regressive": 1,
+      "t11_v1_human_secure": 1,
+      "t11_v2_ai_naive": 1,
+      "t11_v3_human_remediated": 1,
+      "t11_v4_ai_regressive": 1,
+      "t51_v1_human_base": 1,
+      "t51_v2_ai_naive": 1,
+      "t51_v3_human_remediated": 1,
+      "t51_v4_ai_regressive": 1,
+      "t56_v1_human_base": 1,
+      "t56_v2_ai_naive": 1,
+      "t56_v3_human_remediated": 1,
+      "t56_v4_ai_regressive": 1,
+      "t41_v1_human_base": 1,
+      "t41_v2_ai_naive": 1,
+      "t41_v3_human_remediated": 1,
+      "t41_v4_ai_regressive": 1,
+      "t27_v1_human_secure": 1,
+      "t27_v2_ai_naive": 1,
+      "t27_v3_human_remediated": 1,
+      "t27_v4_ai_regressive": 1,
+      "t49_v1_human_base": 1,
+      "t49_v2_ai_naive": 1,
+      "t49_v3_human_remediated": 1,
+      "t49_v4_ai_regressive": 1,
+      "t30_v1_human_secure": 1,
+      "t30_v2_ai_naive": 1,
+      "t30_v3_human_remediated": 1,
+      "t30_v4_ai_regressive": 1,
+      "t19_v1_human_secure": 1,
+      "t19_v2_ai_naive": 1,
+      "t19_v3_human_remediated": 1,
+      "t19_v4_ai_regressive": 1,
+      "t25_v1_human_secure": 1,
+      "t25_v2_ai_naive": 1,
+      "t25_v3_human_remediated": 1,
+      "t25_v4_ai_regressive": 1,
+      "t53_v1_human_base": 1,
+      "t53_v2_ai_naive": 1,
+      "t53_v3_human_remediated": 1,
+      "t53_v4_ai_regressive": 1,
+      "t20_v1_human_secure": 1,
+      "t20_v2_ai_naive": 1,
+      "t20_v3_human_remediated": 1,
+      "t20_v4_ai_regressive": 1,
+      "t54_v1_human_base": 1,
+      "t54_v2_ai_naive": 1,
+      "t54_v3_human_remediated": 1,
+      "t54_v4_ai_regressive": 1,
+      "t42_v1_human_base": 1,
+      "t42_v2_ai_naive": 1,
+      "t42_v3_human_remediated": 1,
+      "t42_v4_ai_regressive": 1,
+      "t28_v1_human_secure": 1,
+      "t28_v2_ai_naive": 1,
+      "t28_v3_human_remediated": 1,
+      "t28_v4_ai_regressive": 1,
+      "t22_v1_human_secure": 1,
+      "t22_v2_ai_naive": 1,
+      "t22_v3_human_remediated": 1,
+      "t22_v4_ai_regressive": 1,
+      "t52_v1_human_base": 1,
+      "t52_v2_ai_naive": 1,
+      "t52_v3_human_remediated": 1,
+      "t52_v4_ai_regressive": 1,
+      "t29_v1_human_legacy_vuln": 1,
+      "t29_v2_ai_defensive": 1,
+      "t29_v3_human_buggy": 1,
+      "t29_v4_ai_fixed": 1,
+      "t57_v1_human_base": 1,
+      "t57_v2_ai_naive": 1,
+      "t57_v3_human_remediated": 1,
+      "t57_v4_ai_regressive": 1,
+      "t14_v1_human_secure": 1,
+      "t14_v2_ai_naive": 1,
+      "t14_v3_human_remediated": 1,
+      "t14_v4_ai_regressive": 1,
+      "t36_v1_human_secure": 1,
+      "t36_v2_ai_naive": 1,
+      "t36_v3_human_remediated": 1,
+      "t36_v4_ai_regressive": 1,
+      "t59_v1_human_base": 1,
+      "t59_v2_ai_naive": 1,
+      "t59_v3_human_remediated": 1,
+      "t59_v4_ai_regressive": 1,
+      "t16_v1_human_secure": 1,
+      "t16_v2_ai_naive": 1,
+      "t16_v3_human_remediated": 1,
+      "t16_v4_ai_regressive": 1,
+      "t32_v1_human_legacy_vuln": 1,
+      "t32_v2_ai_defensive": 1,
+      "t32_v3_human_buggy": 1,
+      "t32_v4_ai_fixed": 1,
+      "t17_v1_human_secure": 1,
+      "t17_v2_ai_naive": 1,
+      "t17_v3_human_remediated": 1,
+      "t17_v4_ai_regressive": 1,
+      "t44_v1_human_base": 1,
+      "t44_v2_ai_naive": 1,
+      "t44_v3_human_remediated": 1,
+      "t44_v4_ai_regressive": 1,
+      "t10_v1_human_secure": 1,
+      "t10_v2_ai_naive": 1,
+      "t10_v3_human_remediated": 1,
+      "t10_v4_ai_regressive": 1,
+      "t15_v1_human_secure": 1,
+      "t15_v2_ai_naive": 1,
+      "t15_v3_human_remediated": 1,
+      "t15_v4_ai_regressive": 1,
+      "t37_v1_human_secure": 1,
+      "t37_v2_ai_naive": 1,
+      "t37_v3_human_remediated": 1,
+      "t37_v4_ai_regressive": 1,
+      "t31_v1_human_secure": 1,
+      "t31_v2_ai_naive": 1,
+      "t31_v3_human_remediated": 1,
+      "t31_v4_ai_regressive": 1,
+      "pure_ai_real_t02": 150,
+      "pure_ai_real_t08": 150,
+      "t26_v1_human_legacy_vuln": 1,
+      "t26_v3_human_buggy_edit": 1,
+      "t26_v2_ai_defensive_fix": 1,
+      "t26_v4_ai_remediated_secure": 1,
+      "t33_v2_ai_naive": 1,
+      "t33_v4_ai_regressive": 1,
+      "t46_v2_ai_naive": 1,
+      "t46_v3_human_remediated": 1,
+      "t46_v4_ai_regressive": 1,
+      "t47_v2_ai_naive": 1,
+      "t47_v3_human_remediated": 1,
+      "t47_v4_ai_regressive": 1,
+      "t33_v1_human_secure": 1,
+      "t33_v3_human_remediated": 1,
+      "t45_v2_ai_naive": 1,
+      "t45_v3_human_remediated": 1,
+      "t45_v4_ai_regressive": 1,
+      "t46_v1_human_base": 1,
+      "t47_v1_human_base": 1,
+      "t18_v2_ai_naive": 1,
+      "t18_v3_human_remediated": 1,
+      "t18_v4_ai_regressive": 1,
+      "t23_v2_ai_naive": 1,
+      "t45_v1_human_base": 1,
+      "t23_v4_ai_regressive": 1,
+      "t18_v1_human_secure": 1,
+      "t23_v1_human_secure": 1,
+      "t23_v3_human_remediated": 1,
+      "t13_v2_ai_naive": 1,
+      "t13_v3_human_remediated": 1,
+      "t13_v4_ai_regressive": 1,
+      "t13_v1_human_secure": 1,
+      "t50_v2_ai_naive": 1,
+      "t50_v3_human_remediated": 1,
+      "t50_v4_ai_regressive": 1,
+      "t50_v1_human_base": 1,
+      "t39_v1_human_secure": 1,
+      "t39_v2_ai_naive": 1,
+      "t39_v3_human_remediated": 1,
+      "t39_v4_ai_regressive": 1,
+      "t58_v2_ai_naive": 1,
+      "t58_v3_human_remediated": 1,
+      "t58_v4_ai_regressive": 1,
+      "t9_v2_ai_naive": 1,
+      "t9_v4_ai_regressive": 1,
+      "t58_v1_human_base": 1,
+      "t9_v1_human_secure": 1,
+      "t9_v3_human_remediated": 1,
+      "t24_v1_human_secure": 1,
+      "t24_v2_ai_naive": 1,
+      "t24_v3_human_remediated": 1,
+      "t34_v3_human_buggy": 1,
+      "t24_v4_ai_regressive": 1,
+      "t55_v2_ai_naive": 1,
+      "t55_v3_human_remediated": 1,
+      "t55_v4_ai_regressive": 1,
+      "t34_v1_human_legacy_vuln": 1,
+      "t34_v2_ai_defensive": 1,
+      "t43_v2_ai_naive": 1,
+      "t43_v3_human_remediated": 1,
+      "t43_v4_ai_regressive": 1,
+      "t34_v4_ai_fixed": 1,
+      "t55_v1_human_base": 1,
+      "t43_v1_human_base": 1,
+      "t48_v2_ai_naive": 1,
+      "t48_v3_human_remediated": 1,
+      "t48_v4_ai_regressive": 1,
+      "t48_v1_human_base": 1,
+      "t21_v2_ai_naive": 1,
+      "t21_v3_human_remediated": 1,
+      "t35_v2_ai_naive": 1,
+      "t21_v1_human_secure": 1,
+      "t35_v4_ai_regressive": 1,
+      "t21_v4_ai_regressive": 1,
+      "t35_v1_human_secure": 1,
+      "t35_v3_human_remediated": 1
+    },
+    "clean_tasks_count": 36,
+    "suspect_tasks_excluded": [
+      "dev_task_023_dangerous_function",
+      "dev_task_033_reachable_assertion",
+      "dev_task_034_mismatched_memory",
+      "dev_task_035_path_manipulation",
+      "dev_task_061_http_chunk_decode_0",
+      "dev_task_067_bmp_palette_alloc_0",
+      "dev_task_078_dns_lookup_cmd_0",
+      "dev_task_100_cert_chain_free_1",
+      "dev_task_108_dns_lookup_cmd_1"
+    ],
+    "cross_validation_method_actual": "5-fold GroupKFold cross-validation grouped by task_id across 5 random seeds (42, 43, 44, 45, 46). Leave-One-Out (LOO) was NOT used.",
+    "c1_counts_and_mcnemar": {
+      "n_tasks": 36,
+      "rate_human": 0.2777777777777778,
+      "rate_human_ci": [
+        0.1584833794013461,
+        0.43992489997397105
+      ],
+      "rate_ai_t02": 0.1111111111111111,
+      "rate_ai_t02_ci": [
+        0.04406640300315648,
+        0.25314808590364857
+      ],
+      "diff_t02_minus_human": -0.16666666666666669,
+      "mcnemar_t02": {
+        "n00": 26,
+        "n01": 0,
+        "n10": 6,
+        "n11": 4,
+        "b": 0,
+        "c": 6,
+        "statistic": 4.166666666666667,
+        "p_value": 0.041226833337163704
+      },
+      "rate_ai_t08": 0.08333333333333333,
+      "rate_ai_t08_ci": [
+        0.02874861133599338,
+        0.2182669124927263
+      ],
+      "diff_t08_minus_human": -0.19444444444444448,
+      "mcnemar_t08": {
+        "n00": 26,
+        "n01": 0,
+        "n10": 7,
+        "n11": 3,
+        "b": 0,
+        "c": 7,
+        "statistic": 5.142857142857143,
+        "p_value": 0.023342202012890834
+      }
+    },
+    "c2_aurocs_with_ci": {
+      "B1(a)": {
+        "auroc": 0.3964183964183964,
+        "auroc_ci": [
+          0.2662305831423478,
+          0.5178318111960533
+        ],
+        "auprc": 0.1284544954483056
+      },
+      "B1(b)": {
+        "auroc": 0.42816442816442807,
+        "auroc_ci": [
+          0.3145285880745742,
+          0.5693491484708636
+        ],
+        "auprc": 0.22527914065710117
+      },
+      "B1(c)": {
+        "auroc": 0.3715913715913716,
+        "auroc_ci": [
+          0.16315437249666226,
+          0.5762598053920368
+        ],
+        "auprc": 0.21045025338989337
+      },
+      "B2": {
+        "auroc": 0.4965404965404965,
+        "auroc_ci": [
+          0.3752880839835935,
+          0.659765132408575
+        ],
+        "auprc": 0.16575068329444534
+      },
+      "B3": {
+        "auroc": 0.36568986568986567,
+        "auroc_ci": [
+          0.2227633027522936,
+          0.5267504647804009
+        ],
+        "auprc": 0.20863292987127974
+      },
+      "B4": {
+        "auroc": 0.4700854700854701,
+        "auroc_ci": [
+          0.3468463909253383,
+          0.6064301770063584
+        ],
+        "auprc": 0.15108664488590234
+      },
+      "B4s": {
+        "auroc": 0.582010582010582,
+        "auroc_ci": [
+          0.43143344592739064,
+          0.7374282212885152
+        ],
+        "auprc": 0.2627620418160136
+      },
+      "B5": {
+        "auroc": 0.3671143671143671,
+        "auroc_ci": [
+          0.2289584710470651,
+          0.4936668065900039
+        ],
+        "auprc": 0.13652436396252157
+      }
+    },
+    "source": "results/p11/modelb_v2_labels.json and scripts/p10/model_b_pipeline.py"
+  }
+}

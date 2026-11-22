@@ -1,0 +1,10 @@
+{
+  "status": "skipped",
+  "reason": "Neither GEMINI_API_KEY nor OPENAI_API_KEY is set in environment",
+  "n_tasks_attempted": 0,
+  "n_generated": 0,
+  "temperatures": [
+    0.2,
+    0.8
+  ]
+}

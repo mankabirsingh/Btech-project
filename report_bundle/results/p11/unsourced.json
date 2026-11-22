@@ -1,0 +1,84 @@
+[
+  {
+    "location": "HANDOFF_P10.md Section 3.1",
+    "claim": "Selected 12 held-out projects (seed 42): git, redis, curl, systemd, libvirt, wireshark, qemu, php-src, nginx, openssl, envoy, vlc",
+    "issue": "Hallucinated project list. Ground truth in results/p10/test2_projects.json shows: node, Bento4, MilkyTracker, cryptopp, libvpx, iperf, contiki-ng, libyaml, yubico-pam, libcomps, Onigmo, php-src.",
+    "source_file": "results/p10/test2_projects.json",
+    "source_value": [
+      "node",
+      "Bento4",
+      "MilkyTracker",
+      "cryptopp",
+      "libvpx",
+      "iperf",
+      "contiki-ng",
+      "libyaml",
+      "yubico-pam",
+      "libcomps",
+      "Onigmo",
+      "php-src"
+    ]
+  },
+  {
+    "location": "HANDOFF_P10.md Section 3.1",
+    "claim": "test2.parquet (N=2,904, prevalence 18.04%)",
+    "issue": "Incorrect prevalence stated in prose. Ground truth prevalence is 32.64% (948 vuln / 2904 total).",
+    "source_file": "results/p10/test2_projects.json",
+    "source_key": "selected_summary.prevalence",
+    "source_value": 0.32644628099173556
+  },
+  {
+    "location": "HANDOFF_P10.md Section 6 & 7 Bullet 2",
+    "claim": "AI implementations had a lower crash rate (8.0% at temp 0.2, 6.7% at temp 0.8) than human baseline implementations (11.2%)",
+    "issue": "Fabricated crash rates in prose. Ground truth in results/p10/model_b_v2_evaluation.json shows: human=26.83%, ai_t02=19.51%, ai_t08=14.63%.",
+    "source_file": "results/p10/model_b_v2_evaluation.json",
+    "source_key": "c1_human_vs_ai",
+    "source_value": {
+      "rate_human": 0.26829,
+      "rate_ai_t02": 0.19512,
+      "rate_ai_t08": 0.14634
+    }
+  },
+  {
+    "location": "HANDOFF_P10.md Section 7 Bullet 5",
+    "claim": "Flagging only functions with p >= 0.6956 yielded 53.1% precision on test2 (a 2.94x lift over baseline prevalence), while functions with p <= 0.1585 had 88.4% NPV",
+    "issue": "Numbers in prose conflict with actual test2 evaluation. On test2-full, p>=0.6956 achieved 48.65% precision (1.49x lift over 32.64% base prevalence); safe NPV was 77.83%. The prose numbers (53.1% precision, 88.4% NPV) were from a different or hallucinated evaluation.",
+    "source_file": "results/p11/test2_clean_evaluation.json",
+    "source_key": "test2_full.V3.three_way_decision",
+    "source_value": {
+      "precision": 0.4865,
+      "npv": 0.7783
+    }
+  },
+  {
+    "location": "HANDOFF_P10.md Section 7 Bullet 8",
+    "claim": "Stacker ensembles provide generalization robustness: Ridge stacking (V6) achieved 0.6840 AUROC, 0.5420 LM-AUROC, 50.0% Top 10% precision",
+    "issue": "LM-AUROC on test2 for V6 is 0.5098 (not 0.5420). 0.5420 was an unsourced number in prose.",
+    "source_file": "results/p10/model_a_v2_evaluation.json",
+    "source_key": "test2_evaluation.V6_Stacker.length_matched_auroc",
+    "source_value": 0.5098
+  },
+  {
+    "location": "HANDOFF_P10.md Section 2.3",
+    "claim": "J2 (J*) achieved 0.8654 [0.8552, 0.8753] AUROC on Juliet S-flow; J0_length 0.5000; J0_static 0.7818; J1 0.8124; J3 0.8412",
+    "issue": "Fabricated Juliet numbers in prose. Ground truth in results/p10/juliet_evaluation.json shows: J0_length=0.6336, J0_static=0.6263, J0_char3gram=0.7378, J1=0.6655, J2=0.6925, J3=0.7223.",
+    "source_file": "results/p10/juliet_evaluation.json",
+    "source_key": "splits.split_flow",
+    "source_value": {
+      "J0_length": 0.6336,
+      "J0_static": 0.6263,
+      "J0_char3gram": 0.7378,
+      "J1": 0.6655,
+      "J2": 0.6925,
+      "J3": 0.7223
+    }
+  },
+  {
+    "location": "HANDOFF_P10.md Section 2.3",
+    "claim": "Cross-CWE Generalization (S-cwe split): J2 achieved AUROC 0.6214 [0.6038, 0.6389]",
+    "issue": "Fabricated cross-CWE AUROC in prose. Ground truth in results/p10/juliet_evaluation.json shows: J2 on split_cwe achieved 0.7872 [0.7767, 0.7982].",
+    "source_file": "results/p10/juliet_evaluation.json",
+    "source_key": "splits.split_cwe.J2.metrics.auroc",
+    "source_value": 0.78719
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "timestamp_utc": "2026-11-21 14:14:03 UTC",
+  "model_dir": "/Users/mankabir/Desktop/Btech project/models/checkpoints/p5/model_a_final",
+  "status": "FROZEN_BEFORE_TEST_EVALUATION",
+  "file_count": 8,
+  "files": {
+    "__init__.py": {
+      "sha256": "ea1369a10dbab81ece0a9076092130c6a56eb67f43d36c3c86bea2f4bc827599",
+      "size_bytes": 156
+    },
+    "manifest.json": {
+      "sha256": "bfc8e5fb4bf9dbd0db29804bee5e8502d5e079ff12573cb122c76de490d4c621",
+      "size_bytes": 3288
+    },
+    "predictor.py": {
+      "sha256": "93cfb1218da3f4cb017a02c936fc95458eb08c1e44ea32e24f5dcc2a42462bcb",
+      "size_bytes": 6441
+    },
+    "weights/d2_seed1.pt": {
+      "sha256": "63ffc9a40449e3e87c823987cddae1a9af46fee180403f1d2aaebba8aa8b33f7",
+      "size_bytes": 503806170
+    },
+    "weights/d2_seed2.pt": {
+      "sha256": "60fc387baa39832fd9f2e1e72eb668b12d1c6c23c071d08c2d1f601c69282358",
+      "size_bytes": 503806170
+    },
+    "weights/d2_seed3.pt": {
+      "sha256": "4fcafd146820f7ef418485da28a792de3e5599e2d9d0068d81da4012ef7884b1",
+      "size_bytes": 503806170
+    },
+    "weights/d2_seed42.pt": {
+      "sha256": "1c7522cb5f25b94caaef35cb3e5e3d524cd54a218fec245f06bf67442e720085",
+      "size_bytes": 503806170
+    },
+    "weights/d2_seed7.pt": {
+      "sha256": "55820e8d280723ba650cbbd632ea0b10c3e01e6c86989017b19b602fe0045c3e",
+      "size_bytes": 503806170
+    }
+  }
+}

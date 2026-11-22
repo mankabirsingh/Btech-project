@@ -1,0 +1,1675 @@
+{
+  "n_tasks": 8,
+  "n_versions": 32,
+  "task_summaries": [
+    {
+      "task_id": "pilot_001_buffer_handling",
+      "n_versions": 4,
+      "version_results": [
+        {
+          "version_id": "pilot_001_v1_human_secure",
+          "author_type": "human",
+          "ai_involvement": 0.0,
+          "n_findings": 5,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 5
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-120",
+            "CWE-126"
+          ],
+          "risk_level": "High",
+          "risk_score": 5,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "pilot_001_v2_ai_insecure",
+          "author_type": "ai",
+          "ai_involvement": 1.0,
+          "n_findings": 6,
+          "severity_counts": {
+            "critical": 2,
+            "high": 2,
+            "medium": 0,
+            "low": 2
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-120"
+          ],
+          "risk_level": "Critical",
+          "risk_score": 16,
+          "known_vuln_label": 1
+        },
+        {
+          "version_id": "pilot_001_v3_human_edited_ai",
+          "author_type": "human_edit_of_ai",
+          "ai_involvement": 0.5,
+          "n_findings": 3,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 3
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-120"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 3,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "pilot_001_v4_human_insecure",
+          "author_type": "human",
+          "ai_involvement": 0.0,
+          "n_findings": 6,
+          "severity_counts": {
+            "critical": 0,
+            "high": 4,
+            "medium": 0,
+            "low": 2
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-120"
+          ],
+          "risk_level": "Critical",
+          "risk_score": 14,
+          "known_vuln_label": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from_version": "pilot_001_v2_ai_insecure",
+          "to_version": "pilot_001_v3_human_edited_ai",
+          "from_author": "ai",
+          "to_author": "human_edit_of_ai",
+          "from_ai_involvement": 1.0,
+          "to_ai_involvement": 0.5,
+          "findings_removed": 3,
+          "risk_change": -13,
+          "cwes_fixed": [],
+          "cwes_introduced": [],
+          "cwes_persistent": [
+            "CWE-119",
+            "CWE-120"
+          ],
+          "vuln_persisted": false,
+          "vuln_fixed": true
+        }
+      ],
+      "summary": {
+        "versions_analyzed": 4,
+        "versions_with_findings": 4,
+        "total_unique_cwes": [
+          "CWE-119",
+          "CWE-120",
+          "CWE-126"
+        ]
+      }
+    },
+    {
+      "task_id": "task_002_format_string",
+      "n_versions": 4,
+      "version_results": [
+        {
+          "version_id": "t2_v1_human_secure",
+          "author_type": "human",
+          "ai_involvement": 0.0,
+          "n_findings": 0,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [],
+          "risk_level": "Low",
+          "risk_score": 0,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t2_v2_ai_insecure",
+          "author_type": "ai",
+          "ai_involvement": 1.0,
+          "n_findings": 2,
+          "severity_counts": {
+            "critical": 0,
+            "high": 2,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [
+            "CWE-134"
+          ],
+          "risk_level": "High",
+          "risk_score": 6,
+          "known_vuln_label": 1
+        },
+        {
+          "version_id": "t2_v3_human_hybrid_fixed",
+          "author_type": "human_edit_of_ai",
+          "ai_involvement": 0.5,
+          "n_findings": 0,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [],
+          "risk_level": "Low",
+          "risk_score": 0,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t2_v4_ai_regressive",
+          "author_type": "ai_edit_of_human",
+          "ai_involvement": 0.75,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 1,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [
+            "CWE-134"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 3,
+          "known_vuln_label": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from_version": "t2_v2_ai_insecure",
+          "to_version": "t2_v3_human_hybrid_fixed",
+          "from_author": "ai",
+          "to_author": "human_edit_of_ai",
+          "from_ai_involvement": 1.0,
+          "to_ai_involvement": 0.5,
+          "findings_removed": 2,
+          "risk_change": -6,
+          "cwes_fixed": [
+            "CWE-134"
+          ],
+          "cwes_introduced": [],
+          "cwes_persistent": [],
+          "vuln_persisted": false,
+          "vuln_fixed": true
+        },
+        {
+          "from_version": "t2_v3_human_hybrid_fixed",
+          "to_version": "t2_v4_ai_regressive",
+          "from_author": "human_edit_of_ai",
+          "to_author": "ai_edit_of_human",
+          "from_ai_involvement": 0.5,
+          "to_ai_involvement": 0.75,
+          "findings_removed": -1,
+          "risk_change": 3,
+          "cwes_fixed": [],
+          "cwes_introduced": [
+            "CWE-134"
+          ],
+          "cwes_persistent": [],
+          "vuln_persisted": true,
+          "vuln_fixed": false
+        }
+      ],
+      "summary": {
+        "versions_analyzed": 4,
+        "versions_with_findings": 2,
+        "total_unique_cwes": [
+          "CWE-134"
+        ]
+      }
+    },
+    {
+      "task_id": "task_003_integer_overflow",
+      "n_versions": 4,
+      "version_results": [
+        {
+          "version_id": "t3_v1_human_secure",
+          "author_type": "human",
+          "ai_involvement": 0.0,
+          "n_findings": 0,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [],
+          "risk_level": "Low",
+          "risk_score": 0,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t3_v2_ai_insecure",
+          "author_type": "ai",
+          "ai_involvement": 1.0,
+          "n_findings": 0,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [],
+          "risk_level": "Low",
+          "risk_score": 0,
+          "known_vuln_label": 1
+        },
+        {
+          "version_id": "t3_v3_human_hybrid_fixed",
+          "author_type": "human_edit_of_ai",
+          "ai_involvement": 0.5,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 1,
+            "low": 0
+          },
+          "cwes": [
+            "CWE-252"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 2,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t3_v4_ai_regressive",
+          "author_type": "ai_edit_of_human",
+          "ai_involvement": 0.75,
+          "n_findings": 0,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [],
+          "risk_level": "Low",
+          "risk_score": 0,
+          "known_vuln_label": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from_version": "t3_v2_ai_insecure",
+          "to_version": "t3_v3_human_hybrid_fixed",
+          "from_author": "ai",
+          "to_author": "human_edit_of_ai",
+          "from_ai_involvement": 1.0,
+          "to_ai_involvement": 0.5,
+          "findings_removed": -1,
+          "risk_change": 2,
+          "cwes_fixed": [],
+          "cwes_introduced": [
+            "CWE-252"
+          ],
+          "cwes_persistent": [],
+          "vuln_persisted": false,
+          "vuln_fixed": true
+        },
+        {
+          "from_version": "t3_v3_human_hybrid_fixed",
+          "to_version": "t3_v4_ai_regressive",
+          "from_author": "human_edit_of_ai",
+          "to_author": "ai_edit_of_human",
+          "from_ai_involvement": 0.5,
+          "to_ai_involvement": 0.75,
+          "findings_removed": 1,
+          "risk_change": -2,
+          "cwes_fixed": [
+            "CWE-252"
+          ],
+          "cwes_introduced": [],
+          "cwes_persistent": [],
+          "vuln_persisted": true,
+          "vuln_fixed": false
+        }
+      ],
+      "summary": {
+        "versions_analyzed": 4,
+        "versions_with_findings": 1,
+        "total_unique_cwes": [
+          "CWE-252"
+        ]
+      }
+    },
+    {
+      "task_id": "task_004_command_injection",
+      "n_versions": 4,
+      "version_results": [
+        {
+          "version_id": "t4_v1_human_secure",
+          "author_type": "human",
+          "ai_involvement": 0.0,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 1,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [
+            "CWE-78"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 3,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t4_v2_ai_insecure",
+          "author_type": "ai",
+          "ai_involvement": 1.0,
+          "n_findings": 5,
+          "severity_counts": {
+            "critical": 0,
+            "high": 4,
+            "medium": 0,
+            "low": 1
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-120",
+            "CWE-78"
+          ],
+          "risk_level": "Critical",
+          "risk_score": 13,
+          "known_vuln_label": 1
+        },
+        {
+          "version_id": "t4_v3_human_hybrid_fixed",
+          "author_type": "human_edit_of_ai",
+          "ai_involvement": 0.5,
+          "n_findings": 4,
+          "severity_counts": {
+            "critical": 0,
+            "high": 2,
+            "medium": 0,
+            "low": 2
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-126",
+            "CWE-78"
+          ],
+          "risk_level": "High",
+          "risk_score": 8,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t4_v4_ai_regressive",
+          "author_type": "ai_edit_of_human",
+          "ai_involvement": 0.75,
+          "n_findings": 5,
+          "severity_counts": {
+            "critical": 0,
+            "high": 4,
+            "medium": 0,
+            "low": 1
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-120",
+            "CWE-78"
+          ],
+          "risk_level": "Critical",
+          "risk_score": 13,
+          "known_vuln_label": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from_version": "t4_v2_ai_insecure",
+          "to_version": "t4_v3_human_hybrid_fixed",
+          "from_author": "ai",
+          "to_author": "human_edit_of_ai",
+          "from_ai_involvement": 1.0,
+          "to_ai_involvement": 0.5,
+          "findings_removed": 1,
+          "risk_change": -5,
+          "cwes_fixed": [
+            "CWE-120"
+          ],
+          "cwes_introduced": [
+            "CWE-126"
+          ],
+          "cwes_persistent": [
+            "CWE-119",
+            "CWE-78"
+          ],
+          "vuln_persisted": false,
+          "vuln_fixed": true
+        },
+        {
+          "from_version": "t4_v3_human_hybrid_fixed",
+          "to_version": "t4_v4_ai_regressive",
+          "from_author": "human_edit_of_ai",
+          "to_author": "ai_edit_of_human",
+          "from_ai_involvement": 0.5,
+          "to_ai_involvement": 0.75,
+          "findings_removed": -1,
+          "risk_change": 5,
+          "cwes_fixed": [
+            "CWE-126"
+          ],
+          "cwes_introduced": [
+            "CWE-120"
+          ],
+          "cwes_persistent": [
+            "CWE-119",
+            "CWE-78"
+          ],
+          "vuln_persisted": true,
+          "vuln_fixed": false
+        }
+      ],
+      "summary": {
+        "versions_analyzed": 4,
+        "versions_with_findings": 4,
+        "total_unique_cwes": [
+          "CWE-119",
+          "CWE-120",
+          "CWE-126",
+          "CWE-78"
+        ]
+      }
+    },
+    {
+      "task_id": "task_005_use_after_free",
+      "n_versions": 4,
+      "version_results": [
+        {
+          "version_id": "t5_v1_human_secure",
+          "author_type": "human",
+          "ai_involvement": 0.0,
+          "n_findings": 2,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 1,
+            "low": 1
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-190"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 3,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t5_v2_ai_insecure",
+          "author_type": "ai",
+          "ai_involvement": 1.0,
+          "n_findings": 2,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 2
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-416"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 2,
+          "known_vuln_label": 1
+        },
+        {
+          "version_id": "t5_v3_human_hybrid_fixed",
+          "author_type": "human_edit_of_ai",
+          "ai_involvement": 0.5,
+          "n_findings": 3,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 1,
+            "low": 2
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-190",
+            "CWE-416"
+          ],
+          "risk_level": "High",
+          "risk_score": 4,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t5_v4_ai_regressive",
+          "author_type": "ai_edit_of_human",
+          "ai_involvement": 0.75,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 1
+          },
+          "cwes": [
+            "CWE-416"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 1,
+          "known_vuln_label": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from_version": "t5_v2_ai_insecure",
+          "to_version": "t5_v3_human_hybrid_fixed",
+          "from_author": "ai",
+          "to_author": "human_edit_of_ai",
+          "from_ai_involvement": 1.0,
+          "to_ai_involvement": 0.5,
+          "findings_removed": -1,
+          "risk_change": 2,
+          "cwes_fixed": [],
+          "cwes_introduced": [
+            "CWE-190"
+          ],
+          "cwes_persistent": [
+            "CWE-119",
+            "CWE-416"
+          ],
+          "vuln_persisted": false,
+          "vuln_fixed": true
+        },
+        {
+          "from_version": "t5_v3_human_hybrid_fixed",
+          "to_version": "t5_v4_ai_regressive",
+          "from_author": "human_edit_of_ai",
+          "to_author": "ai_edit_of_human",
+          "from_ai_involvement": 0.5,
+          "to_ai_involvement": 0.75,
+          "findings_removed": 2,
+          "risk_change": -3,
+          "cwes_fixed": [
+            "CWE-119",
+            "CWE-190"
+          ],
+          "cwes_introduced": [],
+          "cwes_persistent": [
+            "CWE-416"
+          ],
+          "vuln_persisted": true,
+          "vuln_fixed": false
+        }
+      ],
+      "summary": {
+        "versions_analyzed": 4,
+        "versions_with_findings": 4,
+        "total_unique_cwes": [
+          "CWE-119",
+          "CWE-190",
+          "CWE-416"
+        ]
+      }
+    },
+    {
+      "task_id": "task_006_path_traversal",
+      "n_versions": 4,
+      "version_results": [
+        {
+          "version_id": "t6_v1_human_secure",
+          "author_type": "human",
+          "ai_involvement": 0.0,
+          "n_findings": 3,
+          "severity_counts": {
+            "critical": 0,
+            "high": 1,
+            "medium": 0,
+            "low": 2
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-22",
+            "CWE-362"
+          ],
+          "risk_level": "High",
+          "risk_score": 5,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t6_v2_ai_insecure",
+          "author_type": "ai",
+          "ai_involvement": 1.0,
+          "n_findings": 5,
+          "severity_counts": {
+            "critical": 0,
+            "high": 3,
+            "medium": 0,
+            "low": 2
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-120",
+            "CWE-22",
+            "CWE-362"
+          ],
+          "risk_level": "Critical",
+          "risk_score": 11,
+          "known_vuln_label": 1
+        },
+        {
+          "version_id": "t6_v3_human_hybrid_fixed",
+          "author_type": "human_edit_of_ai",
+          "ai_involvement": 0.5,
+          "n_findings": 4,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 1,
+            "low": 3
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-120",
+            "CWE-362"
+          ],
+          "risk_level": "High",
+          "risk_score": 5,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t6_v4_ai_regressive",
+          "author_type": "ai_edit_of_human",
+          "ai_involvement": 0.75,
+          "n_findings": 10,
+          "severity_counts": {
+            "critical": 0,
+            "high": 7,
+            "medium": 0,
+            "low": 3
+          },
+          "cwes": [
+            "CWE-119",
+            "CWE-120",
+            "CWE-22",
+            "CWE-362"
+          ],
+          "risk_level": "Critical",
+          "risk_score": 24,
+          "known_vuln_label": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from_version": "t6_v2_ai_insecure",
+          "to_version": "t6_v3_human_hybrid_fixed",
+          "from_author": "ai",
+          "to_author": "human_edit_of_ai",
+          "from_ai_involvement": 1.0,
+          "to_ai_involvement": 0.5,
+          "findings_removed": 1,
+          "risk_change": -6,
+          "cwes_fixed": [
+            "CWE-22"
+          ],
+          "cwes_introduced": [],
+          "cwes_persistent": [
+            "CWE-119",
+            "CWE-120",
+            "CWE-362"
+          ],
+          "vuln_persisted": false,
+          "vuln_fixed": true
+        },
+        {
+          "from_version": "t6_v3_human_hybrid_fixed",
+          "to_version": "t6_v4_ai_regressive",
+          "from_author": "human_edit_of_ai",
+          "to_author": "ai_edit_of_human",
+          "from_ai_involvement": 0.5,
+          "to_ai_involvement": 0.75,
+          "findings_removed": -6,
+          "risk_change": 19,
+          "cwes_fixed": [],
+          "cwes_introduced": [
+            "CWE-22"
+          ],
+          "cwes_persistent": [
+            "CWE-119",
+            "CWE-120",
+            "CWE-362"
+          ],
+          "vuln_persisted": true,
+          "vuln_fixed": false
+        }
+      ],
+      "summary": {
+        "versions_analyzed": 4,
+        "versions_with_findings": 4,
+        "total_unique_cwes": [
+          "CWE-119",
+          "CWE-120",
+          "CWE-22",
+          "CWE-362"
+        ]
+      }
+    },
+    {
+      "task_id": "task_007_broken_crypto",
+      "n_versions": 4,
+      "version_results": [
+        {
+          "version_id": "t7_v1_human_secure",
+          "author_type": "human",
+          "ai_involvement": 0.0,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 1
+          },
+          "cwes": [
+            "CWE-119"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 1,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t7_v2_ai_insecure",
+          "author_type": "ai",
+          "ai_involvement": 1.0,
+          "n_findings": 2,
+          "severity_counts": {
+            "critical": 0,
+            "high": 2,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [
+            "CWE-327"
+          ],
+          "risk_level": "High",
+          "risk_score": 6,
+          "known_vuln_label": 1
+        },
+        {
+          "version_id": "t7_v3_human_hybrid_fixed",
+          "author_type": "human_edit_of_ai",
+          "ai_involvement": 0.5,
+          "n_findings": 0,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [],
+          "risk_level": "Low",
+          "risk_score": 0,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t7_v4_ai_regressive",
+          "author_type": "ai_edit_of_human",
+          "ai_involvement": 0.75,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 1,
+            "medium": 0,
+            "low": 0
+          },
+          "cwes": [
+            "CWE-327"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 3,
+          "known_vuln_label": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from_version": "t7_v2_ai_insecure",
+          "to_version": "t7_v3_human_hybrid_fixed",
+          "from_author": "ai",
+          "to_author": "human_edit_of_ai",
+          "from_ai_involvement": 1.0,
+          "to_ai_involvement": 0.5,
+          "findings_removed": 2,
+          "risk_change": -6,
+          "cwes_fixed": [
+            "CWE-327"
+          ],
+          "cwes_introduced": [],
+          "cwes_persistent": [],
+          "vuln_persisted": false,
+          "vuln_fixed": true
+        },
+        {
+          "from_version": "t7_v3_human_hybrid_fixed",
+          "to_version": "t7_v4_ai_regressive",
+          "from_author": "human_edit_of_ai",
+          "to_author": "ai_edit_of_human",
+          "from_ai_involvement": 0.5,
+          "to_ai_involvement": 0.75,
+          "findings_removed": -1,
+          "risk_change": 3,
+          "cwes_fixed": [],
+          "cwes_introduced": [
+            "CWE-327"
+          ],
+          "cwes_persistent": [],
+          "vuln_persisted": true,
+          "vuln_fixed": false
+        }
+      ],
+      "summary": {
+        "versions_analyzed": 4,
+        "versions_with_findings": 3,
+        "total_unique_cwes": [
+          "CWE-119",
+          "CWE-327"
+        ]
+      }
+    },
+    {
+      "task_id": "task_008_null_dereference",
+      "n_versions": 4,
+      "version_results": [
+        {
+          "version_id": "t8_v1_human_secure",
+          "author_type": "human",
+          "ai_involvement": 0.0,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 1
+          },
+          "cwes": [
+            "CWE-119"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 1,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t8_v2_ai_insecure",
+          "author_type": "ai",
+          "ai_involvement": 1.0,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 1
+          },
+          "cwes": [
+            "CWE-119"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 1,
+          "known_vuln_label": 1
+        },
+        {
+          "version_id": "t8_v3_human_hybrid_fixed",
+          "author_type": "human_edit_of_ai",
+          "ai_involvement": 0.5,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 1
+          },
+          "cwes": [
+            "CWE-119"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 1,
+          "known_vuln_label": 0
+        },
+        {
+          "version_id": "t8_v4_ai_regressive",
+          "author_type": "ai_edit_of_human",
+          "ai_involvement": 0.75,
+          "n_findings": 1,
+          "severity_counts": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 1
+          },
+          "cwes": [
+            "CWE-119"
+          ],
+          "risk_level": "Medium",
+          "risk_score": 1,
+          "known_vuln_label": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from_version": "t8_v2_ai_insecure",
+          "to_version": "t8_v3_human_hybrid_fixed",
+          "from_author": "ai",
+          "to_author": "human_edit_of_ai",
+          "from_ai_involvement": 1.0,
+          "to_ai_involvement": 0.5,
+          "findings_removed": 0,
+          "risk_change": 0,
+          "cwes_fixed": [],
+          "cwes_introduced": [],
+          "cwes_persistent": [
+            "CWE-119"
+          ],
+          "vuln_persisted": false,
+          "vuln_fixed": true
+        },
+        {
+          "from_version": "t8_v3_human_hybrid_fixed",
+          "to_version": "t8_v4_ai_regressive",
+          "from_author": "human_edit_of_ai",
+          "to_author": "ai_edit_of_human",
+          "from_ai_involvement": 0.5,
+          "to_ai_involvement": 0.75,
+          "findings_removed": 0,
+          "risk_change": 0,
+          "cwes_fixed": [],
+          "cwes_introduced": [],
+          "cwes_persistent": [
+            "CWE-119"
+          ],
+          "vuln_persisted": true,
+          "vuln_fixed": false
+        }
+      ],
+      "summary": {
+        "versions_analyzed": 4,
+        "versions_with_findings": 4,
+        "total_unique_cwes": [
+          "CWE-119"
+        ]
+      }
+    }
+  ],
+  "records": [
+    {
+      "task_id": "pilot_001_buffer_handling",
+      "category": "",
+      "target_cwe": "",
+      "version_id": "pilot_001_v1_human_secure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "ground_truth_vuln": 0,
+      "n_findings": 5,
+      "risk_score": 5,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-120",
+        "CWE-126"
+      ],
+      "char_vuln_prob": 0.39535631193513066,
+      "word_vuln_prob": 0.39041721541330954,
+      "codebert_vuln_prob": 0.41434175369269377,
+      "prov_adjusted_score": 0.24860505221561624
+    },
+    {
+      "task_id": "pilot_001_buffer_handling",
+      "category": "",
+      "target_cwe": "",
+      "version_id": "pilot_001_v2_ai_insecure",
+      "author_type": "ai",
+      "ai_involvement": 1.0,
+      "ground_truth_vuln": 1,
+      "n_findings": 6,
+      "risk_score": 16,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-120"
+      ],
+      "char_vuln_prob": 0.39286168795865356,
+      "word_vuln_prob": 0.49412735429821586,
+      "codebert_vuln_prob": 0.5723705458779087,
+      "prov_adjusted_score": 0.8013187642290721
+    },
+    {
+      "task_id": "pilot_001_buffer_handling",
+      "category": "",
+      "target_cwe": "",
+      "version_id": "pilot_001_v3_human_edited_ai",
+      "author_type": "human_edit_of_ai",
+      "ai_involvement": 0.5,
+      "ground_truth_vuln": 0,
+      "n_findings": 3,
+      "risk_score": 3,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-120"
+      ],
+      "char_vuln_prob": 0.4404282045766661,
+      "word_vuln_prob": 0.5741276994575942,
+      "codebert_vuln_prob": 0.4600962464573423,
+      "prov_adjusted_score": 0.4600962464573423
+    },
+    {
+      "task_id": "pilot_001_buffer_handling",
+      "category": "",
+      "target_cwe": "",
+      "version_id": "pilot_001_v4_human_insecure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "ground_truth_vuln": 1,
+      "n_findings": 6,
+      "risk_score": 14,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-120"
+      ],
+      "char_vuln_prob": 0.4322243883174845,
+      "word_vuln_prob": 0.5090885764003044,
+      "codebert_vuln_prob": 0.4907016656640736,
+      "prov_adjusted_score": 0.2944209993984441
+    },
+    {
+      "task_id": "task_002_format_string",
+      "category": "Format String",
+      "target_cwe": "CWE-134",
+      "version_id": "t2_v1_human_secure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "ground_truth_vuln": 0,
+      "n_findings": 0,
+      "risk_score": 0,
+      "detected_cwes": [],
+      "char_vuln_prob": 0.45682208642620814,
+      "word_vuln_prob": 0.5262870346308101,
+      "codebert_vuln_prob": 0.48353228766520645,
+      "prov_adjusted_score": 0.29011937259912385
+    },
+    {
+      "task_id": "task_002_format_string",
+      "category": "Format String",
+      "target_cwe": "CWE-134",
+      "version_id": "t2_v2_ai_insecure",
+      "author_type": "ai",
+      "ai_involvement": 1.0,
+      "ground_truth_vuln": 1,
+      "n_findings": 2,
+      "risk_score": 6,
+      "detected_cwes": [
+        "CWE-134"
+      ],
+      "char_vuln_prob": 0.2880093808028031,
+      "word_vuln_prob": 0.3888667871842384,
+      "codebert_vuln_prob": 0.4528785292816115,
+      "prov_adjusted_score": 0.634029940994256
+    },
+    {
+      "task_id": "task_002_format_string",
+      "category": "Format String",
+      "target_cwe": "CWE-134",
+      "version_id": "t2_v3_human_hybrid_fixed",
+      "author_type": "human_edit_of_ai",
+      "ai_involvement": 0.5,
+      "ground_truth_vuln": 0,
+      "n_findings": 0,
+      "risk_score": 0,
+      "detected_cwes": [],
+      "char_vuln_prob": 0.26555034889630164,
+      "word_vuln_prob": 0.4349719712631404,
+      "codebert_vuln_prob": 0.4893967873041263,
+      "prov_adjusted_score": 0.4893967873041263
+    },
+    {
+      "task_id": "task_002_format_string",
+      "category": "Format String",
+      "target_cwe": "CWE-134",
+      "version_id": "t2_v4_ai_regressive",
+      "author_type": "ai_edit_of_human",
+      "ai_involvement": 0.75,
+      "ground_truth_vuln": 1,
+      "n_findings": 1,
+      "risk_score": 3,
+      "detected_cwes": [
+        "CWE-134"
+      ],
+      "char_vuln_prob": 0.30817423943811423,
+      "word_vuln_prob": 0.4169174949944121,
+      "codebert_vuln_prob": 0.44686785660184336,
+      "prov_adjusted_score": 0.5362414279222121
+    },
+    {
+      "task_id": "task_003_integer_overflow",
+      "category": "Integer Overflow",
+      "target_cwe": "CWE-190",
+      "version_id": "t3_v1_human_secure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "ground_truth_vuln": 0,
+      "n_findings": 0,
+      "risk_score": 0,
+      "detected_cwes": [],
+      "char_vuln_prob": 0.47536567957820947,
+      "word_vuln_prob": 0.4557794865438841,
+      "codebert_vuln_prob": 0.44936429888789603,
+      "prov_adjusted_score": 0.2696185793327376
+    },
+    {
+      "task_id": "task_003_integer_overflow",
+      "category": "Integer Overflow",
+      "target_cwe": "CWE-190",
+      "version_id": "t3_v2_ai_insecure",
+      "author_type": "ai",
+      "ai_involvement": 1.0,
+      "ground_truth_vuln": 1,
+      "n_findings": 0,
+      "risk_score": 0,
+      "detected_cwes": [],
+      "char_vuln_prob": 0.6371561743825362,
+      "word_vuln_prob": 0.44640776574835755,
+      "codebert_vuln_prob": 0.511357494547763,
+      "prov_adjusted_score": 0.7159004923668681
+    },
+    {
+      "task_id": "task_003_integer_overflow",
+      "category": "Integer Overflow",
+      "target_cwe": "CWE-190",
+      "version_id": "t3_v3_human_hybrid_fixed",
+      "author_type": "human_edit_of_ai",
+      "ai_involvement": 0.5,
+      "ground_truth_vuln": 0,
+      "n_findings": 1,
+      "risk_score": 2,
+      "detected_cwes": [
+        "CWE-252"
+      ],
+      "char_vuln_prob": 0.5436712860308343,
+      "word_vuln_prob": 0.5278887030128634,
+      "codebert_vuln_prob": 0.5021074768246206,
+      "prov_adjusted_score": 0.5021074768246206
+    },
+    {
+      "task_id": "task_003_integer_overflow",
+      "category": "Integer Overflow",
+      "target_cwe": "CWE-190",
+      "version_id": "t3_v4_ai_regressive",
+      "author_type": "ai_edit_of_human",
+      "ai_involvement": 0.75,
+      "ground_truth_vuln": 1,
+      "n_findings": 0,
+      "risk_score": 0,
+      "detected_cwes": [],
+      "char_vuln_prob": 0.5310468239386787,
+      "word_vuln_prob": 0.48966319103587885,
+      "codebert_vuln_prob": 0.5002348808446074,
+      "prov_adjusted_score": 0.600281857013529
+    },
+    {
+      "task_id": "task_004_command_injection",
+      "category": "Command Injection",
+      "target_cwe": "CWE-78",
+      "version_id": "t4_v1_human_secure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "ground_truth_vuln": 0,
+      "n_findings": 1,
+      "risk_score": 3,
+      "detected_cwes": [
+        "CWE-78"
+      ],
+      "char_vuln_prob": 0.5550927022889509,
+      "word_vuln_prob": 0.595881279240024,
+      "codebert_vuln_prob": 0.4171895857597408,
+      "prov_adjusted_score": 0.25031375145584445
+    },
+    {
+      "task_id": "task_004_command_injection",
+      "category": "Command Injection",
+      "target_cwe": "CWE-78",
+      "version_id": "t4_v2_ai_insecure",
+      "author_type": "ai",
+      "ai_involvement": 1.0,
+      "ground_truth_vuln": 1,
+      "n_findings": 5,
+      "risk_score": 13,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-120",
+        "CWE-78"
+      ],
+      "char_vuln_prob": 0.45617691072999816,
+      "word_vuln_prob": 0.4103962394157274,
+      "codebert_vuln_prob": 0.5066858315895185,
+      "prov_adjusted_score": 0.7093601642253259
+    },
+    {
+      "task_id": "task_004_command_injection",
+      "category": "Command Injection",
+      "target_cwe": "CWE-78",
+      "version_id": "t4_v3_human_hybrid_fixed",
+      "author_type": "human_edit_of_ai",
+      "ai_involvement": 0.5,
+      "ground_truth_vuln": 0,
+      "n_findings": 4,
+      "risk_score": 8,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-126",
+        "CWE-78"
+      ],
+      "char_vuln_prob": 0.4064205170975993,
+      "word_vuln_prob": 0.37622396051625534,
+      "codebert_vuln_prob": 0.4852816959840849,
+      "prov_adjusted_score": 0.4852816959840849
+    },
+    {
+      "task_id": "task_004_command_injection",
+      "category": "Command Injection",
+      "target_cwe": "CWE-78",
+      "version_id": "t4_v4_ai_regressive",
+      "author_type": "ai_edit_of_human",
+      "ai_involvement": 0.75,
+      "ground_truth_vuln": 1,
+      "n_findings": 5,
+      "risk_score": 13,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-120",
+        "CWE-78"
+      ],
+      "char_vuln_prob": 0.4895293741652982,
+      "word_vuln_prob": 0.5170472634227471,
+      "codebert_vuln_prob": 0.4942800804145937,
+      "prov_adjusted_score": 0.5931360964975125
+    },
+    {
+      "task_id": "task_005_use_after_free",
+      "category": "Use After Free",
+      "target_cwe": "CWE-416",
+      "version_id": "t5_v1_human_secure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "ground_truth_vuln": 0,
+      "n_findings": 2,
+      "risk_score": 3,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-190"
+      ],
+      "char_vuln_prob": 0.5444136127373397,
+      "word_vuln_prob": 0.5924467651647852,
+      "codebert_vuln_prob": 0.5234679522015767,
+      "prov_adjusted_score": 0.31408077132094603
+    },
+    {
+      "task_id": "task_005_use_after_free",
+      "category": "Use After Free",
+      "target_cwe": "CWE-416",
+      "version_id": "t5_v2_ai_insecure",
+      "author_type": "ai",
+      "ai_involvement": 1.0,
+      "ground_truth_vuln": 1,
+      "n_findings": 2,
+      "risk_score": 2,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-416"
+      ],
+      "char_vuln_prob": 0.5405074959270337,
+      "word_vuln_prob": 0.6163605210961453,
+      "codebert_vuln_prob": 0.5021188731091336,
+      "prov_adjusted_score": 0.7029664223527871
+    },
+    {
+      "task_id": "task_005_use_after_free",
+      "category": "Use After Free",
+      "target_cwe": "CWE-416",
+      "version_id": "t5_v3_human_hybrid_fixed",
+      "author_type": "human_edit_of_ai",
+      "ai_involvement": 0.5,
+      "ground_truth_vuln": 0,
+      "n_findings": 3,
+      "risk_score": 4,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-190",
+        "CWE-416"
+      ],
+      "char_vuln_prob": 0.5392408122952157,
+      "word_vuln_prob": 0.5880345010248252,
+      "codebert_vuln_prob": 0.5444120181234224,
+      "prov_adjusted_score": 0.5444120181234224
+    },
+    {
+      "task_id": "task_005_use_after_free",
+      "category": "Use After Free",
+      "target_cwe": "CWE-416",
+      "version_id": "t5_v4_ai_regressive",
+      "author_type": "ai_edit_of_human",
+      "ai_involvement": 0.75,
+      "ground_truth_vuln": 1,
+      "n_findings": 1,
+      "risk_score": 1,
+      "detected_cwes": [
+        "CWE-416"
+      ],
+      "char_vuln_prob": 0.5085608119208238,
+      "word_vuln_prob": 0.4628339661809867,
+      "codebert_vuln_prob": 0.5062801352245835,
+      "prov_adjusted_score": 0.6075361622695002
+    },
+    {
+      "task_id": "task_006_path_traversal",
+      "category": "Path Traversal",
+      "target_cwe": "CWE-22",
+      "version_id": "t6_v1_human_secure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "ground_truth_vuln": 0,
+      "n_findings": 3,
+      "risk_score": 5,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-22",
+        "CWE-362"
+      ],
+      "char_vuln_prob": 0.37882328772933854,
+      "word_vuln_prob": 0.451365334146112,
+      "codebert_vuln_prob": 0.4863706800271057,
+      "prov_adjusted_score": 0.2918224080162634
+    },
+    {
+      "task_id": "task_006_path_traversal",
+      "category": "Path Traversal",
+      "target_cwe": "CWE-22",
+      "version_id": "t6_v2_ai_insecure",
+      "author_type": "ai",
+      "ai_involvement": 1.0,
+      "ground_truth_vuln": 1,
+      "n_findings": 5,
+      "risk_score": 11,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-120",
+        "CWE-22",
+        "CWE-362"
+      ],
+      "char_vuln_prob": 0.5190657240944655,
+      "word_vuln_prob": 0.5937178885694377,
+      "codebert_vuln_prob": 0.6150256109561613,
+      "prov_adjusted_score": 0.8610358553386257
+    },
+    {
+      "task_id": "task_006_path_traversal",
+      "category": "Path Traversal",
+      "target_cwe": "CWE-22",
+      "version_id": "t6_v3_human_hybrid_fixed",
+      "author_type": "human_edit_of_ai",
+      "ai_involvement": 0.5,
+      "ground_truth_vuln": 0,
+      "n_findings": 4,
+      "risk_score": 5,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-120",
+        "CWE-362"
+      ],
+      "char_vuln_prob": 0.38083132158610633,
+      "word_vuln_prob": 0.5189386757885572,
+      "codebert_vuln_prob": 0.5585866273676372,
+      "prov_adjusted_score": 0.5585866273676372
+    },
+    {
+      "task_id": "task_006_path_traversal",
+      "category": "Path Traversal",
+      "target_cwe": "CWE-22",
+      "version_id": "t6_v4_ai_regressive",
+      "author_type": "ai_edit_of_human",
+      "ai_involvement": 0.75,
+      "ground_truth_vuln": 1,
+      "n_findings": 10,
+      "risk_score": 24,
+      "detected_cwes": [
+        "CWE-119",
+        "CWE-120",
+        "CWE-22",
+        "CWE-362"
+      ],
+      "char_vuln_prob": 0.48244712201297596,
+      "word_vuln_prob": 0.618445161300223,
+      "codebert_vuln_prob": 0.5819483982015535,
+      "prov_adjusted_score": 0.6983380778418643
+    },
+    {
+      "task_id": "task_007_broken_crypto",
+      "category": "Broken Cryptography",
+      "target_cwe": "CWE-327",
+      "version_id": "t7_v1_human_secure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "ground_truth_vuln": 0,
+      "n_findings": 1,
+      "risk_score": 1,
+      "detected_cwes": [
+        "CWE-119"
+      ],
+      "char_vuln_prob": 0.45084935381284996,
+      "word_vuln_prob": 0.5949972917242274,
+      "codebert_vuln_prob": 0.5982547901370607,
+      "prov_adjusted_score": 0.3589528740822364
+    },
+    {
+      "task_id": "task_007_broken_crypto",
+      "category": "Broken Cryptography",
+      "target_cwe": "CWE-327",
+      "version_id": "t7_v2_ai_insecure",
+      "author_type": "ai",
+      "ai_involvement": 1.0,
+      "ground_truth_vuln": 1,
+      "n_findings": 2,
+      "risk_score": 6,
+      "detected_cwes": [
+        "CWE-327"
+      ],
+      "char_vuln_prob": 0.4294362644803727,
+      "word_vuln_prob": 0.5573718600504566,
+      "codebert_vuln_prob": 0.47948515298696964,
+      "prov_adjusted_score": 0.6712792141817575
+    },
+    {
+      "task_id": "task_007_broken_crypto",
+      "category": "Broken Cryptography",
+      "target_cwe": "CWE-327",
+      "version_id": "t7_v3_human_hybrid_fixed",
+      "author_type": "human_edit_of_ai",
+      "ai_involvement": 0.5,
+      "ground_truth_vuln": 0,
+      "n_findings": 0,
+      "risk_score": 0,
+      "detected_cwes": [],
+      "char_vuln_prob": 0.4762984590305729,
+      "word_vuln_prob": 0.6315645274919639,
+      "codebert_vuln_prob": 0.5852457866693607,
+      "prov_adjusted_score": 0.5852457866693607
+    },
+    {
+      "task_id": "task_007_broken_crypto",
+      "category": "Broken Cryptography",
+      "target_cwe": "CWE-327",
+      "version_id": "t7_v4_ai_regressive",
+      "author_type": "ai_edit_of_human",
+      "ai_involvement": 0.75,
+      "ground_truth_vuln": 1,
+      "n_findings": 1,
+      "risk_score": 3,
+      "detected_cwes": [
+        "CWE-327"
+      ],
+      "char_vuln_prob": 0.3776547936685615,
+      "word_vuln_prob": 0.5847424023194282,
+      "codebert_vuln_prob": 0.5453166555318668,
+      "prov_adjusted_score": 0.6543799866382403
+    },
+    {
+      "task_id": "task_008_null_dereference",
+      "category": "NULL Pointer Dereference",
+      "target_cwe": "CWE-476",
+      "version_id": "t8_v1_human_secure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "ground_truth_vuln": 0,
+      "n_findings": 1,
+      "risk_score": 1,
+      "detected_cwes": [
+        "CWE-119"
+      ],
+      "char_vuln_prob": 0.6302906666850713,
+      "word_vuln_prob": 0.3577968931504066,
+      "codebert_vuln_prob": 0.4969997920523274,
+      "prov_adjusted_score": 0.29819987523139646
+    },
+    {
+      "task_id": "task_008_null_dereference",
+      "category": "NULL Pointer Dereference",
+      "target_cwe": "CWE-476",
+      "version_id": "t8_v2_ai_insecure",
+      "author_type": "ai",
+      "ai_involvement": 1.0,
+      "ground_truth_vuln": 1,
+      "n_findings": 1,
+      "risk_score": 1,
+      "detected_cwes": [
+        "CWE-119"
+      ],
+      "char_vuln_prob": 0.5873779475660772,
+      "word_vuln_prob": 0.3553072328942554,
+      "codebert_vuln_prob": 0.47973960432905643,
+      "prov_adjusted_score": 0.6716354460606789
+    },
+    {
+      "task_id": "task_008_null_dereference",
+      "category": "NULL Pointer Dereference",
+      "target_cwe": "CWE-476",
+      "version_id": "t8_v3_human_hybrid_fixed",
+      "author_type": "human_edit_of_ai",
+      "ai_involvement": 0.5,
+      "ground_truth_vuln": 0,
+      "n_findings": 1,
+      "risk_score": 1,
+      "detected_cwes": [
+        "CWE-119"
+      ],
+      "char_vuln_prob": 0.6146686018208316,
+      "word_vuln_prob": 0.3434609338223422,
+      "codebert_vuln_prob": 0.48187813091834286,
+      "prov_adjusted_score": 0.48187813091834286
+    },
+    {
+      "task_id": "task_008_null_dereference",
+      "category": "NULL Pointer Dereference",
+      "target_cwe": "CWE-476",
+      "version_id": "t8_v4_ai_regressive",
+      "author_type": "ai_edit_of_human",
+      "ai_involvement": 0.75,
+      "ground_truth_vuln": 1,
+      "n_findings": 1,
+      "risk_score": 1,
+      "detected_cwes": [
+        "CWE-119"
+      ],
+      "char_vuln_prob": 0.5776929310779165,
+      "word_vuln_prob": 0.41773802281009964,
+      "codebert_vuln_prob": 0.4597795740691144,
+      "prov_adjusted_score": 0.5517354888829373
+    }
+  ],
+  "prioritization_metrics": {
+    "top_4": {
+      "k": 4,
+      "budget_pct": 12.5,
+      "code_only": {
+        "precision": 0.5,
+        "recall": 0.125,
+        "vuln_found": 2
+      },
+      "provenance_aware": {
+        "precision": 1.0,
+        "recall": 0.25,
+        "vuln_found": 4
+      },
+      "static_analysis": {
+        "precision": 1.0,
+        "recall": 0.25,
+        "vuln_found": 4
+      }
+    },
+    "top_8": {
+      "k": 8,
+      "budget_pct": 25.0,
+      "code_only": {
+        "precision": 0.5,
+        "recall": 0.25,
+        "vuln_found": 4
+      },
+      "provenance_aware": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "vuln_found": 8
+      },
+      "static_analysis": {
+        "precision": 0.875,
+        "recall": 0.4375,
+        "vuln_found": 7
+      }
+    },
+    "top_12": {
+      "k": 12,
+      "budget_pct": 37.5,
+      "code_only": {
+        "precision": 0.5833333333333334,
+        "recall": 0.4375,
+        "vuln_found": 7
+      },
+      "provenance_aware": {
+        "precision": 1.0,
+        "recall": 0.75,
+        "vuln_found": 12
+      },
+      "static_analysis": {
+        "precision": 0.6666666666666666,
+        "recall": 0.5,
+        "vuln_found": 8
+      }
+    },
+    "top_16": {
+      "k": 16,
+      "budget_pct": 50.0,
+      "code_only": {
+        "precision": 0.5625,
+        "recall": 0.5625,
+        "vuln_found": 9
+      },
+      "provenance_aware": {
+        "precision": 0.875,
+        "recall": 0.875,
+        "vuln_found": 14
+      },
+      "static_analysis": {
+        "precision": 0.5625,
+        "recall": 0.5625,
+        "vuln_found": 9
+      }
+    }
+  }
+}

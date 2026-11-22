@@ -1,0 +1,90 @@
+{
+  "part": "A1",
+  "title": "Real-World Model A v2 Pre-registration",
+  "timestamp": "2026-11-21 21:20:00 UTC",
+  "candidates": {
+    "V1": {
+      "name": "QWEN_LR",
+      "features": ["qwen_0.5b_mean_pooled_512"],
+      "model": "LogisticRegression",
+      "tuning": "C in [0.001, 0.01, 0.1, 1.0, 10.0] on dev AUROC"
+    },
+    "V2": {
+      "name": "QWEN_CodeBERT_LR",
+      "features": ["qwen_0.5b_mean_pooled_512", "codebert_chunked_mean_256"],
+      "model": "LogisticRegression",
+      "tuning": "C in [0.001, 0.01, 0.1, 1.0, 10.0] on dev AUROC"
+    },
+    "V3": {
+      "name": "V2_Static_LR",
+      "features": ["V2_features", "flawfinder_cppcheck_cwe_counts_104"],
+      "model": "LogisticRegression",
+      "tuning": "C in [0.001, 0.01, 0.1, 1.0, 10.0] on dev AUROC"
+    },
+    "V4": {
+      "name": "V3_Pairwise_Ranking",
+      "features": ["V3_features"],
+      "model": "Linear MarginRanking / BPR trained on train_pairs_v2",
+      "loss": "max(0, 1 - (w^T x_vuln - w^T x_safe)) + L2 regularization"
+    },
+    "V5": {
+      "name": "V2_PCA_Static_Length_LGBM",
+      "features": ["PCA_256_V2", "static_104", "log_tokens", "log_lines"],
+      "model": "LightGBM",
+      "tuning": "num_leaves in [15, 31], learning_rate=0.05, n_estimators=100"
+    },
+    "VM": {
+      "name": "Mixed_Real_Juliet",
+      "features": ["best_of_V3_V4_features"],
+      "model": "Best of V3/V4 retrained on train_v2 (weight 0.70) + Juliet S-rand train split (weight 0.30)",
+      "target": "Cross-domain generalization and synthetic CWE grounding"
+    },
+    "Baselines": {
+      "L1": "Logistic regression on log(n_tokens)",
+      "champion_faithful": "Phase 15 CodeBERT + CXX28 logistic regression (C=0.01)",
+      "static_only": "Logistic regression on 104 static analysis features"
+    }
+  },
+  "dev_evaluation": {
+    "dataset": "data/splits/p2/dev_heldout.parquet",
+    "metrics": [
+      "AUROC",
+      "length_stratified_auroc_10bin",
+      "length_matched_auroc (|dlog tokens| <= 0.1)",
+      "pair_correct on dev_pairs",
+      "C++ length-matched AUROC",
+      "precision, lift, and recall at top 10% operating point for CWE-476, 400, 416, 787, 119"
+    ],
+    "paired_tests": "Paired bootstrap difference (2000 resamples, grouped by commit_id) vs L1 and champion with Holm adjustment"
+  },
+  "selection_rule": {
+    "gate": "Must beat L1 on dev length-matched AUROC with Holm-adjusted p < 0.05",
+    "ranking": "Highest mean of (dev length-matched AUROC, dev pair_correct)",
+    "tie_breaker": "Simpler model on 95% bootstrap CI overlap",
+    "fallback": "If none beats L1 on length-matched AUROC, fallback to V3 and explicitly document failure to decouple length",
+    "stacker_V6": "Fit triage stacker V6: LogisticRegression(selected_model_logit, log(n_tokens))"
+  },
+  "decision_rule_and_thresholds": {
+    "binary_threshold": "t_bin chosen to maximize balanced accuracy on dev",
+    "three_way_thresholds": {
+      "t_high": "Threshold achieving precision >= 0.80 on dev (or top 5% by score if unreachable)",
+      "t_low": "Threshold achieving SAFE NPV >= 0.90 on dev (or bottom 20% by score if unreachable)"
+    },
+    "verdict_output": {
+      "VULNERABLE": "score >= t_high",
+      "SAFE": "score <= t_low",
+      "UNSURE": "t_low < score < t_high",
+      "length_risk": {
+        "LOW": "tokens <= 256",
+        "MED": "257 <= tokens <= 1024",
+        "HIGH": "tokens > 1024"
+      }
+    }
+  },
+  "freeze_protocol": "Write SHA-256 of all model artifacts, scalers, and thresholds to results/p10/freeze_a.json BEFORE touching test sets.",
+  "final_evaluation": {
+    "primary": "Single call to load_locked_test2(reason='P10 final')",
+    "secondary": "Single call to load_locked_test(reason='P10 secondary, viewed in P6')",
+    "cross_benchmark": "Juliet S-flow test split"
+  }
+}

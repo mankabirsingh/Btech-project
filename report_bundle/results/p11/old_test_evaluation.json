@@ -1,0 +1,217 @@
+{
+  "L1": {
+    "n": 3169,
+    "prevalence": 0.3165036289050174,
+    "auroc": 0.7581970156013953,
+    "auroc_ci": [
+      0.7171379984912131,
+      0.7957264684827473
+    ],
+    "length_matched_auroc": 0.512589713809226,
+    "length_matched_auroc_ci": [
+      0.7125868118482751,
+      0.7924280937764463
+    ],
+    "length_matched_pairs": 67158,
+    "auprc": 0.6095723205651301,
+    "top_10pct": {
+      "cutoff_threshold": 0.15066897690551687,
+      "flagged_count": 317,
+      "precision": 0.7444794952681388,
+      "recall": 0.23529411764705882,
+      "lift": 2.352198923733531
+    },
+    "binary_decision_t_bin": {
+      "threshold": 0.31,
+      "precision": 1.0,
+      "recall": 0.0019940179461615153,
+      "f1": 0.003980099502487562,
+      "balanced_accuracy": 0.5009970089730807,
+      "accuracy": 0.6841274850110445
+    },
+    "three_way_decision": {
+      "t_low": 0.15848484848484848,
+      "t_high": 0.6955790031726438,
+      "p_vuln_precision": 0.0,
+      "p_vuln_coverage": 0.0,
+      "p_safe_npv": 0.7241142070863433,
+      "p_safe_coverage": 0.9173240769958978,
+      "unsure_rate": 0.08267592300410224,
+      "n_vuln_flagged": 0,
+      "n_safe_flagged": 2907,
+      "n_unsure": 262
+    }
+  },
+  "Champion": {
+    "n": 3169,
+    "prevalence": 0.3165036289050174,
+    "auroc": 0.7115442683951838,
+    "auroc_ci": [
+      0.6604212744155566,
+      0.7597736492867644
+    ],
+    "length_matched_auroc": 0.5142574227940082,
+    "length_matched_auroc_ci": [
+      0.657102755034067,
+      0.7560832886163581
+    ],
+    "length_matched_pairs": 67158,
+    "auprc": 0.5494671589899299,
+    "top_10pct": {
+      "cutoff_threshold": 0.6121803159015434,
+      "flagged_count": 317,
+      "precision": 0.7097791798107256,
+      "recall": 0.22432701894317048,
+      "lift": 2.2425625332205277
+    },
+    "binary_decision_t_bin": {
+      "threshold": 0.31,
+      "precision": 0.41044386422976503,
+      "recall": 0.7836490528414756,
+      "f1": 0.5387251542152159,
+      "balanced_accuracy": 0.6312058745278477,
+      "accuracy": 0.5752603344903755
+    },
+    "three_way_decision": {
+      "t_low": 0.15848484848484848,
+      "t_high": 0.6955790031726438,
+      "p_vuln_precision": 0.6470588235294118,
+      "p_vuln_coverage": 0.016093404859577155,
+      "p_safe_npv": 0.7841269841269841,
+      "p_safe_coverage": 0.09940044177974125,
+      "unsure_rate": 0.8845061533606816,
+      "n_vuln_flagged": 51,
+      "n_safe_flagged": 315,
+      "n_unsure": 2803
+    }
+  },
+  "Static-only": {
+    "n": 3169,
+    "prevalence": 0.3165036289050174,
+    "auroc": 0.5873508284012229,
+    "auroc_ci": [
+      0.5560793563618898,
+      0.6209935833289302
+    ],
+    "length_matched_auroc": 0.5330414842609964,
+    "length_matched_auroc_ci": [
+      0.5598863750495631,
+      0.6257351246744306
+    ],
+    "length_matched_pairs": 67158,
+    "auprc": 0.421621993952675,
+    "top_10pct": {
+      "cutoff_threshold": 0.6091056982760891,
+      "flagged_count": 345,
+      "precision": 0.6550724637681159,
+      "recall": 0.22532402791625125,
+      "lift": 2.0697154912075364
+    },
+    "binary_decision_t_bin": {
+      "threshold": 0.31,
+      "precision": 0.3162878787878788,
+      "recall": 0.9990029910269193,
+      "f1": 0.4804603212658835,
+      "balanced_accuracy": 0.4995014955134596,
+      "accuracy": 0.31618807194698645
+    },
+    "three_way_decision": {
+      "t_low": 0.15848484848484848,
+      "t_high": 0.6955790031726438,
+      "p_vuln_precision": 0.7894736842105263,
+      "p_vuln_coverage": 0.011991164405175133,
+      "p_safe_npv": 0.0,
+      "p_safe_coverage": 0.0,
+      "unsure_rate": 0.9880088355948249,
+      "n_vuln_flagged": 38,
+      "n_safe_flagged": 0,
+      "n_unsure": 3131
+    }
+  },
+  "V3": {
+    "n": 3169,
+    "prevalence": 0.3165036289050174,
+    "auroc": 0.7288216145653529,
+    "auroc_ci": [
+      0.6830111488404964,
+      0.7705536608905139
+    ],
+    "length_matched_auroc": 0.5650480955359004,
+    "length_matched_auroc_ci": [
+      0.6788797499923691,
+      0.7687003333447979
+    ],
+    "length_matched_pairs": 67158,
+    "auprc": 0.5734014403965776,
+    "top_10pct": {
+      "cutoff_threshold": 0.6962776376161924,
+      "flagged_count": 317,
+      "precision": 0.722397476340694,
+      "recall": 0.22831505483549352,
+      "lift": 2.282430311588892
+    },
+    "binary_decision_t_bin": {
+      "threshold": 0.31,
+      "precision": 0.47174770039421815,
+      "recall": 0.715852442671984,
+      "f1": 0.5687128712871287,
+      "balanced_accuracy": 0.6723306534689559,
+      "accuracy": 0.6563584727043231
+    },
+    "three_way_decision": {
+      "t_low": 0.15848484848484848,
+      "t_high": 0.6955790031726438,
+      "p_vuln_precision": 0.7232704402515723,
+      "p_vuln_coverage": 0.10034711265383402,
+      "p_safe_npv": 0.8572972972972973,
+      "p_safe_coverage": 0.29189018617860524,
+      "unsure_rate": 0.6077627011675607,
+      "n_vuln_flagged": 318,
+      "n_safe_flagged": 925,
+      "n_unsure": 1926
+    }
+  },
+  "V6": {
+    "n": 3169,
+    "prevalence": 0.3165036289050174,
+    "auroc": 0.7519477578345295,
+    "auroc_ci": [
+      0.7075807934356478,
+      0.7923985769515914
+    ],
+    "length_matched_auroc": 0.5655320289466631,
+    "length_matched_auroc_ci": [
+      0.7026338873175982,
+      0.7917110191073317
+    ],
+    "length_matched_pairs": 67158,
+    "auprc": 0.6128371003271172,
+    "top_10pct": {
+      "cutoff_threshold": 0.6098156384768825,
+      "flagged_count": 317,
+      "precision": 0.7539432176656151,
+      "recall": 0.2382851445663011,
+      "lift": 2.382099757509805
+    },
+    "binary_decision_t_bin": {
+      "threshold": 0.31,
+      "precision": 0.49383561643835616,
+      "recall": 0.7188434695912264,
+      "f1": 0.585464880227365,
+      "balanced_accuracy": 0.688830783733748,
+      "accuracy": 0.677816345850426
+    },
+    "three_way_decision": {
+      "t_low": 0.15848484848484848,
+      "t_high": 0.6955790031726438,
+      "p_vuln_precision": 0.8057553956834532,
+      "p_vuln_coverage": 0.04386241716629852,
+      "p_safe_npv": 0.8740554156171285,
+      "p_safe_coverage": 0.25055222467655414,
+      "unsure_rate": 0.7055853581571474,
+      "n_vuln_flagged": 139,
+      "n_safe_flagged": 794,
+      "n_unsure": 2236
+    }
+  }
+}

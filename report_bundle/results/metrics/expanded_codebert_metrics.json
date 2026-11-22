@@ -1,0 +1,21 @@
+{
+  "model_name": "expanded_codebert_hybrid",
+  "description": "CodeBERT Hybrid (384-tok, MeanPool+CLS+SecurityStruct) on Multi-Project Corpus",
+  "metrics": {
+    "accuracy": 0.4935328898743533,
+    "precision": 0.4881767955801105,
+    "recall": 0.8386484434320425,
+    "f1": 0.6171252968291661,
+    "f1_macro": 0.43461994718675223,
+    "mcc": 0.0066905024940735695,
+    "auroc": 0.5065150141063886,
+    "average_precision": 0.4888706613371737,
+    "brier_score": 0.2945442832044815,
+    "n_samples": 5412,
+    "novel_projects_accuracy": 0.7181954887218045,
+    "novel_projects_auroc": 0.745412587702877,
+    "novel_projects_mcc": 0.37784354391559666,
+    "validation_accuracy": 0.8005,
+    "validation_auroc": 0.7566291265141839
+  }
+}

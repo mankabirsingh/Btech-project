@@ -1,0 +1,65 @@
+{
+  "model_name": "codebert_vuln",
+  "metrics": {
+    "accuracy": 0.5221729490022173,
+    "precision": 0.5086830680173662,
+    "recall": 0.5337889141989369,
+    "f1": 0.5209336791404223,
+    "f1_macro": 0.5221697514758507,
+    "f1_micro": 0.5221729490022173,
+    "mcc": 0.044942432613922945,
+    "confusion_matrix": [
+      [
+        1420,
+        1358
+      ],
+      [
+        1228,
+        1406
+      ]
+    ],
+    "classification_report": {
+      "benign": {
+        "precision": 0.5362537764350453,
+        "recall": 0.5111591072714183,
+        "f1-score": 0.523405823811279,
+        "support": 2778.0
+      },
+      "vulnerable": {
+        "precision": 0.5086830680173662,
+        "recall": 0.5337889141989369,
+        "f1-score": 0.5209336791404223,
+        "support": 2634.0
+      },
+      "accuracy": 0.5221729490022173,
+      "macro avg": {
+        "precision": 0.5224684222262057,
+        "recall": 0.5224740107351776,
+        "f1-score": 0.5221697514758507,
+        "support": 5412.0
+      },
+      "weighted avg": {
+        "precision": 0.5228352165732258,
+        "recall": 0.5221729490022173,
+        "f1-score": 0.5222026403184785,
+        "support": 5412.0
+      }
+    },
+    "auroc": 0.542500996275651,
+    "average_precision": 0.534031771191313,
+    "n_samples": 5412,
+    "n_positive": 2634,
+    "n_negative": 2778,
+    "positive_rate": 0.4866962305986696,
+    "brier_score": 0.24904697919368257,
+    "positive_prediction_rate": 0.5107169253510717,
+    "config": {
+      "model_name": "microsoft/codebert-base",
+      "train_samples": 3000,
+      "val_samples": 800,
+      "test_samples": 5412,
+      "device": "mps",
+      "decision_threshold": 0.5
+    }
+  }
+}

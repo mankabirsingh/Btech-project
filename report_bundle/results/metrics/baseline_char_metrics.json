@@ -1,0 +1,68 @@
+{
+  "model_name": "char_ngram_baseline",
+  "metrics": {
+    "accuracy": 0.5275314116777532,
+    "precision": 0.5131175468483816,
+    "recall": 0.571753986332574,
+    "f1": 0.5408511402406178,
+    "f1_macro": 0.527133467361032,
+    "f1_micro": 0.5275314116777532,
+    "mcc": 0.057541248504910304,
+    "confusion_matrix": [
+      [
+        1349,
+        1429
+      ],
+      [
+        1128,
+        1506
+      ]
+    ],
+    "classification_report": {
+      "benign": {
+        "precision": 0.5446104158255954,
+        "recall": 0.48560115190784736,
+        "f1-score": 0.5134157944814463,
+        "support": 2778.0
+      },
+      "vulnerable": {
+        "precision": 0.5131175468483816,
+        "recall": 0.571753986332574,
+        "f1-score": 0.5408511402406178,
+        "support": 2634.0
+      },
+      "accuracy": 0.5275314116777532,
+      "macro avg": {
+        "precision": 0.5288639813369885,
+        "recall": 0.5286775691202107,
+        "f1-score": 0.527133467361032,
+        "support": 5412.0
+      },
+      "weighted avg": {
+        "precision": 0.5292829552036477,
+        "recall": 0.5275314116777532,
+        "f1-score": 0.5267684738476062,
+        "support": 5412.0
+      }
+    },
+    "auroc": 0.5474329024065319,
+    "average_precision": 0.5284901451567343,
+    "n_samples": 5412,
+    "n_positive": 2634,
+    "n_negative": 2778,
+    "positive_rate": 0.4866962305986696,
+    "training_time_sec": 124.10994267463684,
+    "model_config": {
+      "max_features": 30000,
+      "ngram_range": [
+        1,
+        4
+      ],
+      "analyzer": "char_wb",
+      "C": 1.0,
+      "max_iter": 1000,
+      "class_weight": "balanced",
+      "random_seed": 42
+    }
+  }
+}

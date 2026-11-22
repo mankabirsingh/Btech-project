@@ -1,0 +1,100 @@
+{
+  "task_id": "pilot_001_buffer_handling",
+  "n_versions": 4,
+  "version_results": [
+    {
+      "version_id": "pilot_001_v1_human_secure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "n_findings": 0,
+      "severity_counts": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 0
+      },
+      "cwes": [],
+      "risk_level": "Low",
+      "risk_score": 0,
+      "known_vuln_label": 0
+    },
+    {
+      "version_id": "pilot_001_v2_ai_insecure",
+      "author_type": "ai",
+      "ai_involvement": 1.0,
+      "n_findings": 2,
+      "severity_counts": {
+        "critical": 1,
+        "high": 1,
+        "medium": 0,
+        "low": 0
+      },
+      "cwes": [
+        "CWE-120"
+      ],
+      "risk_level": "High",
+      "risk_score": 7,
+      "known_vuln_label": 1
+    },
+    {
+      "version_id": "pilot_001_v3_human_edited_ai",
+      "author_type": "human_edit_of_ai",
+      "ai_involvement": 0.5,
+      "n_findings": 0,
+      "severity_counts": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 0
+      },
+      "cwes": [],
+      "risk_level": "Low",
+      "risk_score": 0,
+      "known_vuln_label": 0
+    },
+    {
+      "version_id": "pilot_001_v4_human_insecure",
+      "author_type": "human",
+      "ai_involvement": 0.0,
+      "n_findings": 2,
+      "severity_counts": {
+        "critical": 0,
+        "high": 2,
+        "medium": 0,
+        "low": 0
+      },
+      "cwes": [
+        "CWE-120"
+      ],
+      "risk_level": "High",
+      "risk_score": 6,
+      "known_vuln_label": 1
+    }
+  ],
+  "transitions": [
+    {
+      "from_version": "pilot_001_v2_ai_insecure",
+      "to_version": "pilot_001_v3_human_edited_ai",
+      "from_author": "ai",
+      "to_author": "human_edit_of_ai",
+      "from_ai_involvement": 1.0,
+      "to_ai_involvement": 0.5,
+      "findings_removed": 2,
+      "risk_change": -7,
+      "cwes_fixed": [
+        "CWE-120"
+      ],
+      "cwes_introduced": [],
+      "cwes_persistent": [],
+      "vuln_persisted": false,
+      "vuln_fixed": true
+    }
+  ],
+  "summary": {
+    "versions_analyzed": 4,
+    "versions_with_findings": 2,
+    "total_unique_cwes": [
+      "CWE-120"
+    ]
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-11-20T04:54:10.021624+00:00",
+    "phase": "Phase 16 - Prompt 3",
+    "objective": "Improve Model A using ONLY train_minus_dev (GroupKFold) and dev_heldout",
+    "strict_rules": [
+      "Never call load_locked_test",
+      "Threshold chosen strictly on train_minus_dev OOF reweighted to 30% prevalence for FPR <= 10%",
+      "Holm correction across all candidates vs champion_p2",
+      "Model selection by dev length-stratified AUROC among candidates with C++ AUROC not significantly worse"
+    ]
+  },
+  "candidates": [
+    {
+      "id": "L1",
+      "category": "Confound Baseline",
+      "description": "Logistic regression on log(n_tokens) only",
+      "features": [
+        "log_tokens"
+      ]
+    },
+    {
+      "id": "L2",
+      "category": "Confound Baseline",
+      "description": "Logistic regression on log(n_tokens) + log(n_lines) + cyclomatic proxy",
+      "features": [
+        "log_tokens",
+        "log_lines",
+        "cyclomatic_proxy"
+      ]
+    },
+    {
+      "id": "L3",
+      "category": "Confound Baseline",
+      "description": "Logistic regression on 28-dim modern C++ structural features only",
+      "features": [
+        "cxx28"
+      ]
+    },
+    {
+      "id": "L4",
+      "category": "Confound Baseline",
+      "description": "Logistic regression on 38-dim omission-aware structural features only",
+      "features": [
+        "cxx38"
+      ]
+    },
+    {
+      "id": "L_champion_partial",
+      "category": "Confound Baseline",
+      "description": "Partialling out length from champion_p2 score (logistic regression on [log(n_tokens), champion_logit])",
+      "features": [
+        "log_tokens",
+        "champion_logit"
+      ]
+    },
+    {
+      "id": "N0",
+      "category": "Data Variant",
+      "description": "Uncleaned train_minus_dev (25k balanced, champion_p2 baseline)",
+      "features": [
+        "CLS+mean 256",
+        "cxx28"
+      ],
+      "cleaning": "none"
+    },
+    {
+      "id": "N1",
+      "category": "Data Variant",
+      "description": "Drop samples in light-normalization conflict groups (comments/whitespace stripped, identifiers kept), redrawn to 25k balanced",
+      "features": [
+        "CLS+mean 256",
+        "cxx28"
+      ],
+      "cleaning": "light_normalization_drop"
+    },
+    {
+      "id": "N2",
+      "category": "Data Variant",
+      "description": "Drop samples in aggressive-normalization conflict groups (identifiers->ID, strings->STR, numbers->NUM), redrawn to 25k balanced",
+      "features": [
+        "CLS+mean 256",
+        "cxx28"
+      ],
+      "cleaning": "aggressive_normalization_drop"
+    },
+    {
+      "id": "R1",
+      "category": "Representation",
+      "description": "CLS+mean 256 + cxx28 (rebaselined champion recipe on best N variant)",
+      "features": [
+        "emb_codebert_256",
+        "cxx28"
+      ]
+    },
+    {
+      "id": "R2",
+      "category": "Representation",
+      "description": "Chunked-mean + cxx28",
+      "features": [
+        "emb_codebert_chunked_mean_256",
+        "cxx28"
+      ]
+    },
+    {
+      "id": "R3",
+      "category": "Representation",
+      "description": "Chunked-max + cxx28",
+      "features": [
+        "emb_codebert_chunked_max_256",
+        "cxx28"
+      ]
+    },
+    {
+      "id": "R4",
+      "category": "Representation",
+      "description": "Concatenated [CLS+mean 256 ; chunked-mean ; chunked-max] (4,608 dims) + cxx28",
+      "features": [
+        "emb_codebert_256",
+        "emb_codebert_chunked_mean_256",
+        "emb_codebert_chunked_max_256",
+        "cxx28"
+      ]
+    },
+    {
+      "id": "R5",
+      "category": "Representation",
+      "description": "Concatenated [CLS+mean 256 ; chunked-mean ; chunked-max] (4,608 dims) + cxx38",
+      "features": [
+        "emb_codebert_256",
+        "emb_codebert_chunked_mean_256",
+        "emb_codebert_chunked_max_256",
+        "cxx38"
+      ]
+    },
+    {
+      "id": "R6",
+      "category": "Representation",
+      "description": "R4 representation + L2 length features (log_tokens, log_lines, cyclomatic_proxy)",
+      "features": [
+        "emb_codebert_256",
+        "emb_codebert_chunked_mean_256",
+        "emb_codebert_chunked_max_256",
+        "cxx28",
+        "L2_features"
+      ]
+    },
+    {
+      "id": "H1",
+      "category": "Classifier Head",
+      "description": "Logistic regression on best representation from Step 3",
+      "classifier": "LogisticRegression"
+    },
+    {
+      "id": "H2",
+      "category": "Classifier Head",
+      "description": "LightGBM on best representation (early stopping on GroupKFold, num_leaves in {15, 31}, lr=0.05)",
+      "classifier": "LightGBM"
+    },
+    {
+      "id": "H3",
+      "category": "Classifier Head",
+      "description": "2-layer MLP (hidden 256, dropout 0.3, early stopping on GroupKFold OOF loss), mean of 5 seeds",
+      "classifier": "PyTorch_MLP"
+    }
+  ]
+}

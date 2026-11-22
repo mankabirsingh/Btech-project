@@ -1,0 +1,133 @@
+{
+  "random_seed": 42,
+  "criteria": {
+    "min_cpp_samples": 600,
+    "min_total_samples": 2500,
+    "prevalence_range": [
+      0.25,
+      0.35
+    ],
+    "excluded": [
+      "radare2",
+      "chromium",
+      "gpac",
+      "envoy",
+      "qpdf",
+      "vim",
+      "openssl",
+      "chrome",
+      "tcpdump",
+      "tensorflow",
+      "openexr"
+    ]
+  },
+  "selected_summary": {
+    "cpp_projects": [
+      "node",
+      "Bento4",
+      "MilkyTracker",
+      "cryptopp",
+      "libvpx"
+    ],
+    "c_projects": [
+      "iperf",
+      "contiki-ng",
+      "libyaml",
+      "yubico-pam",
+      "libcomps",
+      "Onigmo",
+      "php-src"
+    ],
+    "total_n": 2904,
+    "total_cpp": 717,
+    "total_vuln": 948,
+    "prevalence": 0.32644628099173556,
+    "trial": 97
+  },
+  "project_breakdown": {
+    "node": {
+      "n": 397,
+      "n_cpp": 282,
+      "frac_cpp": 0.7103274559193955,
+      "prevalence": 0.10327455919395466,
+      "n_vuln": 41
+    },
+    "Bento4": {
+      "n": 72,
+      "n_cpp": 51,
+      "frac_cpp": 0.7083333333333334,
+      "prevalence": 0.1388888888888889,
+      "n_vuln": 10
+    },
+    "MilkyTracker": {
+      "n": 62,
+      "n_cpp": 59,
+      "frac_cpp": 0.9516129032258065,
+      "prevalence": 0.04838709677419355,
+      "n_vuln": 3
+    },
+    "cryptopp": {
+      "n": 71,
+      "n_cpp": 57,
+      "frac_cpp": 0.8028169014084507,
+      "prevalence": 0.014084507042253521,
+      "n_vuln": 1
+    },
+    "libvpx": {
+      "n": 363,
+      "n_cpp": 222,
+      "frac_cpp": 0.6115702479338843,
+      "prevalence": 0.049586776859504134,
+      "n_vuln": 18
+    },
+    "iperf": {
+      "n": 181,
+      "n_cpp": 1,
+      "frac_cpp": 0.0055248618784530384,
+      "prevalence": 0.30939226519337015,
+      "n_vuln": 56
+    },
+    "contiki-ng": {
+      "n": 39,
+      "n_cpp": 0,
+      "frac_cpp": 0.0,
+      "prevalence": 0.15384615384615385,
+      "n_vuln": 6
+    },
+    "libyaml": {
+      "n": 36,
+      "n_cpp": 0,
+      "frac_cpp": 0.0,
+      "prevalence": 0.027777777777777776,
+      "n_vuln": 1
+    },
+    "yubico-pam": {
+      "n": 21,
+      "n_cpp": 1,
+      "frac_cpp": 0.047619047619047616,
+      "prevalence": 0.14285714285714285,
+      "n_vuln": 3
+    },
+    "libcomps": {
+      "n": 92,
+      "n_cpp": 0,
+      "frac_cpp": 0.0,
+      "prevalence": 0.021739130434782608,
+      "n_vuln": 2
+    },
+    "Onigmo": {
+      "n": 110,
+      "n_cpp": 0,
+      "frac_cpp": 0.0,
+      "prevalence": 0.03636363636363636,
+      "n_vuln": 4
+    },
+    "php-src": {
+      "n": 1460,
+      "n_cpp": 44,
+      "frac_cpp": 0.030136986301369864,
+      "prevalence": 0.55,
+      "n_vuln": 803
+    }
+  }
+}

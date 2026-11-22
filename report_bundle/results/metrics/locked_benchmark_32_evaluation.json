@@ -1,0 +1,230 @@
+{
+  "benchmark_name": "Locked 32-Example Multi-CWE Benchmark",
+  "benchmark_file": "results/reports/controlled_benchmark_32.json",
+  "sample_count": 32,
+  "n_vulnerable": 16,
+  "n_safe": 16,
+  "integrity_verified": true,
+  "model_a_metrics": {
+    "accuracy": 0.5625,
+    "accuracy_ci_95": [
+      0.3933,
+      0.7183
+    ],
+    "balanced_accuracy": 0.5625,
+    "precision": 0.5385,
+    "recall": 0.875,
+    "f1": 0.6667,
+    "mcc": 0.1601,
+    "auroc": 0.5938,
+    "prauc": 0.5491,
+    "brier_score": 0.2951,
+    "confusion_matrix": [
+      [
+        4,
+        12
+      ],
+      [
+        2,
+        14
+      ]
+    ],
+    "n_samples": 32
+  },
+  "model_b_metrics": {
+    "accuracy": 0.9688,
+    "accuracy_ci_95": [
+      0.8426,
+      0.9945
+    ],
+    "balanced_accuracy": 0.9688,
+    "precision": 1.0,
+    "recall": 0.9375,
+    "f1": 0.9677,
+    "mcc": 0.9393,
+    "auroc": 0.9844,
+    "prauc": 0.9851,
+    "brier_score": 0.0294,
+    "confusion_matrix": [
+      [
+        16,
+        0
+      ],
+      [
+        1,
+        15
+      ]
+    ],
+    "n_samples": 32
+  },
+  "subgroup_metrics": {
+    "Pure Human Baseline (N=9, 8 safe, 1 vuln)": {
+      "n_samples": 9,
+      "model_a_accuracy": 0.3333,
+      "model_b_accuracy": 0.8889
+    },
+    "Pure AI Generation (N=8, 0 safe, 8 vuln)": {
+      "n_samples": 8,
+      "model_a_accuracy": 0.875,
+      "model_b_accuracy": 1.0
+    },
+    "Human-Edited AI Fixed (N=8, 8 safe, 0 vuln)": {
+      "n_samples": 8,
+      "model_a_accuracy": 0.25,
+      "model_b_accuracy": 1.0
+    },
+    "AI Regressive on Human (N=7, 0 safe, 7 vuln)": {
+      "n_samples": 7,
+      "model_a_accuracy": 0.8571,
+      "model_b_accuracy": 1.0
+    },
+    "Combined All Hybrids (N=15, 8 safe, 7 vuln)": {
+      "n_samples": 15,
+      "model_a_accuracy": 0.5333,
+      "model_b_accuracy": 1.0
+    }
+  },
+  "model_a_errors": [
+    {
+      "task_id": "pilot_001_buffer_handling",
+      "version_id": "pilot_001_v1_human_secure",
+      "author": "human",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.95,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "pilot_001_buffer_handling",
+      "version_id": "pilot_001_v3_human_edited_ai",
+      "author": "human_edit_of_ai",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.52,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_003_integer_overflow",
+      "version_id": "t3_v2_ai_insecure",
+      "author": "ai",
+      "true_label": 1,
+      "pred_label": 0,
+      "prob": 0.1445,
+      "error_type": "False Negative"
+    },
+    {
+      "task_id": "task_003_integer_overflow",
+      "version_id": "t3_v3_human_hybrid_fixed",
+      "author": "human_edit_of_ai",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.52,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_003_integer_overflow",
+      "version_id": "t3_v4_ai_regressive",
+      "author": "ai_edit_of_human",
+      "true_label": 1,
+      "pred_label": 0,
+      "prob": 0.1024,
+      "error_type": "False Negative"
+    },
+    {
+      "task_id": "task_004_command_injection",
+      "version_id": "t4_v1_human_secure",
+      "author": "human",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.52,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_004_command_injection",
+      "version_id": "t4_v3_human_hybrid_fixed",
+      "author": "human_edit_of_ai",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.95,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_005_use_after_free",
+      "version_id": "t5_v1_human_secure",
+      "author": "human",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.52,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_005_use_after_free",
+      "version_id": "t5_v3_human_hybrid_fixed",
+      "author": "human_edit_of_ai",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.95,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_006_path_traversal",
+      "version_id": "t6_v1_human_secure",
+      "author": "human",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.95,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_006_path_traversal",
+      "version_id": "t6_v3_human_hybrid_fixed",
+      "author": "human_edit_of_ai",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.95,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_007_broken_crypto",
+      "version_id": "t7_v1_human_secure",
+      "author": "human",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.52,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_008_null_dereference",
+      "version_id": "t8_v1_human_secure",
+      "author": "human",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.52,
+      "error_type": "False Positive"
+    },
+    {
+      "task_id": "task_008_null_dereference",
+      "version_id": "t8_v3_human_hybrid_fixed",
+      "author": "human_edit_of_ai",
+      "true_label": 0,
+      "pred_label": 1,
+      "prob": 0.52,
+      "error_type": "False Positive"
+    }
+  ],
+  "model_b_errors": [
+    {
+      "task_id": "pilot_001_buffer_handling",
+      "version_id": "pilot_001_v4_human_insecure",
+      "author": "human",
+      "true_label": 1,
+      "pred_label": 0,
+      "prob": 0.0596,
+      "error_type": "False Negative"
+    }
+  ],
+  "target_accuracy_70pct_achieved": {
+    "model_a": false,
+    "model_b": true
+  }
+}
